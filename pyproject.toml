@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools==80.9.0", "wheel==0.45.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "calendar-overlap-audit"
+version = "0.1.0"
+description = "Bounded offline iCalendar occupancy and overlap audit"
+requires-python = ">=3.11"
+dependencies = ["icalendar==6.3.2", "tzdata==2025.2", "python-dateutil==2.9.0.post0", "six==1.17.0"]
+
+[project.scripts]
+calendar-audit = "calendar_audit.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

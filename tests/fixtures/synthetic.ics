@@ -1,0 +1,68 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Calendar Audit//SYNTHETIC SAMPLE//EN
+BEGIN:VEVENT
+UID:daily-synthetic
+SUMMARY:Synthetic planning
+DTSTART;TZID=America/New_York:20260306T090000
+DTEND;TZID=America/New_York:20260306T100000
+RRULE:FREQ=DAILY;COUNT=5
+EXDATE;TZID=America/New_York:20260308T090000
+END:VEVENT
+BEGIN:VEVENT
+UID:meeting-synthetic
+SUMMARY:Synthetic design review
+DTSTART;TZID=America/New_York:20260306T093000
+DTEND;TZID=America/New_York:20260306T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:nested-synthetic
+SUMMARY:Synthetic nested check-in
+DTSTART;TZID=America/New_York:20260306T094500
+DTEND;TZID=America/New_York:20260306T095500
+END:VEVENT
+BEGIN:VEVENT
+UID:boundary-synthetic
+SUMMARY:Synthetic adjacent meeting
+DTSTART;TZID=America/New_York:20260306T103000
+DTEND;TZID=America/New_York:20260306T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:floating-synthetic
+SUMMARY:Synthetic floating appointment
+DTSTART:20260306T110000
+DTEND:20260306T113000
+END:VEVENT
+BEGIN:VEVENT
+UID:all-day-synthetic
+SUMMARY:Synthetic offsite dates
+DTSTART;VALUE=DATE:20260306
+DTEND;VALUE=DATE:20260308
+END:VEVENT
+BEGIN:VEVENT
+UID:transparent-synthetic
+SUMMARY:Synthetic nonblocking reminder
+DTSTART:20260306T080000
+DTEND:20260306T120000
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:cancelled-synthetic
+SUMMARY:Synthetic cancelled meeting
+STATUS:CANCELLED
+END:VEVENT
+BEGIN:VEVENT
+UID:instant-synthetic
+SUMMARY:Synthetic zero-duration reminder
+DTSTART:20260306T120000
+END:VEVENT
+BEGIN:VEVENT
+UID:hostile-synthetic
+SUMMARY:Synthetic <img src="https://invalid.example/steal" onerror="window.pwned=1"> </script><script>window.pwned=2</script> & "quotes"
+DTSTART:20260306T130000
+DTEND:20260306T140000
+DESCRIPTION:This field must never appear in the report: PRIVATE_DESCRIPTION_SENTINEL
+ATTENDEE:mailto:PRIVATE_ATTENDEE_SENTINEL@example.invalid
+LOCATION:PRIVATE_LOCATION_SENTINEL
+END:VEVENT
+END:VCALENDAR

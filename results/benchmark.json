@@ -1,0 +1,302 @@
+{
+  "benchmark_script_sha256": "92366cc0e1c349cda824944d4582b1fbc000ee6019f7af3628415cbf6b8140dc",
+  "dependencies": {
+    "calendar-overlap-audit": "0.1.0",
+    "icalendar": "6.3.2",
+    "python-dateutil": "2.9.0.post0",
+    "six": "1.17.0",
+    "tzdata": "2025.2"
+  },
+  "implementation_sha256": {
+    "src/calendar_audit/__init__.py": "582bc5679ceb4adaf0b06fb94d58ff10ccb8ca3a7e85fcea9720c8da464acb73",
+    "src/calendar_audit/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/calendar_audit/cli.py": "70e70461d7ae9c5ba6e682633366a7eeb16c1ec42e125f222d1379944ec48a3d",
+    "src/calendar_audit/core.py": "eb1096caf441a1a2499254d060d3c5b99d8b72abc8dae6348991aa13d388db96",
+    "src/calendar_audit/report.py": "c317befd42b6cb03c92e9c38e581b0a04e8650f987c3a0b1b6ce89c85070e839"
+  },
+  "measured_at_utc": "2026-09-28T09:48:01.422487+00:00",
+  "method": "Fresh CLI process per repetition; perf_counter elapsed seconds; Linux wait4 ru_maxrss KiB; default resource limits; no warmup.",
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "repeats": 3,
+  "schema_version": 1,
+  "seed": 20260928,
+  "workloads": [
+    {
+      "input_bytes": 366856,
+      "input_events": 3000,
+      "input_sha256": "550869f4827314c41c92f7e5e0ceb4d3e2b7a4730965fc79accb872c2f7ecc20",
+      "name": "sparse_3000",
+      "runs": [
+        {
+          "elapsed_seconds": 3.3332758338656276,
+          "exit_code": 0,
+          "occupied_seconds": 90000,
+          "occurrences": 3000,
+          "output_bytes": {
+            "report.html": 2185909,
+            "report.json": 1922730
+          },
+          "output_sha256": {
+            "report.html": "28394b970667f270718b7003e2254967afc0f92ca93ca42cfc62d3f3eaf15ec5",
+            "report.json": "55e697d55051da5c90aef03b563da75b6ceb66801ed22e8df0d52c5eb1720b29"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 49808
+        },
+        {
+          "elapsed_seconds": 2.4887885318603367,
+          "exit_code": 0,
+          "occupied_seconds": 90000,
+          "occurrences": 3000,
+          "output_bytes": {
+            "report.html": 2185909,
+            "report.json": 1922730
+          },
+          "output_sha256": {
+            "report.html": "28394b970667f270718b7003e2254967afc0f92ca93ca42cfc62d3f3eaf15ec5",
+            "report.json": "55e697d55051da5c90aef03b563da75b6ceb66801ed22e8df0d52c5eb1720b29"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 49896
+        },
+        {
+          "elapsed_seconds": 1.7332168039865792,
+          "exit_code": 0,
+          "occupied_seconds": 90000,
+          "occurrences": 3000,
+          "output_bytes": {
+            "report.html": 2185909,
+            "report.json": 1922730
+          },
+          "output_sha256": {
+            "report.html": "28394b970667f270718b7003e2254967afc0f92ca93ca42cfc62d3f3eaf15ec5",
+            "report.json": "55e697d55051da5c90aef03b563da75b6ceb66801ed22e8df0d52c5eb1720b29"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 49916
+        }
+      ]
+    },
+    {
+      "input_bytes": 60356,
+      "input_events": 500,
+      "input_sha256": "bfa30e0d4043cb8f57f96b1ed5909f73dae3b123667ce6d75f9d557ff38630c8",
+      "name": "seeded_500",
+      "runs": [
+        {
+          "elapsed_seconds": 0.5085500278510153,
+          "exit_code": 0,
+          "occupied_seconds": 461160,
+          "occurrences": 500,
+          "output_bytes": {
+            "report.html": 379871,
+            "report.json": 336544
+          },
+          "output_sha256": {
+            "report.html": "911f90641851c6dc159787ae7b51d866750c640fe8f09edd0637e8a70dea6b9d",
+            "report.json": "c1b011ba6bb3f13f68046c50448832295aa06fe6b47d82249fefe61a3662229f"
+          },
+          "overlap_pairs": 32,
+          "peak_rss_kib": 37404
+        },
+        {
+          "elapsed_seconds": 0.5247764780651778,
+          "exit_code": 0,
+          "occupied_seconds": 461160,
+          "occurrences": 500,
+          "output_bytes": {
+            "report.html": 379871,
+            "report.json": 336544
+          },
+          "output_sha256": {
+            "report.html": "911f90641851c6dc159787ae7b51d866750c640fe8f09edd0637e8a70dea6b9d",
+            "report.json": "c1b011ba6bb3f13f68046c50448832295aa06fe6b47d82249fefe61a3662229f"
+          },
+          "overlap_pairs": 32,
+          "peak_rss_kib": 37404
+        },
+        {
+          "elapsed_seconds": 0.5182565578725189,
+          "exit_code": 0,
+          "occupied_seconds": 461160,
+          "occurrences": 500,
+          "output_bytes": {
+            "report.html": 379871,
+            "report.json": 336544
+          },
+          "output_sha256": {
+            "report.html": "911f90641851c6dc159787ae7b51d866750c640fe8f09edd0637e8a70dea6b9d",
+            "report.json": "c1b011ba6bb3f13f68046c50448832295aa06fe6b47d82249fefe61a3662229f"
+          },
+          "overlap_pairs": 32,
+          "peak_rss_kib": 37404
+        }
+      ]
+    },
+    {
+      "input_bytes": 21636,
+      "input_events": 180,
+      "input_sha256": "45886f1e3c5b1b4da8cdb70cbcd71dbb63bbd6ca1388c5d3e24b178c0cf76a1a",
+      "name": "dense_180",
+      "runs": [
+        {
+          "elapsed_seconds": 1.0290617560967803,
+          "exit_code": 0,
+          "occupied_seconds": 3600,
+          "occurrences": 180,
+          "output_bytes": {
+            "report.html": 4950172,
+            "report.json": 2965628
+          },
+          "output_sha256": {
+            "report.html": "992db8367191968fb0b508a8be91d2262f81efbeab5e5c1d65ed48ca1726772e",
+            "report.json": "922c7e47530ab7edd3aa51bccabb71d0f465e0502997ed27863454ed0c861e9a"
+          },
+          "overlap_pairs": 16110,
+          "peak_rss_kib": 63652
+        },
+        {
+          "elapsed_seconds": 1.2762484999839216,
+          "exit_code": 0,
+          "occupied_seconds": 3600,
+          "occurrences": 180,
+          "output_bytes": {
+            "report.html": 4950172,
+            "report.json": 2965628
+          },
+          "output_sha256": {
+            "report.html": "992db8367191968fb0b508a8be91d2262f81efbeab5e5c1d65ed48ca1726772e",
+            "report.json": "922c7e47530ab7edd3aa51bccabb71d0f465e0502997ed27863454ed0c861e9a"
+          },
+          "overlap_pairs": 16110,
+          "peak_rss_kib": 63500
+        },
+        {
+          "elapsed_seconds": 0.9782436417881399,
+          "exit_code": 0,
+          "occupied_seconds": 3600,
+          "occurrences": 180,
+          "output_bytes": {
+            "report.html": 4950172,
+            "report.json": 2965628
+          },
+          "output_sha256": {
+            "report.html": "992db8367191968fb0b508a8be91d2262f81efbeab5e5c1d65ed48ca1726772e",
+            "report.json": "922c7e47530ab7edd3aa51bccabb71d0f465e0502997ed27863454ed0c861e9a"
+          },
+          "overlap_pairs": 16110,
+          "peak_rss_kib": 63720
+        }
+      ]
+    },
+    {
+      "input_bytes": 14556,
+      "input_events": 100,
+      "input_sha256": "626eb65fe5267333ee46dcc2b8114fbd785a92d6ae21f8d04b6de59a7a32f103",
+      "name": "daily_100_by_90",
+      "runs": [
+        {
+          "elapsed_seconds": 1.4127813910599798,
+          "exit_code": 0,
+          "occupied_seconds": 270000,
+          "occurrences": 9000,
+          "output_bytes": {
+            "report.html": 4108587,
+            "report.json": 3147248
+          },
+          "output_sha256": {
+            "report.html": "2917142e2522bde013fdb05a3290f2023ec90d2df410c6b4292f0f23d5c48e9c",
+            "report.json": "5a9b3e89ff94e410ed47ea67c67ba3befc667b8d07ca6bc78dd7c5c914ba5874"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 57572
+        },
+        {
+          "elapsed_seconds": 1.358049717033282,
+          "exit_code": 0,
+          "occupied_seconds": 270000,
+          "occurrences": 9000,
+          "output_bytes": {
+            "report.html": 4108587,
+            "report.json": 3147248
+          },
+          "output_sha256": {
+            "report.html": "2917142e2522bde013fdb05a3290f2023ec90d2df410c6b4292f0f23d5c48e9c",
+            "report.json": "5a9b3e89ff94e410ed47ea67c67ba3befc667b8d07ca6bc78dd7c5c914ba5874"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 57696
+        },
+        {
+          "elapsed_seconds": 1.5265919680241495,
+          "exit_code": 0,
+          "occupied_seconds": 270000,
+          "occurrences": 9000,
+          "output_bytes": {
+            "report.html": 4108587,
+            "report.json": 3147248
+          },
+          "output_sha256": {
+            "report.html": "2917142e2522bde013fdb05a3290f2023ec90d2df410c6b4292f0f23d5c48e9c",
+            "report.json": "5a9b3e89ff94e410ed47ea67c67ba3befc667b8d07ca6bc78dd7c5c914ba5874"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 57544
+        }
+      ]
+    },
+    {
+      "input_bytes": 30106,
+      "input_events": 250,
+      "input_sha256": "673bec8b7650df92c1e406a9652a5d3c10573ec1c1cf31511e9901bf3ecc40ae",
+      "name": "dense_pair_limit_250",
+      "runs": [
+        {
+          "elapsed_seconds": 0.399131644051522,
+          "exit_code": 1,
+          "failure": "Audit failed: pairs limit exceeded",
+          "peak_rss_kib": 47580
+        },
+        {
+          "elapsed_seconds": 0.40316058904863894,
+          "exit_code": 1,
+          "failure": "Audit failed: pairs limit exceeded",
+          "peak_rss_kib": 47580
+        },
+        {
+          "elapsed_seconds": 0.3691676880698651,
+          "exit_code": 1,
+          "failure": "Audit failed: pairs limit exceeded",
+          "peak_rss_kib": 47580
+        }
+      ]
+    },
+    {
+      "input_bytes": 222,
+      "input_events": 1,
+      "input_sha256": "a58f6e281f8b13a028821b58c849ffda4a41f3c111ad8ccc37c06a59501ac36c",
+      "name": "ancient_candidate_limit",
+      "runs": [
+        {
+          "elapsed_seconds": 2.8774707370903343,
+          "exit_code": 1,
+          "failure": "Audit failed: candidates limit exceeded",
+          "peak_rss_kib": 47580
+        },
+        {
+          "elapsed_seconds": 3.067874920088798,
+          "exit_code": 1,
+          "failure": "Audit failed: candidates limit exceeded",
+          "peak_rss_kib": 47580
+        },
+        {
+          "elapsed_seconds": 3.365523163927719,
+          "exit_code": 1,
+          "failure": "Audit failed: candidates limit exceeded",
+          "peak_rss_kib": 47580
+        }
+      ]
+    }
+  ]
+}
