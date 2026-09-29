@@ -1,0 +1,544 @@
+{
+  "benchmark_script_sha256": "d8054c80964e9f872c63efd9c08ac23c0dd5661270766f9986f4c45eab78775c",
+  "dependencies": {
+    "calendar-overlap-audit": "0.2.0",
+    "icalendar": "6.3.2",
+    "python-dateutil": "2.9.0.post0",
+    "six": "1.17.0",
+    "tzdata": "2025.2"
+  },
+  "implementation_sha256": {
+    "src/calendar_audit/__init__.py": "47eba8d65676af96be1fbe080d68cf89781c92529a5056cee46c77dfb6166263",
+    "src/calendar_audit/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/calendar_audit/cli.py": "70e70461d7ae9c5ba6e682633366a7eeb16c1ec42e125f222d1379944ec48a3d",
+    "src/calendar_audit/core.py": "59091480f3b3669627cc277f1c7fea41d6ab6f0070d17ec97e4b625ecb57df62",
+    "src/calendar_audit/report.py": "623e3c83aeca950bfcaa2a9c25bd9e929fb5c2f8c1a73dc38ee8094e672d0b1f"
+  },
+  "measured_at_utc": "2026-09-29T01:53:06.080572+00:00",
+  "method": "Fresh CLI process per repetition; perf_counter elapsed seconds; Linux wait4 ru_maxrss KiB; default resource limits; no warmup.",
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "repeats": 3,
+  "schema_version": 1,
+  "seed": 20260928,
+  "workloads": [
+    {
+      "input_bytes": 366856,
+      "input_events": 3000,
+      "input_sha256": "550869f4827314c41c92f7e5e0ceb4d3e2b7a4730965fc79accb872c2f7ecc20",
+      "name": "sparse_3000",
+      "runs": [
+        {
+          "elapsed_seconds": 2.6300807860679924,
+          "exit_code": 0,
+          "occupied_seconds": 90000,
+          "occurrences": 3000,
+          "output_bytes": {
+            "report.html": 2362909,
+            "report.json": 2281673
+          },
+          "output_sha256": {
+            "report.html": "98efbaac1ac7b4f3be2d1ea4352b892f3cb4793c3a9763541410d835592f6339",
+            "report.json": "60b02ccc19388b8f7478048e078c7369070b4577df76e315380d1282a8a82d7b"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 51920
+        },
+        {
+          "elapsed_seconds": 4.102626882959157,
+          "exit_code": 0,
+          "occupied_seconds": 90000,
+          "occurrences": 3000,
+          "output_bytes": {
+            "report.html": 2362909,
+            "report.json": 2281673
+          },
+          "output_sha256": {
+            "report.html": "98efbaac1ac7b4f3be2d1ea4352b892f3cb4793c3a9763541410d835592f6339",
+            "report.json": "60b02ccc19388b8f7478048e078c7369070b4577df76e315380d1282a8a82d7b"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 51724
+        },
+        {
+          "elapsed_seconds": 4.579110749997199,
+          "exit_code": 0,
+          "occupied_seconds": 90000,
+          "occurrences": 3000,
+          "output_bytes": {
+            "report.html": 2362909,
+            "report.json": 2281673
+          },
+          "output_sha256": {
+            "report.html": "98efbaac1ac7b4f3be2d1ea4352b892f3cb4793c3a9763541410d835592f6339",
+            "report.json": "60b02ccc19388b8f7478048e078c7369070b4577df76e315380d1282a8a82d7b"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 51760
+        }
+      ]
+    },
+    {
+      "input_bytes": 60356,
+      "input_events": 500,
+      "input_sha256": "bfa30e0d4043cb8f57f96b1ed5909f73dae3b123667ce6d75f9d557ff38630c8",
+      "name": "seeded_500",
+      "runs": [
+        {
+          "elapsed_seconds": 1.2709482212085277,
+          "exit_code": 0,
+          "occupied_seconds": 461160,
+          "occurrences": 500,
+          "output_bytes": {
+            "report.html": 409371,
+            "report.json": 395986
+          },
+          "output_sha256": {
+            "report.html": "f6cb92abc932d4cb8946307b034b7e4420055de2232a729ea1682754caf7acbe",
+            "report.json": "343904355680abdb049387fad980df2699d9830ba99ea9ed8fec5bd3364d8d99"
+          },
+          "overlap_pairs": 32,
+          "peak_rss_kib": 40204
+        },
+        {
+          "elapsed_seconds": 1.2131445379927754,
+          "exit_code": 0,
+          "occupied_seconds": 461160,
+          "occurrences": 500,
+          "output_bytes": {
+            "report.html": 409371,
+            "report.json": 395986
+          },
+          "output_sha256": {
+            "report.html": "f6cb92abc932d4cb8946307b034b7e4420055de2232a729ea1682754caf7acbe",
+            "report.json": "343904355680abdb049387fad980df2699d9830ba99ea9ed8fec5bd3364d8d99"
+          },
+          "overlap_pairs": 32,
+          "peak_rss_kib": 40204
+        },
+        {
+          "elapsed_seconds": 1.4208979329559952,
+          "exit_code": 0,
+          "occupied_seconds": 461160,
+          "occurrences": 500,
+          "output_bytes": {
+            "report.html": 409371,
+            "report.json": 395986
+          },
+          "output_sha256": {
+            "report.html": "f6cb92abc932d4cb8946307b034b7e4420055de2232a729ea1682754caf7acbe",
+            "report.json": "343904355680abdb049387fad980df2699d9830ba99ea9ed8fec5bd3364d8d99"
+          },
+          "overlap_pairs": 32,
+          "peak_rss_kib": 40204
+        }
+      ]
+    },
+    {
+      "input_bytes": 21636,
+      "input_events": 180,
+      "input_sha256": "45886f1e3c5b1b4da8cdb70cbcd71dbb63bbd6ca1388c5d3e24b178c0cf76a1a",
+      "name": "dense_180",
+      "runs": [
+        {
+          "elapsed_seconds": 2.0003287990111858,
+          "exit_code": 0,
+          "occupied_seconds": 3600,
+          "occurrences": 180,
+          "output_bytes": {
+            "report.html": 4960792,
+            "report.json": 2986990
+          },
+          "output_sha256": {
+            "report.html": "dc08dee9ce1bd5cb8130144b5102a31a99ce1676c83ba1f4634141894f7a666f",
+            "report.json": "5fd9019ad5039fd584287668b9b6df2ed5202243851135545867563ac2d832ec"
+          },
+          "overlap_pairs": 16110,
+          "peak_rss_kib": 63860
+        },
+        {
+          "elapsed_seconds": 1.9364516998175532,
+          "exit_code": 0,
+          "occupied_seconds": 3600,
+          "occurrences": 180,
+          "output_bytes": {
+            "report.html": 4960792,
+            "report.json": 2986990
+          },
+          "output_sha256": {
+            "report.html": "dc08dee9ce1bd5cb8130144b5102a31a99ce1676c83ba1f4634141894f7a666f",
+            "report.json": "5fd9019ad5039fd584287668b9b6df2ed5202243851135545867563ac2d832ec"
+          },
+          "overlap_pairs": 16110,
+          "peak_rss_kib": 63904
+        },
+        {
+          "elapsed_seconds": 1.9960974699351937,
+          "exit_code": 0,
+          "occupied_seconds": 3600,
+          "occurrences": 180,
+          "output_bytes": {
+            "report.html": 4960792,
+            "report.json": 2986990
+          },
+          "output_sha256": {
+            "report.html": "dc08dee9ce1bd5cb8130144b5102a31a99ce1676c83ba1f4634141894f7a666f",
+            "report.json": "5fd9019ad5039fd584287668b9b6df2ed5202243851135545867563ac2d832ec"
+          },
+          "overlap_pairs": 16110,
+          "peak_rss_kib": 63864
+        }
+      ]
+    },
+    {
+      "input_bytes": 14556,
+      "input_events": 100,
+      "input_sha256": "626eb65fe5267333ee46dcc2b8114fbd785a92d6ae21f8d04b6de59a7a32f103",
+      "name": "daily_100_by_90",
+      "runs": [
+        {
+          "elapsed_seconds": 2.9291620168369263,
+          "exit_code": 0,
+          "occupied_seconds": 270000,
+          "occurrences": 9000,
+          "output_bytes": {
+            "report.html": 4639587,
+            "report.json": 3994978
+          },
+          "output_sha256": {
+            "report.html": "ae7039bac12853dd52523f20d857137f1b915b69ed6dc362cd54ab9c3c12fbad",
+            "report.json": "f434330644d50cb6adb94ddd2a371799804560769a493f0094b554abb08d5569"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 62712
+        },
+        {
+          "elapsed_seconds": 3.160037199035287,
+          "exit_code": 0,
+          "occupied_seconds": 270000,
+          "occurrences": 9000,
+          "output_bytes": {
+            "report.html": 4639587,
+            "report.json": 3994978
+          },
+          "output_sha256": {
+            "report.html": "ae7039bac12853dd52523f20d857137f1b915b69ed6dc362cd54ab9c3c12fbad",
+            "report.json": "f434330644d50cb6adb94ddd2a371799804560769a493f0094b554abb08d5569"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 62840
+        },
+        {
+          "elapsed_seconds": 3.120773975038901,
+          "exit_code": 0,
+          "occupied_seconds": 270000,
+          "occurrences": 9000,
+          "output_bytes": {
+            "report.html": 4639587,
+            "report.json": 3994978
+          },
+          "output_sha256": {
+            "report.html": "ae7039bac12853dd52523f20d857137f1b915b69ed6dc362cd54ab9c3c12fbad",
+            "report.json": "f434330644d50cb6adb94ddd2a371799804560769a493f0094b554abb08d5569"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 62712
+        }
+      ]
+    },
+    {
+      "input_bytes": 30106,
+      "input_events": 250,
+      "input_sha256": "673bec8b7650df92c1e406a9652a5d3c10573ec1c1cf31511e9901bf3ecc40ae",
+      "name": "dense_pair_limit_250",
+      "runs": [
+        {
+          "elapsed_seconds": 0.801706206984818,
+          "exit_code": 1,
+          "failure": "Audit failed: pairs limit exceeded",
+          "peak_rss_kib": 50460
+        },
+        {
+          "elapsed_seconds": 0.7212549450341612,
+          "exit_code": 1,
+          "failure": "Audit failed: pairs limit exceeded",
+          "peak_rss_kib": 50460
+        },
+        {
+          "elapsed_seconds": 0.7863737740553916,
+          "exit_code": 1,
+          "failure": "Audit failed: pairs limit exceeded",
+          "peak_rss_kib": 50460
+        }
+      ]
+    },
+    {
+      "input_bytes": 222,
+      "input_events": 1,
+      "input_sha256": "a58f6e281f8b13a028821b58c849ffda4a41f3c111ad8ccc37c06a59501ac36c",
+      "name": "ancient_candidate_limit",
+      "runs": [
+        {
+          "elapsed_seconds": 7.212588546099141,
+          "exit_code": 1,
+          "failure": "Audit failed: candidates limit exceeded",
+          "peak_rss_kib": 50460
+        },
+        {
+          "elapsed_seconds": 3.2837348768953234,
+          "exit_code": 1,
+          "failure": "Audit failed: candidates limit exceeded",
+          "peak_rss_kib": 50460
+        },
+        {
+          "elapsed_seconds": 3.2607144040521234,
+          "exit_code": 1,
+          "failure": "Audit failed: candidates limit exceeded",
+          "peak_rss_kib": 50460
+        }
+      ]
+    },
+    {
+      "input_bytes": 33136,
+      "input_events": 300,
+      "input_sha256": "c03f1b869127bd0f42e32da97d30528b1f16fa8f970cabb0ec558ab1965aa34e",
+      "name": "overrides_100_by_90",
+      "runs": [
+        {
+          "elapsed_seconds": 1.7531069600954652,
+          "exit_code": 0,
+          "occupied_seconds": 267000,
+          "occurrences": 8900,
+          "output_bytes": {
+            "report.html": 4735783,
+            "report.json": 4099087
+          },
+          "output_sha256": {
+            "report.html": "93f10e2c48b3c3c8420b40f418c48b00b448e9b2123a178a70b967a520457d02",
+            "report.json": "8fa717b5deb483b463b1574840dca372a6a6118e09c2c131cea41d727bf48051"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 64148
+        },
+        {
+          "elapsed_seconds": 1.4837492189835757,
+          "exit_code": 0,
+          "occupied_seconds": 267000,
+          "occurrences": 8900,
+          "output_bytes": {
+            "report.html": 4735783,
+            "report.json": 4099087
+          },
+          "output_sha256": {
+            "report.html": "93f10e2c48b3c3c8420b40f418c48b00b448e9b2123a178a70b967a520457d02",
+            "report.json": "8fa717b5deb483b463b1574840dca372a6a6118e09c2c131cea41d727bf48051"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 64116
+        },
+        {
+          "elapsed_seconds": 1.4359007561579347,
+          "exit_code": 0,
+          "occupied_seconds": 267000,
+          "occurrences": 8900,
+          "output_bytes": {
+            "report.html": 4735783,
+            "report.json": 4099087
+          },
+          "output_sha256": {
+            "report.html": "93f10e2c48b3c3c8420b40f418c48b00b448e9b2123a178a70b967a520457d02",
+            "report.json": "8fa717b5deb483b463b1574840dca372a6a6118e09c2c131cea41d727bf48051"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 63892
+        }
+      ]
+    },
+    {
+      "input_bytes": 24146,
+      "input_events": 200,
+      "input_sha256": "735662ebf176ac5561732c58a395b9c7df70116f92f229d2838ff9d032425f10",
+      "name": "overrides_dense_100",
+      "runs": [
+        {
+          "elapsed_seconds": 0.5642458109650761,
+          "exit_code": 0,
+          "occupied_seconds": 3030,
+          "occurrences": 200,
+          "output_bytes": {
+            "report.html": 1668671,
+            "report.json": 1054749
+          },
+          "output_sha256": {
+            "report.html": "c5fd15ce6ea83ec595118647c46c3e6c824cbb5c24a92102735dfcb0349c1566",
+            "report.json": "e64dfb2fda95dd680b12158dd0ac7dc07c9e73baf88971aed982937190a80084"
+          },
+          "overlap_pairs": 4950,
+          "peak_rss_kib": 51180
+        },
+        {
+          "elapsed_seconds": 0.6518002059310675,
+          "exit_code": 0,
+          "occupied_seconds": 3030,
+          "occurrences": 200,
+          "output_bytes": {
+            "report.html": 1668671,
+            "report.json": 1054749
+          },
+          "output_sha256": {
+            "report.html": "c5fd15ce6ea83ec595118647c46c3e6c824cbb5c24a92102735dfcb0349c1566",
+            "report.json": "e64dfb2fda95dd680b12158dd0ac7dc07c9e73baf88971aed982937190a80084"
+          },
+          "overlap_pairs": 4950,
+          "peak_rss_kib": 51180
+        },
+        {
+          "elapsed_seconds": 0.5196976310107857,
+          "exit_code": 0,
+          "occupied_seconds": 3030,
+          "occurrences": 200,
+          "output_bytes": {
+            "report.html": 1668671,
+            "report.json": 1054749
+          },
+          "output_sha256": {
+            "report.html": "c5fd15ce6ea83ec595118647c46c3e6c824cbb5c24a92102735dfcb0349c1566",
+            "report.json": "e64dfb2fda95dd680b12158dd0ac7dc07c9e73baf88971aed982937190a80084"
+          },
+          "overlap_pairs": 4950,
+          "peak_rss_kib": 51180
+        }
+      ]
+    },
+    {
+      "input_bytes": 316,
+      "input_events": 2,
+      "input_sha256": "bf88048e789075283927c160e96f68916e895fade33a11e28310529a1ada3d27",
+      "name": "override_resolution_limit",
+      "runs": [
+        {
+          "elapsed_seconds": 3.8659980641677976,
+          "exit_code": 2,
+          "issue_codes": [
+            "resolution_limit"
+          ],
+          "occupied_seconds": 0,
+          "occurrences": 0,
+          "output_bytes": {
+            "report.html": 15509,
+            "report.json": 16592
+          },
+          "output_sha256": {
+            "report.html": "34304b01f4276bd70537d6e4e6e543721bf419e452335b4a2819fb227313e935",
+            "report.json": "dd1b5818358f5b7225a50569f20f82940b467a450a4b67b75ccb955bdef7acb1"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 51180
+        },
+        {
+          "elapsed_seconds": 3.7970345898065716,
+          "exit_code": 2,
+          "issue_codes": [
+            "resolution_limit"
+          ],
+          "occupied_seconds": 0,
+          "occurrences": 0,
+          "output_bytes": {
+            "report.html": 15509,
+            "report.json": 16592
+          },
+          "output_sha256": {
+            "report.html": "34304b01f4276bd70537d6e4e6e543721bf419e452335b4a2819fb227313e935",
+            "report.json": "dd1b5818358f5b7225a50569f20f82940b467a450a4b67b75ccb955bdef7acb1"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 51180
+        },
+        {
+          "elapsed_seconds": 4.319751010974869,
+          "exit_code": 2,
+          "issue_codes": [
+            "resolution_limit"
+          ],
+          "occupied_seconds": 0,
+          "occurrences": 0,
+          "output_bytes": {
+            "report.html": 15509,
+            "report.json": 16592
+          },
+          "output_sha256": {
+            "report.html": "34304b01f4276bd70537d6e4e6e543721bf419e452335b4a2819fb227313e935",
+            "report.json": "dd1b5818358f5b7225a50569f20f82940b467a450a4b67b75ccb955bdef7acb1"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 51180
+        }
+      ]
+    },
+    {
+      "input_bytes": 321,
+      "input_events": 2,
+      "input_sha256": "d0a69bdf9211a9577376d3797a62c16925263afdb15f011781b4c52dd22d6424",
+      "name": "override_orphan",
+      "runs": [
+        {
+          "elapsed_seconds": 0.24565186607651412,
+          "exit_code": 2,
+          "issue_codes": [
+            "orphan_override"
+          ],
+          "occupied_seconds": 0,
+          "occurrences": 0,
+          "output_bytes": {
+            "report.html": 15515,
+            "report.json": 16623
+          },
+          "output_sha256": {
+            "report.html": "402bd2cc08698072423647522944044fa69038eea7aef1f0a7539f2e169b800d",
+            "report.json": "59ffc92f4edb985d6a3f7a36d7bfe927608713b46ddd562807fd3ef472190e87"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 51180
+        },
+        {
+          "elapsed_seconds": 0.2887037310283631,
+          "exit_code": 2,
+          "issue_codes": [
+            "orphan_override"
+          ],
+          "occupied_seconds": 0,
+          "occurrences": 0,
+          "output_bytes": {
+            "report.html": 15515,
+            "report.json": 16623
+          },
+          "output_sha256": {
+            "report.html": "402bd2cc08698072423647522944044fa69038eea7aef1f0a7539f2e169b800d",
+            "report.json": "59ffc92f4edb985d6a3f7a36d7bfe927608713b46ddd562807fd3ef472190e87"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 51180
+        },
+        {
+          "elapsed_seconds": 0.2995685401838273,
+          "exit_code": 2,
+          "issue_codes": [
+            "orphan_override"
+          ],
+          "occupied_seconds": 0,
+          "occurrences": 0,
+          "output_bytes": {
+            "report.html": 15515,
+            "report.json": 16623
+          },
+          "output_sha256": {
+            "report.html": "402bd2cc08698072423647522944044fa69038eea7aef1f0a7539f2e169b800d",
+            "report.json": "59ffc92f4edb985d6a3f7a36d7bfe927608713b46ddd562807fd3ef472190e87"
+          },
+          "overlap_pairs": 0,
+          "peak_rss_kib": 51180
+        }
+      ]
+    }
+  ]
+}

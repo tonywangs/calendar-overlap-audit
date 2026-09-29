@@ -1,0 +1,307 @@
+{
+  "cancellations": [
+    {
+      "master": "e1",
+      "override": "e5",
+      "reason": "STATUS:CANCELLED",
+      "recurrence_id": "2026-03-04T10:00:00Z"
+    }
+  ],
+  "complete": true,
+  "counts": {
+    "candidates": 1,
+    "events": 7,
+    "files": 1,
+    "input_bytes": 881,
+    "occurrences": 3,
+    "pairs": 3,
+    "resolutions": 10
+  },
+  "daily": [
+    {
+      "all_day_occurrences": 0,
+      "date": "2026-03-03",
+      "day_seconds": 86400,
+      "occupied_seconds": 9000,
+      "timed_occurrences": 3
+    },
+    {
+      "all_day_occurrences": 0,
+      "date": "2026-03-04",
+      "day_seconds": 86400,
+      "occupied_seconds": 0,
+      "timed_occurrences": 0
+    },
+    {
+      "all_day_occurrences": 0,
+      "date": "2026-03-05",
+      "day_seconds": 86400,
+      "occupied_seconds": 0,
+      "timed_occurrences": 0
+    }
+  ],
+  "dependencies": {
+    "icalendar": "6.3.2",
+    "python-dateutil": "2.9.0.post0",
+    "six": "1.17.0",
+    "tzdata": "2025.2"
+  },
+  "events": [
+    {
+      "disposition": "included",
+      "id": "e1",
+      "role": "master",
+      "sources": [
+        {
+          "event": 1,
+          "source": "s1"
+        }
+      ],
+      "summary": "Daily commitment",
+      "time_basis": "utc",
+      "timezone": "UTC",
+      "uid": "series"
+    },
+    {
+      "disposition": "included",
+      "duration_seconds": 3600,
+      "effective_end": "2026-03-03T10:00:00Z",
+      "effective_start": "2026-03-03T09:00:00Z",
+      "id": "e2",
+      "inherited": [
+        "TRANSP",
+        "STATUS",
+        "duration"
+      ],
+      "master": "e1",
+      "recurrence_id": "2026-03-01T10:00:00Z",
+      "role": "override",
+      "sources": [
+        {
+          "event": 2,
+          "source": "s1"
+        }
+      ],
+      "summary": "Moved from before window",
+      "time_basis": "utc",
+      "timezone": "UTC",
+      "uid": "series"
+    },
+    {
+      "disposition": "included",
+      "duration_seconds": 7200,
+      "effective_end": "2026-03-03T11:30:00Z",
+      "effective_start": "2026-03-03T09:30:00Z",
+      "id": "e3",
+      "inherited": [
+        "TRANSP",
+        "STATUS"
+      ],
+      "master": "e1",
+      "recurrence_id": "2026-03-10T10:00:00Z",
+      "role": "override",
+      "sources": [
+        {
+          "event": 3,
+          "source": "s1"
+        }
+      ],
+      "summary": "Moved from after window",
+      "time_basis": "utc",
+      "timezone": "UTC",
+      "uid": "series"
+    },
+    {
+      "disposition": "included",
+      "duration_seconds": 3600,
+      "effective_end": "2026-03-20T11:00:00Z",
+      "effective_start": "2026-03-20T10:00:00Z",
+      "id": "e4",
+      "inherited": [
+        "SUMMARY",
+        "TRANSP",
+        "STATUS",
+        "duration"
+      ],
+      "master": "e1",
+      "recurrence_id": "2026-03-03T10:00:00Z",
+      "role": "override",
+      "sources": [
+        {
+          "event": 4,
+          "source": "s1"
+        }
+      ],
+      "summary": "Daily commitment",
+      "time_basis": "utc",
+      "timezone": "UTC",
+      "uid": "series"
+    },
+    {
+      "disposition": "cancelled",
+      "duration_seconds": 3600,
+      "effective_end": "2026-03-04T11:00:00Z",
+      "effective_start": "2026-03-04T10:00:00Z",
+      "id": "e5",
+      "inherited": [
+        "SUMMARY",
+        "TRANSP",
+        "duration"
+      ],
+      "master": "e1",
+      "recurrence_id": "2026-03-04T10:00:00Z",
+      "role": "override",
+      "sources": [
+        {
+          "event": 5,
+          "source": "s1"
+        }
+      ],
+      "summary": "Daily commitment",
+      "time_basis": "utc",
+      "timezone": "UTC",
+      "uid": "series"
+    },
+    {
+      "disposition": "transparent",
+      "duration_seconds": 3600,
+      "effective_end": "2026-03-05T11:00:00Z",
+      "effective_start": "2026-03-05T10:00:00Z",
+      "id": "e6",
+      "inherited": [
+        "SUMMARY",
+        "STATUS",
+        "duration"
+      ],
+      "master": "e1",
+      "recurrence_id": "2026-03-05T10:00:00Z",
+      "role": "override",
+      "sources": [
+        {
+          "event": 6,
+          "source": "s1"
+        }
+      ],
+      "summary": "Daily commitment",
+      "time_basis": "utc",
+      "timezone": "UTC",
+      "uid": "series"
+    },
+    {
+      "disposition": "included",
+      "id": "e7",
+      "role": "master",
+      "sources": [
+        {
+          "event": 7,
+          "source": "s1"
+        }
+      ],
+      "summary": "Another commitment",
+      "time_basis": "utc",
+      "timezone": "UTC",
+      "uid": "anchor"
+    }
+  ],
+  "issues": [],
+  "limits": {
+    "candidates": 200000,
+    "events": 5000,
+    "files": 32,
+    "input_bytes": 8388608,
+    "line_bytes": 65536,
+    "occurrences": 20000,
+    "pairs": 20000,
+    "report_bytes": 8388608,
+    "resolutions": 200000,
+    "seconds": 30.0
+  },
+  "occupied_seconds": 9000,
+  "occurrences": [
+    {
+      "all_day": false,
+      "clipped_end": "2026-03-03T10:00:00Z",
+      "clipped_start": "2026-03-03T09:00:00Z",
+      "end": "2026-03-03T10:00:00Z",
+      "event": "e2",
+      "id": "o1",
+      "local_end": "2026-03-03T10:00:00+00:00",
+      "local_start": "2026-03-03T09:00:00+00:00",
+      "master": "e1",
+      "override": "e2",
+      "recurrence_id": "2026-03-01T10:00:00Z",
+      "start": "2026-03-03T09:00:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2026-03-03T11:30:00Z",
+      "clipped_start": "2026-03-03T09:30:00Z",
+      "end": "2026-03-03T11:30:00Z",
+      "event": "e3",
+      "id": "o2",
+      "local_end": "2026-03-03T11:30:00+00:00",
+      "local_start": "2026-03-03T09:30:00+00:00",
+      "master": "e1",
+      "override": "e3",
+      "recurrence_id": "2026-03-10T10:00:00Z",
+      "start": "2026-03-03T09:30:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2026-03-03T10:15:00Z",
+      "clipped_start": "2026-03-03T09:45:00Z",
+      "end": "2026-03-03T10:15:00Z",
+      "event": "e7",
+      "id": "o3",
+      "local_end": "2026-03-03T10:15:00+00:00",
+      "local_start": "2026-03-03T09:45:00+00:00",
+      "master": "e7",
+      "override": null,
+      "recurrence_id": "2026-03-03T09:45:00Z",
+      "start": "2026-03-03T09:45:00Z"
+    }
+  ],
+  "overlaps": [
+    {
+      "end": "2026-03-03T10:00:00Z",
+      "id": "p1",
+      "left": "o1",
+      "right": "o2",
+      "seconds": 1800,
+      "start": "2026-03-03T09:30:00Z"
+    },
+    {
+      "end": "2026-03-03T10:00:00Z",
+      "id": "p2",
+      "left": "o1",
+      "right": "o3",
+      "seconds": 900,
+      "start": "2026-03-03T09:45:00Z"
+    },
+    {
+      "end": "2026-03-03T10:15:00Z",
+      "id": "p3",
+      "left": "o2",
+      "right": "o3",
+      "seconds": 1800,
+      "start": "2026-03-03T09:45:00Z"
+    }
+  ],
+  "schema_version": 2,
+  "sources": [
+    {
+      "bytes": 881,
+      "id": "s1",
+      "name": "overrides.ics",
+      "sha256": "722174a9c470f69714a43876091dff4be66905aee46247beef29f0cb9b62bc04"
+    }
+  ],
+  "tool_version": "0.2.0",
+  "window": {
+    "end": "2026-03-06",
+    "end_utc": "2026-03-06T00:00:00Z",
+    "start": "2026-03-03",
+    "start_utc": "2026-03-03T00:00:00Z",
+    "timezone": "UTC"
+  }
+}

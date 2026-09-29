@@ -46,8 +46,9 @@ through your normal environment setup before following these instructions.
 * Floating times use the explicitly chosen display timezone. All-day events,
   cancelled events and transparent events do not consume timed occupancy.
 * Identical unfolded event definitions with the same UID are counted once across
-  files, retaining source citations. Different definitions or overrides sharing a
-  UID are excluded as ambiguous.
+  files, retaining source citations. Single-instance overrides match their original
+  recurrence identity and can move, resize, cancel or change transparency. Competing
+  revisions, orphan overrides and differing source snapshots are incomplete.
 * An **INCOMPLETE** banner means some data could not be interpreted. Reported
   occupancy and overlaps are provisional. Zero detected overlaps never proves
   availability.
@@ -71,15 +72,18 @@ JavaScript, with all findings visible.
 | Physical/unfolded line bytes | 64 KiB |
 | VEVENT definitions | 5,000 |
 | Recurrence candidates, including before window | 200,000 |
+| Override-family resolution candidates | 200,000 |
 | Retained occurrences, including all-day/zero-length | 20,000 |
 | Overlapping pairs | 20,000 |
 | Each output report | 8 MiB |
 | CLI wall time | 30 seconds |
 
 Use `--max-input-bytes`, `--max-files`, `--max-line-bytes`, `--max-events`,
-`--max-candidates`, `--max-occurrences`, `--max-pairs`, `--max-report-bytes`, and
+`--max-candidates`, `--max-resolutions`, `--max-occurrences`, `--max-pairs`, `--max-report-bytes`, and
 `--max-seconds` to **lower** limits. They cannot be raised above the ceilings.
-Limits fail the audit instead of publishing truncated findings. Very old rules can
+Ordinary limits fail the audit instead of publishing truncated findings. Override
+resolution exhaustion excludes the entire unresolved UID and writes an explicitly
+incomplete report (exit 2). Very old rules can
 exhaust the candidate budget before reaching the window. `--help` lists options.
 
 Exit codes: **0** complete within the supported subset, **2** incomplete report
@@ -134,6 +138,37 @@ Recreate the bounded workload measurements separately:
 
 Every input is synthetic and reproducible. Compatibility with real provider exports
 is **unverified**. Unsupported features include monthly/yearly rules, custom
-`VTIMEZONE`, `DURATION`, `RDATE`, recurrence overrides and scheduling messages. This
+`VTIMEZONE`, `DURATION`, `RDATE`, ranged overrides and scheduling messages. This
 is an intentionally limited audit tool, not a full iCalendar validator or a new
 recurrence algorithm.
+
+## Single-instance replacements and cancellations
+
+The [override example](examples/override-report/report.html) has **3 overlap pairs,
+9,000 occupied seconds and one resolved cancellation**. It includes an original
+identity after the window moved into the window, another moved out, an inherited
+duration and a transparent replacement. Reproduce it offline:
+
+```sh
+.venv/bin/calendar-audit tests/fixtures/overrides.ics \
+  --start 2026-03-03 --end 2026-03-06 --timezone UTC \
+  --output /tmp/calendar-override-report
+```
+
+[The frozen specification](docs/overrides.md) defines property inheritance,
+source-file boundaries, EXDATE collisions and bounded membership checks. Exceptions
+must use the master's recurrence identity type and timezone form. EXDATE plus an
+exception targeting the same identity is incomplete. This conservative snapshot
+policy may reject exports another calendar application accepts.
+
+Verification includes **256 seeded override series** with explicit-occurrence,
+overlap and occupancy oracles. A pinned recurring-ical-events comparison preserves
+seven agreements and three known differences; see
+[comparison evidence](results/overrides.md). Neither library comparison nor the
+synthetic tests establishes real-provider compatibility.
+
+To reproduce the new and historical workload shapes on the current implementation:
+
+```sh
+.venv/bin/python scripts/benchmark.py --suite all --output /tmp/calendar-benchmark-v2.json --repeats 3
+```

@@ -118,12 +118,13 @@ def test_deduplicate_across_sources_and_ambiguous_group(make_ics):
     assert all(e['disposition'] == 'ambiguous' for e in r['events'])
 
 
-def test_override_excludes_master_even_when_cancelled(make_ics):
+def test_single_instance_cancellation_preserves_other_instances(make_ics):
     p = make_ics('UID:same\nDTSTART:20260301T100000Z\nRRULE:FREQ=DAILY;COUNT=4',
                  'UID:same\nRECURRENCE-ID:20260302T100000Z\nSTATUS:CANCELLED')
     r = audit([p])
-    assert not r['complete'] and not r['occurrences']
-    assert all(e['disposition'] == 'ambiguous' for e in r['events'])
+    assert r['complete'] and len(r['occurrences']) == 3
+    assert [o['start'][:10] for o in r['occurrences']] == ['2026-03-01', '2026-03-03', '2026-03-04']
+    assert len(r['cancellations']) == 1
 
 
 @pytest.mark.parametrize('extra', [

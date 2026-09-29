@@ -48,10 +48,35 @@ def workloads():
     }
 
 
+def override(uid, original, moved=None):
+    return '\n'.join(['BEGIN:VEVENT', f'UID:synthetic-{uid}', f'RECURRENCE-ID:{stamp(original)}',
+        *([f'DTSTART:{stamp(moved)}'] if moved is not None else ['STATUS:CANCELLED']), 'END:VEVENT'])
+
+
+def override_workloads():
+    series = []
+    dense = []
+    for i in range(100):
+        start = BASE + timedelta(minutes=i)
+        series.extend([event(i,start,rule='FREQ=DAILY;COUNT=90'),
+                       override(i,start+timedelta(days=45)),
+                       override(i,start+timedelta(days=89),start+timedelta(days=1,seconds=30))])
+        dense.extend([event(i,start,rule='FREQ=DAILY;COUNT=2'),override(i,start,BASE)])
+    return {
+        'overrides_100_by_90': (series, 0, 267000, 0),
+        'overrides_dense_100': (dense, 0, 3030, 4950),
+        'override_resolution_limit': ([event('ancient',datetime(1,1,1,tzinfo=timezone.utc),rule='FREQ=DAILY'),
+                                      override('ancient',BASE)], 2, 0, 0),
+        'override_orphan': ([event('orphan',BASE,rule='FREQ=DAILY;COUNT=2'),
+                             override('orphan',BASE+timedelta(days=5))], 2, 0, 0),
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--repeats', type=int, default=3)
+    parser.add_argument('--suite', choices=['baseline', 'overrides', 'all'], default='baseline')
     args = parser.parse_args()
     if not 1 <= args.repeats <= 10:
         parser.error('--repeats must be 1..10')
@@ -68,7 +93,12 @@ def main():
                'workloads': []}
     with tempfile.TemporaryDirectory(prefix='calendar-benchmark-') as temp:
         base = Path(temp)
-        for name, (events, expected_exit, expected_seconds, expected_pairs) in workloads().items():
+        cases = {}
+        if args.suite in ('baseline', 'all'):
+            cases.update(workloads())
+        if args.suite in ('overrides', 'all'):
+            cases.update(override_workloads())
+        for name, (events, expected_exit, expected_seconds, expected_pairs) in cases.items():
             source = base / (name + '.ics')
             raw = ('BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Synthetic benchmark//EN\n' + '\n'.join(events) + '\nEND:VCALENDAR\n').encode()
             source.write_bytes(raw)
@@ -86,9 +116,13 @@ def main():
                 stdout, stderr = process.communicate()
                 assert process.returncode == expected_exit, (name, process.returncode, stderr)
                 measurement = {'elapsed_seconds': elapsed, 'peak_rss_kib': usage.ru_maxrss, 'exit_code': process.returncode}
-                if process.returncode == 0:
+                if process.returncode in (0, 2):
                     report = json.loads((output / 'report.json').read_text())
-                    assert report['complete']
+                    assert report['complete'] == (process.returncode == 0)
+                    if process.returncode == 2:
+                        expected_code = 'resolution_limit' if name.endswith('limit') else 'orphan_override'
+                        assert {i['code'] for i in report['issues']} == {expected_code}
+                        measurement['issue_codes'] = [expected_code]
                     if expected_seconds is not None:
                         assert report['occupied_seconds'] == expected_seconds
                     if expected_pairs is not None:

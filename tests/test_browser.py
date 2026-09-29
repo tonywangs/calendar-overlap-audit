@@ -115,3 +115,55 @@ def test_source_filters_and_incomplete_warning(tmp_path, make_ics):
         expect(page.locator('#o1')).to_be_visible()
         expect(page.locator('#source')).to_have_value('')
         browser.close()
+
+
+def test_override_citations_filters_cancellations_and_hostile_text(tmp_path):
+    source = tmp_path / 'override.ics'
+    source.write_text((FIXTURES / 'overrides.ics').read_text().replace(
+        'Moved from after window', 'Moved <img src=https://invalid.test/x onerror=window.pwned=1> & </script>'))
+    out = tmp_path / 'out'
+    assert main([str(source), '--start','2026-03-03','--end','2026-03-06',
+                 '--timezone','UTC','--output',str(out)]) == 0
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        context = browser.new_context(offline=True, service_workers='block')
+        requests, errors = [], []
+        def block(route):
+            requests.append(route.request.url)
+            route.abort()
+        context.route('http://**/*', block)
+        context.route('https://**/*', block)
+        page = context.new_page()
+        page.on('pageerror', lambda e: errors.append(str(e)))
+        page.goto((out/'report.html').as_uri())
+        expect(page.locator('[data-occurrence]')).to_have_count(3)
+        expect(page.locator('[data-pair]')).to_have_count(3)
+        assert '2026-03-04T10:00:00Z' in page.locator('#cancellations + ul').inner_text()
+        assert page.locator('img').count() == 0 and page.evaluate('window.pwned') is None
+        # Filter hides a replacement; keyboard-follow a master backreference.
+        page.locator('#search').fill('Another')
+        expect(page.locator('[data-occurrence]:visible')).to_have_count(1)
+        page.locator('#e1 a[href="#o2"]').focus()
+        page.keyboard.press('Enter')
+        expect(page).to_have_url(re.compile('#o2$'))
+        expect(page.locator('#o2')).to_be_visible()
+        page.locator('#o2 a[href="#e3"]').first.focus()
+        page.keyboard.press('Enter')
+        expect(page).to_have_url(re.compile('#e3$'))
+        page.locator('#e3 a[href="#e1"]').focus()
+        page.keyboard.press('Enter')
+        expect(page).to_have_url(re.compile('#e1$'))
+        page.locator('#e1 a[href="#e5"]').focus()
+        page.keyboard.press('Enter')
+        expect(page).to_have_url(re.compile('#e5$'))
+        assert 'cancelled' in page.locator('#e5').inner_text()
+        page.locator('#source').select_option('s1')
+        expect(page.locator('[data-occurrence]:visible')).to_have_count(3)
+        page.locator('#kind').select_option('all-day')
+        expect(page.locator('[data-occurrence]:visible')).to_have_count(0)
+        page.keyboard.press('Escape')
+        expect(page.locator('[data-occurrence]:visible')).to_have_count(3)
+        assert page.evaluate('''() => [...document.querySelectorAll('a')].every(a =>
+            a.getAttribute('href').startsWith('#') && document.getElementById(a.getAttribute('href').slice(1)))''')
+        assert not errors and not requests
+        browser.close()

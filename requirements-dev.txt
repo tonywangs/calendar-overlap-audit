@@ -9,3 +9,6 @@ greenlet==3.2.4
 typing_extensions==4.15.0
 setuptools==80.9.0
 wheel==0.45.1
+recurring-ical-events==3.8.0
+x-wr-timezone==2.0.1
+click==8.1.8

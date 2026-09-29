@@ -1,7 +1,12 @@
 # Validation and measured workloads
+
+For current schema-2 override results, see [version 0.2 validation](overrides.md).
+The measurements below are the preserved version 0.1 baseline; `tests.log` now
+contains the latest full-suite output.
+
 All inputs are synthetic. These results describe local runs, not provider compatibility or a performance guarantee.
 ## Correctness and integration
-The verification suite passed **71 tests** on Linux with Python 3.12.3, pytest 8.4.2, Playwright 1.55.0 and Chromium 140.0.7339.16. The plain pytest output is saved in [tests.log](tests.log).
+The verification suite passed **71 tests** on Linux with Python 3.12.3, pytest 8.4.2, Playwright 1.55.0 and Chromium 140.0.7339.16. The current plain pytest output is saved in [tests.log](tests.log).
 * An independent exhaustive unit-cell oracle checks union duration and every pair intersection in **400 seeded interval cases** (seeds 0–399). It does not reuse the sweep/merge algorithms.
 * **220 additional seeded end-to-end ICS cases** (seeds 10000–10219) check parsing, clipping, citations, daily occupancy and pair results against a discrete cell oracle.
 * Hand-authored fixtures check spring DST gaps, fall folds, exact elapsed recurrence duration, weekly week starts and exclusions, COUNT/UNTIL boundaries, floating times, all-day spans, nested events, simultaneous starts, zero-length reminders, transparency and cancellation.

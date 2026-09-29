@@ -90,16 +90,22 @@ def html_bytes(report, budget):
 
     events = {event['id']: event for event in report['events']}
     occurrences = {o['id']: o for o in report['occurrences']}
+    by_master = {e: [] for e in events}
+    for event in events.values():
+        if event.get('master') in by_master:
+            by_master[event['master']].append(event)
     by_event = {e: [] for e in events}
     for o in occurrences.values():
         by_event[o['event']].append(o['id'])
+        if o.get('master', o['event']) != o['event']:
+            by_event[o['master']].append(o['id'])
     add('<!doctype html><html lang="en"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
         '<meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; '
         'script-src &#39;unsafe-inline&#39;; style-src &#39;unsafe-inline&#39;; '
         'base-uri &#39;none&#39;; form-action &#39;none&#39;">'
         '<title>Calendar overlap audit</title><style>' + STYLE + '</style></head><body>')
-    add('<a class="skip" href="#main">Skip to report</a><header><p>OFFLINE CALENDAR AUDIT · SCHEMA 1</p>'
+    add('<a class="skip" href="#main">Skip to report</a><header><p>OFFLINE CALENDAR AUDIT · SCHEMA 2</p>'
         '<h1>Where commitments overlap</h1><p>Exclusive event ends · union-based occupied time · all-day events kept separate</p></header>'
         '<nav aria-label="Report sections"><a href="#daily">Daily summary</a><a href="#overlaps">Overlaps</a>'
         '<a href="#occurrences">Occurrences</a><a href="#records">Event records</a><a href="#sources">Sources</a></nav>'
@@ -152,7 +158,8 @@ def html_bytes(report, budget):
     add('<h2 id="occurrences" tabindex="-1">Occurrences</h2>')
     for o in occurrences.values():
         event = events[o['event']]
-        source_ids = ' '.join(sorted({s['source'] for s in event['sources']}))
+        master = events[o.get('master', o['event'])]
+        source_ids = ' '.join(sorted({s['source'] for e in (event, master) for s in e['sources']}))
         kind = 'all-day' if o['all_day'] else 'timed'
         add(f'<article class="card" id="{o["id"]}" data-occurrence data-kind="{kind}" '
             f'data-search="{esc(event["summary"] + " " + event["uid"])}" data-sources="{source_ids}" tabindex="-1">'
@@ -160,13 +167,35 @@ def html_bytes(report, budget):
             f'{esc(o.get("local_start", o["start"]))} – {esc(o.get("local_end", o["end"]))} (end exclusive)</p>'
             f'<p class="muted">Clipped bounds: {esc(o["clipped_start"])} – {esc(o["clipped_end"])} '
             f'{"(dates)" if o["all_day"] else "(UTC)"}</p>'
-            f'<p><a href="#{event["id"]}">Event record {event["id"]}</a> · Occurrence {o["id"]}</p></article>')
+            f'<p><a href="#{event["id"]}">Event record {event["id"]}</a> · Occurrence {o["id"]}</p>')
+        if 'recurrence_id' in o:
+            add(f'<p>Original identity: <code>{esc(o["recurrence_id"])}</code></p>')
+        if o.get('override'):
+            add(f'<p>Replacement from override <a href="#{o["override"]}">{o["override"]}</a> · '
+                f'Master <a href="#{o["master"]}">{o["master"]}</a></p>')
+        add('</article>')
+    if report.get('cancellations'):
+        add('<h2 id="cancellations" tabindex="-1">Cancelled instances</h2><ul>')
+        for c in report['cancellations']:
+            add(f'<li>Original identity <code>{esc(c["recurrence_id"])}</code>: '
+                f'<a href="#{c["override"]}">Cancellation {c["override"]}</a> · '
+                f'<a href="#{c["master"]}">Master {c["master"]}</a>. No occupied time.</li>')
+        add('</ul>')
     add('<h2 id="records" tabindex="-1">Event records</h2>')
     for e in events.values():
         add(f'<article class="card" id="{e["id"]}" tabindex="-1"><h3>{e["id"]}: {esc(e["summary"])}</h3>'
             f'<p>UID: <code>{esc(e["uid"])}</code> · {esc(e["disposition"])}</p>')
         if 'time_basis' in e:
             add(f'<p>Time basis: {esc(e["time_basis"])} · {esc(e["timezone"])}</p>')
+        if e.get('role') == 'override':
+            add(f'<p>Override of <a href="#{e["master"]}">Master {e["master"]}</a> · '
+                f'Original identity: <code>{esc(e.get("recurrence_id", "unresolved"))}</code></p>')
+            if 'effective_start' in e:
+                add(f'<p>Effective timing: {esc(e["effective_start"])} – {esc(e["effective_end"])} '
+                    f'(end exclusive). Inherited: {esc(", ".join(e["inherited"]) or "none")}</p>')
+        related = by_master[e['id']]
+        if related:
+            add('<p>Override records: ' + ', '.join(f'<a href="#{x["id"]}">{x["id"]}</a>' for x in related) + '</p>')
         if 'duplicate_of' in e:
             add(f'<p>Deduplicated into <a href="#{e["duplicate_of"]}">{e["duplicate_of"]}</a></p>')
         add('<p>Source citations: ' + ', '.join(f'<a href="#{s["source"]}">{s["source"]}, VEVENT {s["event"]}</a>' for s in e['sources']) + '</p>')
@@ -177,6 +206,6 @@ def html_bytes(report, budget):
             f'<p>{s["bytes"]} bytes · SHA-256 <code>{s["sha256"]}</code></p></article>')
     add('<p>Only scheduling fields, UID and summary are shown. This report can still contain private information. '
         'All processing and filtering are local; this page makes no network requests.</p></main>'
-        '<footer><p>calendar-overlap-audit ' + esc(report['tool_version']) + ' · JSON schema 1</p></footer>'
+        '<footer><p>calendar-overlap-audit ' + esc(report['tool_version']) + ' · JSON schema 2</p></footer>'
         '<script>' + SCRIPT + '</script></body></html>\n')
     return ''.join(chunks).encode('utf-8')

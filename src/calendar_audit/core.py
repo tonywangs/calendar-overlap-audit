@@ -41,6 +41,7 @@ class Limits:
     line_bytes: int = 65536
     events: int = 5000
     candidates: int = 200000
+    resolutions: int = 200000
     occurrences: int = 20000
     pairs: int = 20000
     report_bytes: int = 8 * 1024 * 1024
@@ -351,17 +352,24 @@ def decode_event(props, display):
     return Event(start, duration, rule, excluded, transparency == 'TRANSPARENT')
 
 
-def expand(event: Event, end_date: date, end_instant: datetime, budget: Budget):
+def expand(event: Event, end_date: date, end_instant: datetime, budget: Budget, *,
+           through=None, resolution=False):
     start, rule = event.start.value, event.rule
     candidate = start
     generated = 0
     while True:
-        budget.take('candidates')
+        if resolution:
+            budget.check()
+            budget.counts['resolutions'] += 1
+            if budget.counts['resolutions'] > budget.limits.resolutions:
+                raise SeriesError('resolution_limit', 'Override resolution limit exhausted; entire UID excluded')
+        else:
+            budget.take('candidates')
         is_date = event.start.kind == 'date'
         # Include a seed in a DST gap per explicit DATE-TIME semantics. Generated
         # local gap times are invalid recurrence instances and do not consume COUNT.
         instant = candidate if is_date else candidate.astimezone(UTC)
-        if (candidate >= end_date if is_date else instant >= end_instant):
+        if (candidate >= end_date if is_date else instant >= end_instant) and (through is None or candidate > through):
             return
         eligible = True
         if rule.get('FREQ') == 'WEEKLY':
@@ -387,6 +395,156 @@ def expand(event: Event, end_date: date, end_instant: datetime, budget: Budget):
             candidate += DAY * step
         except OverflowError:
             return  # beyond representable dates, hence beyond the window
+
+
+class SeriesError(Unsupported):
+    def __init__(self, code, message):
+        super().__init__(message)
+        self.code = code
+
+
+def recurrence_identity(value, basis):
+    """Civil identity retains floating fields and explicit nonexistent seed times."""
+    if basis.kind == 'utc':
+        return iso(value)
+    if basis.kind == 'floating':
+        return value.replace(tzinfo=None).isoformat()
+    return value.isoformat()
+
+
+def compatible(start, other):
+    return ((start.kind == 'date') == (other.kind == 'date') and
+            (start.kind == 'floating') == (other.kind == 'floating'))
+
+
+def prepare_family(group, display):
+    """Validate snapshot boundaries and deduplicate without selecting revisions."""
+    snapshots = defaultdict(set)
+    for record, props, fingerprint in group:
+        text_value(props, 'SUMMARY')  # validate even a duplicate or cancelled component
+        snapshots[record['sources'][0]['source']].add(fingerprint)
+    if len({frozenset(s) for s in snapshots.values()}) != 1:
+        raise SeriesError('conflicting_snapshots', 'Different UID snapshots across source files; entire UID excluded')
+    unique = {}
+    for record, props, fingerprint in group:
+        if fingerprint in unique:
+            original = unique[fingerprint][0]
+            original['sources'].extend(record['sources'])
+            record.update(disposition='duplicate', duplicate_of=original['id'])
+        else:
+            unique[fingerprint] = (record, props)
+    masters = [item for item in unique.values() if 'RECURRENCE-ID' not in item[1]]
+    exceptions = [item for item in unique.values() if 'RECURRENCE-ID' in item[1]]
+    if len(masters) != 1:
+        raise SeriesError('orphan_override' if not masters else 'conflicting_masters',
+                          'Expected one master per UID; entire UID excluded')
+    record, props = masters[0]
+    record['role'] = 'master'
+    if text_value(props, 'STATUS', '').upper() == 'CANCELLED':
+        if exceptions:
+            raise SeriesError('cancelled_master_with_overrides', 'Cancelled master has exceptions; entire UID excluded')
+        record['disposition'] = 'cancelled'
+        return record, None, {}
+    event = decode_event(props, display)
+    record.update(time_basis=event.start.kind, timezone=event.start.zone,
+                  disposition='transparent' if event.transparent else 'included')
+    if exceptions and not event.rule:
+        raise SeriesError('nonrecurring_master', 'Overrides require a supported recurring master')
+    overrides = {}
+    for replacement, values in exceptions:
+        replacement.update(role='override', master=record['id'])
+        rid_prop = one(values, 'RECURRENCE-ID', True)
+        if 'RANGE' in rid_prop[0]:
+            raise SeriesError('unsupported_range', 'RECURRENCE-ID RANGE is unsupported')
+        rid = decode_time(*rid_prop, display)
+        if rid.kind != event.start.kind or rid.zone != event.start.zone:
+            raise SeriesError('incompatible_identity', 'RECURRENCE-ID must use master value type and timezone form')
+        identity = recurrence_identity(rid.value, event.start)
+        replacement['recurrence_id'] = identity
+        if identity in overrides:
+            raise SeriesError('conflicting_overrides', 'Competing overrides for one original identity; entire UID excluded')
+        if (rid.value if rid.kind == 'date' else rid.instant()) in event.excluded:
+            raise SeriesError('exdate_override_collision', 'EXDATE and override target the same identity; entire UID excluded')
+        for key in ('RRULE', 'EXDATE', 'RDATE', 'EXRULE', 'DURATION'):
+            if key in values:
+                raise SeriesError('unsupported_override', f'{key} on override is unsupported')
+        effective = {k: v for k, v in values.items() if k != 'RECURRENCE-ID'}
+        inherited = []
+        for key in ('SUMMARY', 'TRANSP', 'STATUS'):
+            if key not in values:
+                inherited.append(key)
+                if key in props:
+                    effective[key] = props[key]
+        cancelled = text_value(effective, 'STATUS', 'CONFIRMED').upper() == 'CANCELLED'
+        if 'DTSTART' not in effective:
+            if not cancelled:
+                raise SeriesError('missing_override_start', 'Active override requires DTSTART')
+            effective['DTSTART'] = [rid_prop]
+        changed = decode_event(effective, display)
+        if not compatible(event.start, changed.start):
+            raise SeriesError('incompatible_timing', 'Override DTSTART type differs from master')
+        if 'DTEND' not in values:
+            changed.duration = event.duration
+            inherited.append('duration')
+        replacement.update(summary=text_value(effective, 'SUMMARY', '(untitled)'),
+                           time_basis=changed.start.kind, timezone=changed.start.zone,
+                           disposition='cancelled' if cancelled else ('transparent' if changed.transparent else 'included'),
+                           inherited=inherited,
+                           effective_start=recurrence_identity(changed.start.value, changed.start),
+                           duration_seconds=int(changed.duration.total_seconds()))
+        finish = (changed.start.value + changed.duration if changed.start.kind == 'date'
+                  else changed.start.instant() + changed.duration)
+        replacement['effective_end'] = finish.isoformat() if changed.start.kind == 'date' else iso(finish)
+        overrides[identity] = (replacement, changed, rid.value, cancelled)
+    return record, event, overrides
+
+
+def family_occurrences(record, event, overrides, first, last, lo, hi, zone, budget):
+    """Resolve every exception before publishing any part of a family."""
+    if event is None or (event.transparent and not overrides):
+        return [], []
+    pending, cancellations, matched = [], [], set()
+    through = max((item[2] for item in overrides.values()), default=None)
+    for original in expand(event, last, hi, budget, through=through, resolution=bool(overrides)):
+        budget.check()
+        identity = recurrence_identity(original, event.start)
+        replacement = overrides.get(identity)
+        effective, owner, override_id = event, record, None
+        candidate = original
+        if replacement:
+            owner, effective, _, cancelled = replacement
+            matched.add(identity)
+            override_id = owner['id']
+            if cancelled:
+                cancellations.append({'master': record['id'], 'override': override_id,
+                                      'recurrence_id': identity, 'reason': 'STATUS:CANCELLED'})
+                continue
+            candidate = effective.start.value
+        if effective.transparent:
+            continue
+        is_date = effective.start.kind == 'date'
+        if is_date:
+            finish = candidate + effective.duration
+            a, b = max(candidate, first), min(finish, last)
+            if a >= b:
+                continue
+            occurrence = {'start': candidate.isoformat(), 'end': finish.isoformat(),
+                          'clipped_start': a.isoformat(), 'clipped_end': b.isoformat()}
+        else:
+            a0 = candidate.astimezone(UTC)
+            b0 = a0 + effective.duration
+            a, b = max(a0, lo), min(b0, hi)
+            if a >= b and not (a0 == b0 and lo <= a0 < hi):
+                continue
+            occurrence = {'start': iso(a0), 'end': iso(b0), 'clipped_start': iso(a), 'clipped_end': iso(b),
+                          'local_start': a0.astimezone(zone).isoformat(), 'local_end': b0.astimezone(zone).isoformat()}
+        budget.take('occurrences')
+        occurrence.update(event=owner['id'], master=record['id'], override=override_id,
+                          recurrence_id=identity, all_day=is_date)
+        pending.append((occurrence, a, b, is_date))
+    if matched != set(overrides):
+        raise SeriesError('orphan_override', 'Override identity is not a valid master recurrence; entire UID excluded')
+    return pending, cancellations
 
 
 def union_seconds(intervals):
@@ -464,65 +622,29 @@ def analyze(paths, start: str, end: str, display: str, limits=Limits(), budget=N
             except (ValueError, AssertionError) as exc:
                 record['disposition'] = 'unsupported'
                 issues.append({'event': ident, 'code': 'invalid_identity', 'message': str(exc) if isinstance(exc, Unsupported) else 'Malformed event identity'})
-                continue
+                if not record['uid']:
+                    continue
             # Compare complete unfolded components; metadata differences are also
             # ambiguous, rather than guessing whether two exports are equivalent.
             fingerprint = hashlib.sha256('\n'.join(lines).encode()).hexdigest()
             groups[record['uid']].append((record, props, fingerprint))
-    occurrences, timed, all_day = [], [], []
+    occurrences, timed, all_day, cancellations = [], [], [], []
     for group in groups.values():
         budget.check()
-        if len({item[2] for item in group}) > 1 or any('RECURRENCE-ID' in item[1] for item in group):
-            for record, _, _ in group:
-                record['disposition'] = 'ambiguous'
-                issues.append({'event': record['id'], 'code': 'ambiguous_identity', 'message': 'Differing UID definitions or recurrence overrides; entire UID excluded'})
-            continue
-        record, props, _ = group[0]
-        for duplicate, _, _ in group[1:]:
-            record['sources'].extend(duplicate['sources'])
-            duplicate['disposition'] = 'duplicate'
-            duplicate['duplicate_of'] = record['id']
         try:
-            # Whole-series cancellation does not require a start, but remains
-            # subject to global identity/override checks above.
-            if text_value(props, 'STATUS', '').upper() == 'CANCELLED':
-                record['disposition'] = 'cancelled'
-                continue
-            event = decode_event(props, display)
-            record['time_basis'] = event.start.kind
-            record['timezone'] = event.start.zone
-            record['disposition'] = 'transparent' if event.transparent else 'included'
-            if event.transparent:
-                continue
-            pending = []
-            for candidate in expand(event, last, hi, budget):
-                budget.check()
-                is_date = event.start.kind == 'date'
-                if is_date:
-                    finish = candidate + event.duration
-                    a, b = max(candidate, first), min(finish, last)
-                    if a >= b:
-                        continue
-                    occurrence = {'start': candidate.isoformat(), 'end': finish.isoformat(),
-                                  'clipped_start': a.isoformat(), 'clipped_end': b.isoformat()}
-                else:
-                    a0 = candidate.astimezone(UTC)
-                    b0 = a0 + event.duration
-                    a, b = max(a0, lo), min(b0, hi)
-                    if a >= b and not (a0 == b0 and lo <= a0 < hi):
-                        continue
-                    occurrence = {'start': iso(a0), 'end': iso(b0), 'clipped_start': iso(a), 'clipped_end': iso(b),
-                                  'local_start': a0.astimezone(zone).isoformat(), 'local_end': b0.astimezone(zone).isoformat()}
-                budget.take('occurrences')
-                pending.append((occurrence, a, b, is_date))
-            # Commit occurrences only once the entire event has decoded/expanded.
+            record, event, overrides = prepare_family(group, display)
+            pending, cancelled = family_occurrences(record, event, overrides, first, last, lo, hi, zone, budget)
             for occurrence, a, b, is_date in pending:
-                occurrence.update(id=f'o{len(occurrences)+1}', event=record['id'], all_day=is_date)
+                occurrence['id'] = f'o{len(occurrences)+1}'
                 occurrences.append(occurrence)
                 (all_day if is_date else timed).append((a, b, occurrence['id']))
+            cancellations.extend(cancelled)
         except (ValueError, OverflowError, AssertionError) as exc:
-            record['disposition'] = 'unsupported'
-            issues.append({'event': record['id'], 'code': 'unsupported_event', 'message': str(exc) if isinstance(exc, Unsupported) else 'Malformed or out-of-range event value'})
+            code = exc.code if isinstance(exc, SeriesError) else 'unsupported_event'
+            message = str(exc) if isinstance(exc, Unsupported) else 'Malformed or out-of-range event value'
+            for record, _, _ in group:
+                record['disposition'] = 'ambiguous' if isinstance(exc, SeriesError) else 'unsupported'
+                issues.append({'event': record['id'], 'code': code, 'message': message})
     pairs = [{'id': f'p{i}', 'left': left, 'right': right, 'start': iso(a), 'end': iso(b),
               'seconds': int((b-a).total_seconds())}
              for i, (left, right, a, b) in enumerate(overlap_pairs(timed, budget), 1)]
@@ -538,10 +660,10 @@ def analyze(paths, start: str, end: str, display: str, limits=Limits(), budget=N
                       'all_day_occurrences': sum(1 for x, y, _ in all_day if x <= d < y)})
         d += DAY
     budget.check()
-    return {'schema_version': 1, 'tool_version': __version__,
+    return {'schema_version': 2, 'tool_version': __version__,
             'dependencies': {name: metadata.version(name) for name in ('icalendar', 'tzdata', 'python-dateutil', 'six')},
             'window': {'start': start, 'end': end, 'timezone': display, 'start_utc': iso(lo), 'end_utc': iso(hi)},
             'complete': not issues, 'issues': issues, 'limits': asdict(limits),
-            'sources': sources, 'events': records, 'occurrences': occurrences, 'overlaps': pairs,
+            'cancellations': cancellations, 'sources': sources, 'events': records, 'occurrences': occurrences, 'overlaps': pairs,
             'daily': daily, 'occupied_seconds': int(union_seconds((a, b) for a, b, _ in timed)),
             'counts': dict(sorted(budget.counts.items()))}

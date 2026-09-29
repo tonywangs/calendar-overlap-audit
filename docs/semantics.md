@@ -1,4 +1,4 @@
-# Supported semantics (schema 1)
+# Supported semantics (schema 2)
 
 This is a bounded audit of local files, not a provider sync client or a full RFC
 validator. No novelty is claimed. The design uses [RFC 5545](https://www.rfc-editor.org/rfc/rfc5545)
@@ -16,7 +16,8 @@ candidate budgets and exclusions explicit; it is not a replacement for that libr
   day for DATE, zero duration for DATE-TIME. DURATION is unsupported in this version.
 * DAILY or WEEKLY RRULE, optional positive INTERVAL, COUNT **or** UNTIL, EXDATE,
   and weekly BYDAY (unqualified weekdays) and WKST. Other rule parts, RDATE,
-  EXRULE and RECURRENCE-ID are incomplete, not silently approximated.
+  EXRULE are incomplete, not silently approximated. Single-instance RECURRENCE-ID
+  follows the [frozen override contract](overrides.md).
   Unbounded rules are evaluated only to the window end with a candidate budget.
 * DTSTART must match weekly BYDAY. Generated nonexistent local starts are skipped
   without consuming COUNT. Ambiguous starts use the first occurrence. Explicit
@@ -31,16 +32,21 @@ candidate budgets and exclusions explicit; it is not a replacement for that libr
 * Cancelled and transparent events do not occupy time. All-day events are listed
   separately and never included in timed occupancy or overlap pairs. Zero-length
   timed events remain traceable but do not occupy time.
-* UID is a global identity across files. Identical unfolded VEVENT definitions with the
-  same UID are deduplicated and retain all source references. Differing definitions
-  of the same UID, including overrides, cause the entire UID group to be excluded
-  as ambiguous. Sequence numbers are not a license to guess the latest version.
+* UID is a global identity across files. Exact unfolded components deduplicate,
+  preserving source references. One recurring master may have single-instance
+  replacements/cancellations. Differing masters or exceptions for one original
+  identity are ambiguous; SEQUENCE never selects a winner. Each source containing
+  a UID must have the same complete component set. Detached exceptions from another
+  source do not attach to a master. See [overrides.md](overrides.md) for inheritance,
+  EXDATE collisions, identity/timezone restrictions and atomic family exclusion.
 * Clipped timed occurrences contribute to a union of occupied intervals, never a
   sum of event durations. Pair intersections use positive duration only. Daily
   summaries split at display-zone midnight (23/25-hour days are possible).
 * Unsupported or malformed input produces an incomplete report with traceable
   diagnostics. A report with no detected pairs is never called conflict-free.
-  Missing/unreadable files and exhausted resource limits fail with no report.
+  Missing/unreadable files and ordinary exhausted resource limits fail with no report.
+  Override-resolution exhaustion instead excludes the unresolved family and marks
+  the report incomplete; it never retains partial family results.
 * JSON is deterministic for identical input bytes, input order, filenames, window,
   timezone, tool/dependency versions and limits. No current time or machine path is
   embedded. Source references use an ordinal, basename, SHA-256 and event ordinal.
@@ -49,7 +55,8 @@ candidate budgets and exclusions explicit; it is not a replacement for that libr
 
 The CLI will enforce aggregate input bytes, file count, physical/unfolded line size,
 event count, generated candidates, retained occurrences, pairs, per-report size and
-wall time. Limit failures do not publish partial reports. Output goes into a new
+wall time. Ordinary limit failures do not publish partial reports. Resolution exhaustion
+publishes an explicit incomplete result, with no occurrences from that UID. Output goes into a new
 private directory as a bundle; an existing path is never overwritten. SIGINT and
 SIGTERM clean up staging files. Hard kill/power loss may leave hidden staging files.
 
@@ -78,11 +85,13 @@ supported; their floating/absolute and DATE/DATE-TIME types must match DTSTART
 Input order is significant for local report IDs. Deduplication compares the whole
 unfolded VEVENT text, including metadata/property order; reordering or updating
 metadata can therefore make the UID ambiguous. This conservative policy can omit
-otherwise equivalent events, and always reports that omission as incomplete.
+otherwise equivalent definitions of one master/exception, and always reports that
+omission as incomplete. Reordering complete VEVENT components is supported.
 Calendar exports must be snapshots: detached cancellation/scheduling messages are
 not merged into historical versions. STATUS:CANCELLED suppresses a whole series,
-subject to identity/override checks. Missing DTSTART is allowed only for this
-whole-series cancellation case. Tentative events occupy time; individual attendee
+subject to identity/override checks. Missing DTSTART is allowed for whole-series
+cancellation and cancelled single-instance overrides; the latter must resolve to
+a valid original recurrence identity. Tentative events occupy time; individual attendee
 acceptance/decline is not interpreted.
 
 All resource flags may lower, but never exceed, the documented hard ceilings.
