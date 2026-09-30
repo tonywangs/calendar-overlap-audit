@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "start": "2026-03-06",
+  "end": "2026-03-11",
+  "timezone": "America/New_York",
+  "weekdays": ["MO", "TU", "WE", "TH", "FR"],
+  "work_start": "09:00",
+  "work_end": "17:00",
+  "minimum_seconds": 1800,
+  "all_day": "block"
+}

@@ -68,6 +68,19 @@ def installed_example():
         assert len(changed['overlaps']) == 3 and len(changed['occurrences']) == 3
         assert len(changed['cancellations']) == 1 and changed['schema_version'] == 2
         assert changed['sources'][0]['sha256'] == override_hash == hashlib.sha256(override_source.read_bytes()).hexdigest()
+        spec = base / 'working-v1.json'
+        spec.write_bytes((ROOT / 'examples/working-v1.json').read_bytes())
+        spec_hash = hashlib.sha256(spec.read_bytes()).hexdigest()
+        available_output = base / 'availability-report'
+        run([envdir / 'bin/calendar-availability', source, '--spec', spec,
+             '--output', available_output], cwd=base, env=env)
+        available = json.loads((available_output / 'report.json').read_text())
+        assert available['complete'] and available['candidate_seconds'] == 50400
+        assert len(available['candidates']) == 2
+        assert available['spec_source']['sha256'] == spec_hash == hashlib.sha256(spec.read_bytes()).hexdigest()
+        assert available['audit']['sources'][0]['sha256'] == before == hashlib.sha256(source.read_bytes()).hexdigest()
+        for name in ('report.json', 'report.html'):
+            assert (available_output / name).read_bytes() == (ROOT / 'examples/availability-report' / name).read_bytes()
         # Confirm import origin belongs to the isolated environment, not editable src.
         run([python, '-c', 'import calendar_audit,sys; assert calendar_audit.__file__.startswith(sys.prefix)'], cwd=base, env=env)
         print('Isolated installed CLI: offline, expected occupancy/pairs, input hash unchanged.', flush=True)
@@ -98,6 +111,33 @@ def evidence_checks():
     assert json_bytes(report) == (ROOT / 'examples/override-report/report.json').read_bytes()
     assert html_bytes(report, Budget(Limits())) == (ROOT / 'examples/override-report/report.html').read_bytes()
     print('Saved measurements match implementation hashes; override example reproduced byte for byte.', flush=True)
+    from calendar_audit.availability import availability, load_spec
+    from calendar_audit.availability_report import html_bytes as availability_html
+    measured = json.loads((ROOT / 'results/benchmark-availability-v1.json').read_text())
+    for name, expected in {**measured['implementation_sha256'], **measured['scripts_sha256']}.items():
+        assert hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == expected, name
+    for workload in measured['workloads']:
+        hashes = [r.get('output_sha256') for r in workload['runs']]
+        assert all(h == hashes[0] for h in hashes)
+    spec, fingerprint = load_spec(ROOT / 'examples/working-v1.json')
+    available = availability([ROOT / 'tests/fixtures/synthetic.ics'], spec, spec_source=fingerprint)
+    assert json_bytes(available) == (ROOT / 'examples/availability-report/report.json').read_bytes()
+    assert availability_html(available, Budget(Limits())) == (ROOT / 'examples/availability-report/report.html').read_bytes()
+    print('Availability measurements match implementation hashes; example reproduced byte for byte.', flush=True)
+
+
+def availability_workloads():
+    with tempfile.TemporaryDirectory(prefix='availability-evidence-') as temp:
+        output = Path(temp) / 'measurements.json'
+        run([sys.executable, ROOT / 'scripts/benchmark_availability.py', '--repeats', '1', '--output', output], cwd=ROOT)
+        actual = json.loads(output.read_text())
+        saved = json.loads((ROOT / 'results/benchmark-availability-v1.json').read_text())
+        assert [w['name'] for w in actual['workloads']] == [w['name'] for w in saved['workloads']]
+        for a, b in zip(actual['workloads'], saved['workloads']):
+            assert a['input_sha256'] == b['input_sha256']
+            for key in ('exit_code', 'output_sha256', 'candidate_seconds', 'candidates', 'failure'):
+                assert a['runs'][0].get(key) == b['runs'][0].get(key), (a['name'], key)
+    print('Availability workload outputs reproduced; runtime and memory are observations, not thresholds.', flush=True)
 
 
 def main():
@@ -116,6 +156,7 @@ def main():
         run([sys.executable, ROOT / 'scripts/compare_recurrence.py', '--output', result], cwd=ROOT)
         assert json.loads(result.read_text()) == json.loads((ROOT / 'results/recurrence-comparison.json').read_text())
     evidence_checks()
+    availability_workloads()
     publication_bounds()
     print('Verification passed: unit/oracle/CLI/browser checks and isolated installed CLI.', flush=True)
 

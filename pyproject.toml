@@ -11,6 +11,7 @@ dependencies = ["icalendar==6.3.2", "tzdata==2025.2", "python-dateutil==2.9.0.po
 
 [project.scripts]
 calendar-audit = "calendar_audit.cli:main"
+calendar-availability = "calendar_audit.availability_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

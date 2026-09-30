@@ -1,0 +1,655 @@
+{
+  "dependencies": {
+    "icalendar": "6.3.2",
+    "python-dateutil": "2.9.0.post0",
+    "six": "1.17.0",
+    "tzdata": "2025.2"
+  },
+  "implementation_sha256": {
+    "src/calendar_audit/__init__.py": "47eba8d65676af96be1fbe080d68cf89781c92529a5056cee46c77dfb6166263",
+    "src/calendar_audit/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/calendar_audit/availability.py": "1a6e52aad8d9af7090e936e4a6a39d6ce3a93170b256b6915798a7adb131acb8",
+    "src/calendar_audit/availability_cli.py": "f188a1c9095ba439efbe40ef77a1c1a8f930264ff25cca4cd8ca2ee0dc450b7e",
+    "src/calendar_audit/availability_report.py": "e1a3e9ac845f3a082e3c6c4d1705224a0d1034db2e4d4cd1fa715d4b6dfe927c",
+    "src/calendar_audit/cli.py": "70e70461d7ae9c5ba6e682633366a7eeb16c1ec42e125f222d1379944ec48a3d",
+    "src/calendar_audit/core.py": "59091480f3b3669627cc277f1c7fea41d6ab6f0070d17ec97e4b625ecb57df62",
+    "src/calendar_audit/report.py": "623e3c83aeca950bfcaa2a9c25bd9e929fb5c2f8c1a73dc38ee8094e672d0b1f"
+  },
+  "measured_at_utc": "2026-09-30T20:10:00.975498+00:00",
+  "method": "Fresh CLI per repetition; perf_counter elapsed seconds; Linux wait4 peak child RSS in KiB; no warmup; default limits; synthetic inputs.",
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "repeats": 2,
+  "schema_version": 1,
+  "scripts_sha256": {
+    "scripts/benchmark.py": "d8054c80964e9f872c63efd9c08ac23c0dd5661270766f9986f4c45eab78775c",
+    "scripts/benchmark_availability.py": "62ddca92bfd44ae9f3e82772dac350033d080c9e319cace4ee14e33893142a24"
+  },
+  "seed": 20260928,
+  "workloads": [
+    {
+      "input_bytes": 77,
+      "input_events": 0,
+      "input_sha256": {
+        "empty_90_days.ics": "ba53829effbeb5dcf5140813c0d48b4b10c133cc1f2f0d6b70b783f5537cf5cd",
+        "working.json": "ea98691341d5a7e85ea7846cd882e449d91d7d4ab0dd19ffc223ad0e6fca02c7"
+      },
+      "name": "empty_90_days",
+      "runs": [
+        {
+          "candidate_seconds": 7776000,
+          "candidates": 90,
+          "elapsed_seconds": 0.3982243658974767,
+          "exit_code": 0,
+          "output_bytes": {
+            "report.html": 83676,
+            "report.json": 71108
+          },
+          "output_sha256": {
+            "report.html": "ba25fda48b1577db2e2ee9a3ed58c232fb7f4d6117ac5ba53ce0e4d86480cae8",
+            "report.json": "b79e5a070c8805f39183a2851602879a702d5ba81d44eecbf50d531ed73a02d9"
+          },
+          "peak_rss_kib": 25460
+        },
+        {
+          "candidate_seconds": 7776000,
+          "candidates": 90,
+          "elapsed_seconds": 0.42387460777536035,
+          "exit_code": 0,
+          "output_bytes": {
+            "report.html": 83676,
+            "report.json": 71108
+          },
+          "output_sha256": {
+            "report.html": "ba25fda48b1577db2e2ee9a3ed58c232fb7f4d6117ac5ba53ce0e4d86480cae8",
+            "report.json": "b79e5a070c8805f39183a2851602879a702d5ba81d44eecbf50d531ed73a02d9"
+          },
+          "peak_rss_kib": 25332
+        }
+      ],
+      "spec": {
+        "all_day": "block",
+        "end": "2026-04-01",
+        "minimum_seconds": 1,
+        "start": "2026-01-01",
+        "timezone": "UTC",
+        "version": 1,
+        "weekdays": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA",
+          "SU"
+        ],
+        "work_end": "24:00",
+        "work_start": "00:00"
+      }
+    },
+    {
+      "input_bytes": 60356,
+      "input_events": 500,
+      "input_sha256": {
+        "seeded_500.ics": "bfa30e0d4043cb8f57f96b1ed5909f73dae3b123667ce6d75f9d557ff38630c8",
+        "working.json": "ea98691341d5a7e85ea7846cd882e449d91d7d4ab0dd19ffc223ad0e6fca02c7"
+      },
+      "name": "seeded_500",
+      "runs": [
+        {
+          "candidate_seconds": 7314840,
+          "candidates": 551,
+          "elapsed_seconds": 1.0533875050023198,
+          "exit_code": 0,
+          "output_bytes": {
+            "report.html": 771855,
+            "report.json": 850424
+          },
+          "output_sha256": {
+            "report.html": "464b60a590d140208ab7eee2026188575c4ffa6ca62e4c538faa54ac12d8c1bc",
+            "report.json": "1c63bfeeed3eda582fce27703bc9d847fcdfe33cd0d6f61800fba14da0526da4"
+          },
+          "peak_rss_kib": 33492
+        },
+        {
+          "candidate_seconds": 7314840,
+          "candidates": 551,
+          "elapsed_seconds": 0.8579097683541477,
+          "exit_code": 0,
+          "output_bytes": {
+            "report.html": 771855,
+            "report.json": 850424
+          },
+          "output_sha256": {
+            "report.html": "464b60a590d140208ab7eee2026188575c4ffa6ca62e4c538faa54ac12d8c1bc",
+            "report.json": "1c63bfeeed3eda582fce27703bc9d847fcdfe33cd0d6f61800fba14da0526da4"
+          },
+          "peak_rss_kib": 33496
+        }
+      ],
+      "spec": {
+        "all_day": "block",
+        "end": "2026-04-01",
+        "minimum_seconds": 1,
+        "start": "2026-01-01",
+        "timezone": "UTC",
+        "version": 1,
+        "weekdays": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA",
+          "SU"
+        ],
+        "work_end": "24:00",
+        "work_start": "00:00"
+      }
+    },
+    {
+      "input_bytes": 366856,
+      "input_events": 3000,
+      "input_sha256": {
+        "sparse_3000.ics": "550869f4827314c41c92f7e5e0ceb4d3e2b7a4730965fc79accb872c2f7ecc20",
+        "working.json": "ea98691341d5a7e85ea7846cd882e449d91d7d4ab0dd19ffc223ad0e6fca02c7"
+      },
+      "name": "sparse_3000",
+      "runs": [
+        {
+          "candidate_seconds": 7686000,
+          "candidates": 3087,
+          "elapsed_seconds": 2.8894966142252088,
+          "exit_code": 0,
+          "output_bytes": {
+            "report.html": 4348280,
+            "report.json": 4868007
+          },
+          "output_sha256": {
+            "report.html": "8c81d5c54dd4973d27ec5832a957ed70a2dc05971ddc7d8cae4e94d1ff219e91",
+            "report.json": "92f353c9ef16b4753df957ab4af378cce15cb40a9191ccd8104e5aa501fb8b83"
+          },
+          "peak_rss_kib": 73284
+        },
+        {
+          "candidate_seconds": 7686000,
+          "candidates": 3087,
+          "elapsed_seconds": 3.175344661809504,
+          "exit_code": 0,
+          "output_bytes": {
+            "report.html": 4348280,
+            "report.json": 4868007
+          },
+          "output_sha256": {
+            "report.html": "8c81d5c54dd4973d27ec5832a957ed70a2dc05971ddc7d8cae4e94d1ff219e91",
+            "report.json": "92f353c9ef16b4753df957ab4af378cce15cb40a9191ccd8104e5aa501fb8b83"
+          },
+          "peak_rss_kib": 73280
+        }
+      ],
+      "spec": {
+        "all_day": "block",
+        "end": "2026-04-01",
+        "minimum_seconds": 1,
+        "start": "2026-01-01",
+        "timezone": "UTC",
+        "version": 1,
+        "weekdays": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA",
+          "SU"
+        ],
+        "work_end": "24:00",
+        "work_start": "00:00"
+      }
+    },
+    {
+      "input_bytes": 11956,
+      "input_events": 100,
+      "input_sha256": {
+        "dense_100.ics": "0815c910c11ce70ad9b9df1987d4386d5d380bfaeda3490d88bb5d13d67d7f67",
+        "working.json": "ea98691341d5a7e85ea7846cd882e449d91d7d4ab0dd19ffc223ad0e6fca02c7"
+      },
+      "name": "dense_100",
+      "runs": [
+        {
+          "candidate_seconds": 7772400,
+          "candidates": 90,
+          "elapsed_seconds": 0.6557686538435519,
+          "exit_code": 0,
+          "output_bytes": {
+            "report.html": 1620149,
+            "report.json": 1102458
+          },
+          "output_sha256": {
+            "report.html": "1b99fa6b0f080ce1f5ae652ecacec37bcb2a5a76f00e3909850f7a4b35ce3929",
+            "report.json": "1efba66efa3c2968ccd3938caa6de979fd0ed237e0ced5ef68f4056437fec5c3"
+          },
+          "peak_rss_kib": 57048
+        },
+        {
+          "candidate_seconds": 7772400,
+          "candidates": 90,
+          "elapsed_seconds": 0.6222680397331715,
+          "exit_code": 0,
+          "output_bytes": {
+            "report.html": 1620149,
+            "report.json": 1102458
+          },
+          "output_sha256": {
+            "report.html": "1b99fa6b0f080ce1f5ae652ecacec37bcb2a5a76f00e3909850f7a4b35ce3929",
+            "report.json": "1efba66efa3c2968ccd3938caa6de979fd0ed237e0ced5ef68f4056437fec5c3"
+          },
+          "peak_rss_kib": 57048
+        }
+      ],
+      "spec": {
+        "all_day": "block",
+        "end": "2026-04-01",
+        "minimum_seconds": 1,
+        "start": "2026-01-01",
+        "timezone": "UTC",
+        "version": 1,
+        "weekdays": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA",
+          "SU"
+        ],
+        "work_end": "24:00",
+        "work_start": "00:00"
+      }
+    },
+    {
+      "input_bytes": 5856,
+      "input_events": 40,
+      "input_sha256": {
+        "daily_40_by_90.ics": "6ff67b742930b6473dc6ff4720fb5f2433f53bd61cdd4c65655efad7ff7386bd",
+        "working.json": "ea98691341d5a7e85ea7846cd882e449d91d7d4ab0dd19ffc223ad0e6fca02c7"
+      },
+      "name": "daily_40_by_90",
+      "runs": [
+        {
+          "elapsed_seconds": 0.5445417459122837,
+          "exit_code": 2,
+          "failure": "INCOMPLETE; no availability bundle: pairs limit exceeded",
+          "peak_rss_kib": 57048
+        },
+        {
+          "elapsed_seconds": 0.5234830640256405,
+          "exit_code": 2,
+          "failure": "INCOMPLETE; no availability bundle: pairs limit exceeded",
+          "peak_rss_kib": 57048
+        }
+      ],
+      "spec": {
+        "all_day": "block",
+        "end": "2026-04-01",
+        "minimum_seconds": 1,
+        "start": "2026-01-01",
+        "timezone": "UTC",
+        "version": 1,
+        "weekdays": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA",
+          "SU"
+        ],
+        "work_end": "24:00",
+        "work_start": "00:00"
+      }
+    },
+    {
+      "input_bytes": 30106,
+      "input_events": 250,
+      "input_sha256": {
+        "pair_limit_250.ics": "673bec8b7650df92c1e406a9652a5d3c10573ec1c1cf31511e9901bf3ecc40ae",
+        "working.json": "ea98691341d5a7e85ea7846cd882e449d91d7d4ab0dd19ffc223ad0e6fca02c7"
+      },
+      "name": "pair_limit_250",
+      "runs": [
+        {
+          "elapsed_seconds": 0.4282039678655565,
+          "exit_code": 2,
+          "failure": "INCOMPLETE; no availability bundle: pairs limit exceeded",
+          "peak_rss_kib": 57048
+        },
+        {
+          "elapsed_seconds": 0.39144949801266193,
+          "exit_code": 2,
+          "failure": "INCOMPLETE; no availability bundle: pairs limit exceeded",
+          "peak_rss_kib": 57048
+        }
+      ],
+      "spec": {
+        "all_day": "block",
+        "end": "2026-04-01",
+        "minimum_seconds": 1,
+        "start": "2026-01-01",
+        "timezone": "UTC",
+        "version": 1,
+        "weekdays": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA",
+          "SU"
+        ],
+        "work_end": "24:00",
+        "work_start": "00:00"
+      }
+    },
+    {
+      "input_bytes": 166,
+      "input_events": 1,
+      "input_sha256": {
+        "all_day_block.ics": "1822c21c7868e0cb6aea9026ace876e7affd3242b96ce44202930d431249023e",
+        "working.json": "ea98691341d5a7e85ea7846cd882e449d91d7d4ab0dd19ffc223ad0e6fca02c7"
+      },
+      "name": "all_day_block",
+      "runs": [
+        {
+          "candidate_seconds": 0,
+          "candidates": 0,
+          "elapsed_seconds": 0.3152335179038346,
+          "exit_code": 0,
+          "output_bytes": {
+            "report.html": 61575,
+            "report.json": 81363
+          },
+          "output_sha256": {
+            "report.html": "511c75b70a16c347483323e7fef7e31b2ae762751cec6da3cef674c1037fb7c5",
+            "report.json": "eb5b234872f3583e6f5867bf6f0648c54b8ee3043dcf9bc1dbb99b3719ee832f"
+          },
+          "peak_rss_kib": 57048
+        },
+        {
+          "candidate_seconds": 0,
+          "candidates": 0,
+          "elapsed_seconds": 0.3245948627591133,
+          "exit_code": 0,
+          "output_bytes": {
+            "report.html": 61575,
+            "report.json": 81363
+          },
+          "output_sha256": {
+            "report.html": "511c75b70a16c347483323e7fef7e31b2ae762751cec6da3cef674c1037fb7c5",
+            "report.json": "eb5b234872f3583e6f5867bf6f0648c54b8ee3043dcf9bc1dbb99b3719ee832f"
+          },
+          "peak_rss_kib": 57048
+        }
+      ],
+      "spec": {
+        "all_day": "block",
+        "end": "2026-04-01",
+        "minimum_seconds": 1,
+        "start": "2026-01-01",
+        "timezone": "UTC",
+        "version": 1,
+        "weekdays": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA",
+          "SU"
+        ],
+        "work_end": "24:00",
+        "work_start": "00:00"
+      }
+    },
+    {
+      "input_bytes": 166,
+      "input_events": 1,
+      "input_sha256": {
+        "all_day_ignore.ics": "1822c21c7868e0cb6aea9026ace876e7affd3242b96ce44202930d431249023e",
+        "working.json": "377b934862d46fd8123201132d7d4f8175b663ffbc0254e5c460c9743c2169be"
+      },
+      "name": "all_day_ignore",
+      "runs": [
+        {
+          "candidate_seconds": 7776000,
+          "candidates": 90,
+          "elapsed_seconds": 0.3872245280072093,
+          "exit_code": 0,
+          "output_bytes": {
+            "report.html": 84335,
+            "report.json": 71815
+          },
+          "output_sha256": {
+            "report.html": "741b4c32d06d6df7064e1e83a0931b885e2bd32614e729ff173203d03551a19a",
+            "report.json": "6495cc2321b315745db4df15c8d243eceedb7898e0a5c05a7368f8348da6293c"
+          },
+          "peak_rss_kib": 57048
+        },
+        {
+          "candidate_seconds": 7776000,
+          "candidates": 90,
+          "elapsed_seconds": 0.33995019271969795,
+          "exit_code": 0,
+          "output_bytes": {
+            "report.html": 84335,
+            "report.json": 71815
+          },
+          "output_sha256": {
+            "report.html": "741b4c32d06d6df7064e1e83a0931b885e2bd32614e729ff173203d03551a19a",
+            "report.json": "6495cc2321b315745db4df15c8d243eceedb7898e0a5c05a7368f8348da6293c"
+          },
+          "peak_rss_kib": 57048
+        }
+      ],
+      "spec": {
+        "all_day": "ignore",
+        "end": "2026-04-01",
+        "minimum_seconds": 1,
+        "start": "2026-01-01",
+        "timezone": "UTC",
+        "version": 1,
+        "weekdays": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA",
+          "SU"
+        ],
+        "work_end": "24:00",
+        "work_start": "00:00"
+      }
+    },
+    {
+      "input_bytes": 77,
+      "input_events": 0,
+      "input_sha256": {
+        "dst_spring.ics": "ba53829effbeb5dcf5140813c0d48b4b10c133cc1f2f0d6b70b783f5537cf5cd",
+        "working.json": "347886d24f54b47a5789134128a8d89feca22454edf69533c9a7e58d27634ba3"
+      },
+      "name": "dst_spring",
+      "runs": [
+        {
+          "candidate_seconds": 10800,
+          "candidates": 1,
+          "elapsed_seconds": 0.3022364559583366,
+          "exit_code": 0,
+          "output_bytes": {
+            "report.html": 9872,
+            "report.json": 2890
+          },
+          "output_sha256": {
+            "report.html": "f890f01d2b55c725cf2e11ded0d1be9d3173976e3d3d0d170d096872ee7c8b39",
+            "report.json": "45d95ed08d217da75b7c26d0c7547cd44253b7c1cc7e85acf9e6bbaa05b6c1df"
+          },
+          "peak_rss_kib": 57048
+        },
+        {
+          "candidate_seconds": 10800,
+          "candidates": 1,
+          "elapsed_seconds": 0.28034981712698936,
+          "exit_code": 0,
+          "output_bytes": {
+            "report.html": 9872,
+            "report.json": 2890
+          },
+          "output_sha256": {
+            "report.html": "f890f01d2b55c725cf2e11ded0d1be9d3173976e3d3d0d170d096872ee7c8b39",
+            "report.json": "45d95ed08d217da75b7c26d0c7547cd44253b7c1cc7e85acf9e6bbaa05b6c1df"
+          },
+          "peak_rss_kib": 57048
+        }
+      ],
+      "spec": {
+        "all_day": "block",
+        "end": "2026-03-09",
+        "minimum_seconds": 1,
+        "start": "2026-03-08",
+        "timezone": "America/New_York",
+        "version": 1,
+        "weekdays": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA",
+          "SU"
+        ],
+        "work_end": "04:00",
+        "work_start": "00:00"
+      }
+    },
+    {
+      "input_bytes": 77,
+      "input_events": 0,
+      "input_sha256": {
+        "dst_fall.ics": "ba53829effbeb5dcf5140813c0d48b4b10c133cc1f2f0d6b70b783f5537cf5cd",
+        "working.json": "28b815424e37e267e3b5559d71eb4c8f6d720e8a94903dc90a8fac578a66dbf3"
+      },
+      "name": "dst_fall",
+      "runs": [
+        {
+          "candidate_seconds": 18000,
+          "candidates": 1,
+          "elapsed_seconds": 0.2956741191446781,
+          "exit_code": 0,
+          "output_bytes": {
+            "report.html": 9868,
+            "report.json": 2888
+          },
+          "output_sha256": {
+            "report.html": "b0948046d51f5b84cbb96069fccd458f41c20dd66e0b86388e459219c7dd165b",
+            "report.json": "8e1c31f3f218c25b65bbd8cf49a528100440665a72be0ea3a3b525eb9487be1e"
+          },
+          "peak_rss_kib": 57048
+        },
+        {
+          "candidate_seconds": 18000,
+          "candidates": 1,
+          "elapsed_seconds": 0.2958314148709178,
+          "exit_code": 0,
+          "output_bytes": {
+            "report.html": 9868,
+            "report.json": 2888
+          },
+          "output_sha256": {
+            "report.html": "b0948046d51f5b84cbb96069fccd458f41c20dd66e0b86388e459219c7dd165b",
+            "report.json": "8e1c31f3f218c25b65bbd8cf49a528100440665a72be0ea3a3b525eb9487be1e"
+          },
+          "peak_rss_kib": 57048
+        }
+      ],
+      "spec": {
+        "all_day": "block",
+        "end": "2026-11-02",
+        "minimum_seconds": 1,
+        "start": "2026-11-01",
+        "timezone": "America/New_York",
+        "version": 1,
+        "weekdays": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA",
+          "SU"
+        ],
+        "work_end": "04:00",
+        "work_start": "00:00"
+      }
+    },
+    {
+      "input_bytes": 160,
+      "input_events": 1,
+      "input_sha256": {
+        "unsupported.ics": "53a781845c266342bf903253d7076125f1c60746521a2916e77e26b37dce3460",
+        "working.json": "ea98691341d5a7e85ea7846cd882e449d91d7d4ab0dd19ffc223ad0e6fca02c7"
+      },
+      "name": "unsupported",
+      "runs": [
+        {
+          "candidate_seconds": null,
+          "candidates": 0,
+          "elapsed_seconds": 0.2956098089925945,
+          "exit_code": 2,
+          "output_bytes": {
+            "report.html": 46820,
+            "report.json": 42851
+          },
+          "output_sha256": {
+            "report.html": "0e266b5a8bbbc80f31fea4d0a708f337dc61d782a7e51d7bca6eceb253715eb9",
+            "report.json": "105f398940575e261446444bdc0f5bed7e2ec9685c7971716d17e4f7c9f86b23"
+          },
+          "peak_rss_kib": 57048
+        },
+        {
+          "candidate_seconds": null,
+          "candidates": 0,
+          "elapsed_seconds": 0.341076890937984,
+          "exit_code": 2,
+          "output_bytes": {
+            "report.html": 46820,
+            "report.json": 42851
+          },
+          "output_sha256": {
+            "report.html": "0e266b5a8bbbc80f31fea4d0a708f337dc61d782a7e51d7bca6eceb253715eb9",
+            "report.json": "105f398940575e261446444bdc0f5bed7e2ec9685c7971716d17e4f7c9f86b23"
+          },
+          "peak_rss_kib": 57048
+        }
+      ],
+      "spec": {
+        "all_day": "block",
+        "end": "2026-04-01",
+        "minimum_seconds": 1,
+        "start": "2026-01-01",
+        "timezone": "UTC",
+        "version": 1,
+        "weekdays": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA",
+          "SU"
+        ],
+        "work_end": "24:00",
+        "work_start": "00:00"
+      }
+    }
+  ]
+}

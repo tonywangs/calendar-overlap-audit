@@ -172,3 +172,45 @@ To reproduce the new and historical workload shapes on the current implementatio
 ```sh
 .venv/bin/python scripts/benchmark.py --suite all --output /tmp/calendar-benchmark-v2.json --repeats 3
 ```
+
+## Find candidate availability
+
+The separate `calendar-availability` command subtracts supported commitments from
+explicit working windows. It preserves the original `calendar-audit` interface and
+schema-2 output. Install the project again after updating to expose the new command,
+or run `.venv/bin/python -m calendar_audit.availability_cli` directly.
+
+```sh
+.venv/bin/calendar-availability tests/fixtures/synthetic.ics \
+  --spec examples/working-v1.json --output /tmp/calendar-availability-report
+```
+
+The clearly **synthetic** example uses Monday–Friday 09:00–17:00 in
+America/New_York, March 6–10, 2026, a 30-minute minimum, and explicit all-day blocking.
+It yields two seven-hour candidates, Monday and Tuesday 10:00–17:00: **50,400 elapsed
+seconds**. Friday is blocked by the opaque all-day event. Inspect the saved
+[HTML](examples/availability-report/report.html) or [JSON](examples/availability-report/report.json).
+
+Edit a copy of [working-v1.json](examples/working-v1.json). The
+[version-1 specification](docs/availability-v1.md) defines exact keys, time semantics,
+limits and the result schema. Working dates are end-exclusive; windows are independent
+per day. Choose `all_day: "block"` or `"ignore"` explicitly. Minimum duration uses
+elapsed seconds, so daylight-saving transitions can change duration. Ambiguous or
+nonexistent working boundaries are rejected with instructions to change the settings.
+One nonovernight window per weekday is supported; no holidays, split shifts or meeting
+buffers are inferred.
+
+A **complete** result means only the supplied exports and selected policies. It is
+not a booking guarantee. Unsupported or unresolved input withholds **all** candidates;
+`candidate_seconds: null` means unknown, while zero in a complete result means no
+qualifying interval. Resource exhaustion also returns INCOMPLETE (exit 2), with no
+bundle if safe report generation cannot finish. Other operational failures return 1;
+cancellation returns 130. Existing destinations are preserved. Source and specification
+hashes, exact UTC/local-offset endpoints, merged busy intervals and bounding commitment
+links make the result auditable. Date filtering and keyboard navigation work locally.
+
+Run the existing single verification command, `.venv/bin/python scripts/verify.py`,
+after the dependency/browser preparation described above. It now also exercises
+256 independent seeded availability cases, failure cleanup, network-blocked Chromium,
+an isolated installed availability CLI and reproducible workload output hashes.
+[Availability results](results/availability-v1.md) record actual measurements and limits.
