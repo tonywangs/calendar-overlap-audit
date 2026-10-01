@@ -76,3 +76,9 @@ The supported subset is defined in [semantics.md](semantics.md); `complete` is n
 claim that arbitrary provider extensions were understood or that a user's supplied
 files represent all commitments. It also does not imply attendance acceptance:
 `ATTENDEE`/`PARTSTAT` are not interpreted.
+
+## Occurrence-only availability
+
+Availability JSON schema 2 and its nested occurrence audit are described in
+[the occurrence pipeline](occurrence-pipeline.md). The overlap-audit schema above
+is unchanged. Select `--include-overlaps` for the original availability format.

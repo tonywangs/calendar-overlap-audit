@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "seed": 20261001,
+  "repetitions": 6,
+  "order": "AB,BA,AB,BA,AB,BA; A=baseline, B=candidate",
+  "spec": {"version": 1, "start": "2026-01-01", "end": "2026-04-01", "timezone": "UTC", "weekdays": ["MO", "TU", "WE", "TH", "FR", "SA", "SU"], "work_start": "00:00", "work_end": "24:00", "minimum_seconds": 1, "all_day": "block"},
+  "workloads": [
+    {"name": "empty", "kind": "sparse", "events": 0},
+    {"name": "sparse_100", "kind": "sparse", "events": 100},
+    {"name": "sparse_1000", "kind": "sparse", "events": 1000},
+    {"name": "sparse_3000", "kind": "sparse", "events": 3000},
+    {"name": "dense_100", "kind": "dense", "events": 100},
+    {"name": "dense_200", "kind": "dense", "events": 200},
+    {"name": "dense_250", "kind": "dense", "events": 250},
+    {"name": "dense_1000", "kind": "dense", "events": 1000},
+    {"name": "daily_40_by_90", "kind": "daily", "events": 40},
+    {"name": "unsupported", "kind": "unsupported", "events": 1},
+    {"name": "occurrence_limit", "kind": "daily", "events": 2, "flags": ["--max-occurrences", "1"]},
+    {"name": "output_limit", "kind": "dense", "events": 250, "flags": ["--max-report-bytes", "1024"]},
+    {"name": "runtime_limit", "kind": "dense", "events": 250, "flags": ["--max-seconds", "0.000001"]}
+  ]
+}

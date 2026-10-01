@@ -189,11 +189,12 @@ The clearly **synthetic** example uses Monday–Friday 09:00–17:00 in
 America/New_York, March 6–10, 2026, a 30-minute minimum, and explicit all-day blocking.
 It yields two seven-hour candidates, Monday and Tuesday 10:00–17:00: **50,400 elapsed
 seconds**. Friday is blocked by the opaque all-day event. Inspect the saved
-[HTML](examples/availability-report/report.html) or [JSON](examples/availability-report/report.json).
+[HTML](examples/occurrence-availability-report/report.html) or [JSON](examples/occurrence-availability-report/report.json).
 
 Edit a copy of [working-v1.json](examples/working-v1.json). The
-[version-1 specification](docs/availability-v1.md) defines exact keys, time semantics,
-limits and the result schema. Working dates are end-exclusive; windows are independent
+[version-1 specification](docs/availability-v1.md) defines exact keys and time semantics.
+The [occurrence-only pipeline](docs/occurrence-pipeline.md) defines the current
+availability JSON schema 2 and applicable limits. Working dates are end-exclusive; windows are independent
 per day. Choose `all_day: "block"` or `"ignore"` explicitly. Minimum duration uses
 elapsed seconds, so daylight-saving transitions can change duration. Ambiguous or
 nonexistent working boundaries are rejected with instructions to change the settings.
@@ -214,3 +215,16 @@ after the dependency/browser preparation described above. It now also exercises
 256 independent seeded availability cases, failure cleanup, network-blocked Chromium,
 an isolated installed availability CLI and reproducible workload output hashes.
 [Availability results](results/availability-v1.md) record actual measurements and limits.
+
+Availability now expands occurrences without constructing overlap pairs. Dense
+calendars can therefore produce complete gaps beyond the audit's 20,000-pair cap,
+within the unchanged occurrence, runtime and output limits. The HTML states that
+pairs were not computed; JSON omits them. `--max-pairs` applies only with the
+compatibility option `--include-overlaps`, which retains the original availability
+JSON schema 1 and [historical example](examples/availability-report/report.html).
+The original `calendar-audit` command continues to enumerate pairs as before.
+
+[Measured comparison](results/occurrence-availability.md) includes six balanced
+paired repetitions of a frozen sparse-to-dense suite, fresh-process peak RSS,
+output hashes, incomplete outcomes and regressions. Measurements are synthetic
+shared-host observations; memory still grows with retained data and report size.

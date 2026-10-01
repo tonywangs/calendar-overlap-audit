@@ -17,6 +17,8 @@ def parser():
     p.add_argument('inputs', nargs='+', type=Path)
     p.add_argument('--spec', type=Path, required=True, help='Version-1 working-window JSON specification')
     p.add_argument('--output', type=Path, required=True, help='New directory; never overwritten')
+    p.add_argument('--include-overlaps', action='store_true',
+                   help='Legacy availability schema 1 with overlap pairs; pair limit applies')
     p.add_argument('--max-days', type=int, default=90)
     for field in fields(Limits):
         default = getattr(Limits(), field.name)
@@ -33,7 +35,8 @@ def main(argv=None):
             if os.path.lexists(args.output):
                 raise AuditError('Output path already exists; choose a new directory')
             spec, fingerprint = load_spec(args.spec, args.max_days)
-            report = availability(args.inputs, spec, limits, budget, fingerprint, args.max_days)
+            report = availability(args.inputs, spec, limits, budget, fingerprint, args.max_days,
+                                  include_overlaps=args.include_overlaps)
             data = json_bytes(report)
             if len(data) > limits.report_bytes:
                 raise AuditError('report_bytes limit exceeded (JSON)')

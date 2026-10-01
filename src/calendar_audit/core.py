@@ -585,6 +585,20 @@ def overlap_pairs(intervals, budget: Budget):
 
 
 def analyze(paths, start: str, end: str, display: str, limits=Limits(), budget=None):
+    """Legacy schema-2 overlap audit, including bounded pair enumeration."""
+    return _analyze(paths, start, end, display, limits, budget, include_overlaps=True)
+
+
+def analyze_occurrences(paths, start: str, end: str, display: str, limits=Limits(), budget=None):
+    """Occurrence audit: identical expansion/diagnostics, no overlap enumeration.
+
+    This distinct report type deliberately omits overlaps and the inapplicable
+    pair limit; absence of a computation must never masquerade as zero overlaps.
+    """
+    return _analyze(paths, start, end, display, limits, budget, include_overlaps=False)
+
+
+def _analyze(paths, start, end, display, limits, budget, *, include_overlaps):
     budget = budget or Budget(limits)
     zone = get_zone(display)
     first, last, lo, hi = window(start, end, zone)
@@ -647,7 +661,7 @@ def analyze(paths, start: str, end: str, display: str, limits=Limits(), budget=N
                 issues.append({'event': record['id'], 'code': code, 'message': message})
     pairs = [{'id': f'p{i}', 'left': left, 'right': right, 'start': iso(a), 'end': iso(b),
               'seconds': int((b-a).total_seconds())}
-             for i, (left, right, a, b) in enumerate(overlap_pairs(timed, budget), 1)]
+             for i, (left, right, a, b) in enumerate(overlap_pairs(timed, budget), 1)] if include_overlaps else None
     daily = []
     d = first
     while d < last:
@@ -660,10 +674,16 @@ def analyze(paths, start: str, end: str, display: str, limits=Limits(), budget=N
                       'all_day_occurrences': sum(1 for x, y, _ in all_day if x <= d < y)})
         d += DAY
     budget.check()
-    return {'schema_version': 2, 'tool_version': __version__,
+    report = {'schema_version': 2, 'tool_version': __version__,
             'dependencies': {name: metadata.version(name) for name in ('icalendar', 'tzdata', 'python-dateutil', 'six')},
             'window': {'start': start, 'end': end, 'timezone': display, 'start_utc': iso(lo), 'end_utc': iso(hi)},
             'complete': not issues, 'issues': issues, 'limits': asdict(limits),
             'cancellations': cancellations, 'sources': sources, 'events': records, 'occurrences': occurrences, 'overlaps': pairs,
             'daily': daily, 'occupied_seconds': int(union_seconds((a, b) for a, b, _ in timed)),
             'counts': dict(sorted(budget.counts.items()))}
+    if not include_overlaps:
+        report['schema_version'] = 1
+        report['report_type'] = 'occurrences'
+        del report['overlaps']
+        del report['limits']['pairs']
+    return report

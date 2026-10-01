@@ -1,4 +1,4 @@
-"""Availability UI plus the unchanged schema-2 audit for full provenance."""
+"""Availability UI with occurrence provenance or a legacy schema-2 overlap audit."""
 import json
 
 from .core import AuditError

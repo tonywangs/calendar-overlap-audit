@@ -54,7 +54,7 @@ SCENARIOS = [
 
 
 @pytest.mark.parametrize('seed', range(256))
-def test_seeded_independent_second_lattice_oracle(seed, make_ics):
+def test_seeded_independent_second_lattice_oracle(seed, make_ics, baseline_availability):
     rng = random.Random(20260930 + seed)
     start, end, zone, utc, length = SCENARIOS[seed % len(SCENARIOS)]
     lo = datetime.fromisoformat(utc)
@@ -100,6 +100,11 @@ def test_seeded_independent_second_lattice_oracle(seed, make_ics):
             'work_start': '00:00', 'work_end': '04:00', 'minimum_seconds': minimum, 'all_day': policy}
     r = availability([p], spec)
     assert r['complete']
+    from baseline import semantics
+    baseline = baseline_availability([p], spec)
+    assert baseline['complete']
+    assert semantics(r) == semantics(baseline)
+    assert availability([p], spec, include_overlaps=True) == baseline
     got = [(datetime.fromisoformat(g['start']), datetime.fromisoformat(g['end'])) for g in r['candidates']]
     assert got == expected
     assert r['windows'][0]['seconds'] == length

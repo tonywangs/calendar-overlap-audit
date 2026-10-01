@@ -3,6 +3,8 @@ import os
 from pathlib import Path
 import re
 
+import pytest
+
 from playwright.sync_api import expect, sync_playwright
 
 from calendar_audit.availability_cli import main
@@ -12,9 +14,11 @@ ROOT = Path(__file__).resolve().parents[1]
 os.environ.setdefault('PLAYWRIGHT_BROWSERS_PATH', str(ROOT / '.cache/ms-playwright'))
 
 
-def test_availability_offline_browser_filter_citations_keyboard_and_hostile_text(tmp_path, make_ics):
+@pytest.mark.parametrize('dense', [False, True])
+def test_availability_offline_browser_filter_citations_keyboard_and_hostile_text(tmp_path, make_ics, dense):
     source = make_ics('UID:hostile\nSUMMARY:<img src=https://invalid.test/x onerror=window.pwned=1>\nDTSTART:20260306T100000Z\nDTEND:20260306T110000Z',
-                      'UID:second\nSUMMARY:Second day\nDTSTART:20260307T100000Z\nDTEND:20260307T110000Z')
+                      'UID:second\nSUMMARY:Second day\nDTSTART:20260307T100000Z\nDTEND:20260307T110000Z',
+                      *[f'UID:dense-{i}\nDTSTART:20260306T100000Z\nDTEND:20260306T110000Z' for i in range(250 if dense else 0)])
     spec = tmp_path / 'working.json'
     spec.write_text(json.dumps({**SPEC, 'end':'2026-03-08'}))
     out = tmp_path / 'out'
@@ -32,6 +36,8 @@ def test_availability_offline_browser_filter_citations_keyboard_and_hostile_text
         page.on('pageerror',lambda e:errors.append(str(e)))
         page.goto((out / 'report.html').as_uri())
         assert page.title() == 'Calendar availability audit'
+        assert 'Overlap pairs were not computed' in page.locator('body').inner_text()
+        assert '0 overlap pairs' not in page.locator('body').inner_text()
         expect(page.locator('[data-gap]:visible')).to_have_count(4)
         assert page.locator('img').count() == 0 and page.evaluate('window.pwned') is None
         page.keyboard.press('Tab')

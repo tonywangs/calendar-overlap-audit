@@ -1,5 +1,9 @@
 # Availability specification v1
 
+The working-window specification remains current. The original output/pipeline
+described below is available with `--include-overlaps`; the new default uses
+[occurrence-only analysis and availability JSON schema 2](occurrence-pipeline.md).
+
 Frozen before implementation. This is an offline complement of supported exported
 commitments, not a booking guarantee, provider integration, or novelty claim.
 

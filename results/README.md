@@ -35,3 +35,11 @@ The two limit-rejection workloads are expected negative results: 250 simultaneou
 ## Limits of this evidence
 
 The workloads are modest and synthetic. There is no real-provider export validation, cross-platform measurement, formal accessibility audit, memory-exhaustion sandbox, or browser-scale performance guarantee at every limit combination. The memory figures are observed peaks, not enforced caps. The worst supported combination can hit a report-size or time limit before the occurrence limit. Pinned tzdata 2025.2 may differ from newer civil-time rules. See [supported semantics](../docs/semantics.md) for excluded features.
+
+## Occurrence-only availability
+
+See [the paired workload experiment](occurrence-availability.md) for the current
+implementation. Existing measurement files and examples above are preserved as
+historical evidence and verified against the frozen original source. The initial
+new benchmark exposed inherited RSS accounting; its raw run and corrected
+measurement method are documented rather than presented as a memory improvement.

@@ -107,3 +107,17 @@ def test_invalid_spec_boundary_and_missing_source(tmp_path, capsys):
     argv = arguments(tmp_path, tmp_path / 'missing.ics')
     assert main(argv) == 1
     assert not (tmp_path / 'out').exists()
+
+
+@pytest.mark.parametrize('signum', [signal.SIGINT, signal.SIGTERM])
+@pytest.mark.parametrize('stage', ['analyze_occurrences', 'complement'])
+def test_cancellation_during_occurrence_analysis(tmp_path, stage, signum):
+    argv = arguments(tmp_path)
+    before = {p:Path(p).read_bytes() for p in (argv[0],argv[2])}
+    def cancel(*args,**kwargs):
+        os.kill(os.getpid(),signum)
+        raise AssertionError('signal was not handled')
+    with patch('calendar_audit.availability.'+stage,side_effect=cancel):
+        assert main(argv) == 130
+    assert not (tmp_path/'out').exists() and not list(tmp_path.glob('.calendar-audit-*'))
+    assert before == {p:Path(p).read_bytes() for p in before}

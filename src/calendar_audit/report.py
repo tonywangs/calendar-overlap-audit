@@ -77,6 +77,8 @@ filter();
 
 
 def html_bytes(report, budget):
+    occurrence_only = report.get("report_type") == "occurrences"
+    pairs = report.get("overlaps", [])
     chunks = []
     size = 0
 
@@ -105,9 +107,11 @@ def html_bytes(report, budget):
         'script-src &#39;unsafe-inline&#39;; style-src &#39;unsafe-inline&#39;; '
         'base-uri &#39;none&#39;; form-action &#39;none&#39;">'
         '<title>Calendar overlap audit</title><style>' + STYLE + '</style></head><body>')
-    add('<a class="skip" href="#main">Skip to report</a><header><p>OFFLINE CALENDAR AUDIT · SCHEMA 2</p>'
+    add('<a class="skip" href="#main">Skip to report</a><header><p>'
+        + ('OFFLINE OCCURRENCE AUDIT · SCHEMA 1' if occurrence_only else 'OFFLINE CALENDAR AUDIT · SCHEMA 2') + '</p>'
         '<h1>Where commitments overlap</h1><p>Exclusive event ends · union-based occupied time · all-day events kept separate</p></header>'
-        '<nav aria-label="Report sections"><a href="#daily">Daily summary</a><a href="#overlaps">Overlaps</a>'
+        '<nav aria-label="Report sections"><a href="#daily">Daily summary</a>'
+        + ('' if occurrence_only else '<a href="#overlaps">Overlaps</a>') +
         '<a href="#occurrences">Occurrences</a><a href="#records">Event records</a><a href="#sources">Sources</a></nav>'
         '<main id="main" tabindex="-1">')
     w = report['window']
@@ -118,8 +122,11 @@ def html_bytes(report, budget):
             'No unsupported input was detected. This does not validate provider compatibility or establish availability.</p>')
     else:
         add('<p class="warning" role="status"><strong>INCOMPLETE ANALYSIS.</strong> '
-            'Some inputs could not be interpreted. Occupancy and overlaps below are provisional; absence of pairs is not evidence of availability.</p>')
-    add(f'<p class="stats">{hours(report["occupied_seconds"])} occupied · {len(report["overlaps"])} overlap pairs · '
+            'Some inputs could not be interpreted. '
+            + ('Occupancy below is provisional; missing commitments can hide busy time.' if occurrence_only else
+               'Occupancy and overlaps below are provisional; absence of pairs is not evidence of availability.') + '</p>')
+    add(f'<p class="stats">{hours(report["occupied_seconds"])} occupied · '
+        + ('' if occurrence_only else f'{len(pairs)} overlap pairs · ') +
         f'{sum(o["all_day"] for o in occurrences.values())} all-day occurrences</p>')
     if report['issues']:
         add('<h2 id="issues">Analysis issues</h2><ul>')
@@ -135,7 +142,8 @@ def html_bytes(report, budget):
         add(f'<tr><th scope="row">{row["date"]}</th><td>{hours(row["day_seconds"])}</td>'
             f'<td>{hours(row["occupied_seconds"])}</td><td>{row["timed_occurrences"]}</td><td>{row["all_day_occurrences"]}</td></tr>')
     add('</tbody></table></div><h2>Explore findings</h2>'
-        '<p>Search matches a summary or UID. Pairs appear when either occurrence matches. '
+        '<p>Search matches a summary or UID. '
+        + ('' if occurrence_only else 'Pairs appear when either occurrence matches. ') +
         'Tab navigates controls and links; Enter follows citations; Escape clears filters. Event records always remain visible.</p>'
         '<div class="controls"><label for="search">Summary or UID<input id="search" type="search" autocomplete="off"></label>'
         '<label for="kind">Occurrence type<select id="kind"><option value="">All types</option>'
@@ -145,10 +153,11 @@ def html_bytes(report, budget):
         add(f'<option value="{s["id"]}">{esc(s["id"] + ": " + s["name"])}</option>')
     add('</select></label><button id="reset" type="button">Clear filters</button></div>'
         '<p id="filter-status" aria-live="polite"></p><noscript><p>JavaScript disabled: all findings remain visible.</p></noscript>'
-        '<h2 id="overlaps" tabindex="-1">Overlap details</h2>')
-    if not report['overlaps']:
+        + ('<p>Overlap pairs were not computed. This report uses occurrence unions.</p>' if occurrence_only else
+           '<h2 id="overlaps" tabindex="-1">Overlap details</h2>'))
+    if not occurrence_only and not pairs:
         add('<p>No overlapping timed pairs detected in the analyzed subset.</p>')
-    for p in report['overlaps']:
+    for p in pairs:
         left, right = occurrences[p['left']], occurrences[p['right']]
         add(f'<article class="card" id="{p["id"]}" data-pair data-refs="{p["left"]} {p["right"]}" tabindex="-1">'
             f'<h3>{esc(events[left["event"]]["summary"])} ↔ {esc(events[right["event"]]["summary"])}</h3>'
@@ -206,6 +215,6 @@ def html_bytes(report, budget):
             f'<p>{s["bytes"]} bytes · SHA-256 <code>{s["sha256"]}</code></p></article>')
     add('<p>Only scheduling fields, UID and summary are shown. This report can still contain private information. '
         'All processing and filtering are local; this page makes no network requests.</p></main>'
-        '<footer><p>calendar-overlap-audit ' + esc(report['tool_version']) + ' · JSON schema 2</p></footer>'
-        '<script>' + SCRIPT + '</script></body></html>\n')
+        '<footer><p>calendar-overlap-audit ' + esc(report['tool_version']) + (' · Occurrence JSON schema 1' if occurrence_only else ' · JSON schema 2') + '</p></footer>'
+        '<script>' + (SCRIPT.replace(' and ${pairs} overlap pairs shown.', ' shown.') if occurrence_only else SCRIPT) + '</script></body></html>\n')
     return ''.join(chunks).encode('utf-8')

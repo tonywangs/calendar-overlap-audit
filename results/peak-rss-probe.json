@@ -1,0 +1,10 @@
+{
+  "child": {
+    "getrusage_maxrss_kib": 110976,
+    "proc_vmhwm_kib": 10544,
+    "proc_vmrss_kib": 10544
+  },
+  "parent_allocation_bytes": 100000000,
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3"
+}

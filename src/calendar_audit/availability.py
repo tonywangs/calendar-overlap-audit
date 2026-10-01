@@ -7,7 +7,7 @@ from pathlib import Path
 import re
 import stat
 
-from .core import AuditError, Budget, DAY, Limits, UTC, WEEKDAYS, analyze, get_zone, iso, window
+from .core import AuditError, Budget, DAY, Limits, UTC, WEEKDAYS, analyze, analyze_occurrences, get_zone, iso, window
 
 KEYS = {'version', 'start', 'end', 'timezone', 'weekdays', 'work_start', 'work_end',
         'minimum_seconds', 'all_day'}
@@ -120,7 +120,7 @@ def complement(lo, hi, busy, minimum, budget):
     return merged, gaps
 
 
-def availability(paths, spec, limits=Limits(), budget=None, spec_source=None, max_days=90):
+def availability(paths, spec, limits=Limits(), budget=None, spec_source=None, max_days=90, *, include_overlaps=False):
     spec = validate_spec(spec, max_days)
     budget = budget or Budget(limits)
     zone = get_zone(spec['timezone'])
@@ -134,7 +134,8 @@ def availability(paths, spec, limits=Limits(), budget=None, spec_source=None, ma
         if day.weekday() in {WEEKDAYS[d] for d in spec['weekdays']}:
             working.append((day, boundary(day, spec['work_start'], zone), boundary(day, spec['work_end'], zone)))
         day += DAY
-    audit = analyze(paths, spec['start'], spec['end'], spec['timezone'], limits, budget)
+    analyze_input = analyze if include_overlaps else analyze_occurrences
+    audit = analyze_input(paths, spec['start'], spec['end'], spec['timezone'], limits, budget)
     timed = [(datetime.fromisoformat(o['start']), datetime.fromisoformat(o['end']), o['id'])
              for o in audit['occurrences'] if not o['all_day']]
     all_day = [o for o in audit['occurrences'] if o['all_day']]
@@ -154,7 +155,10 @@ def availability(paths, spec, limits=Limits(), budget=None, spec_source=None, ma
                 candidates.append({'id': f'g{len(candidates) + 1}', 'window': wid, 'date': day.isoformat(),
                                    **interval(a, b, zone), 'before': sorted(left), 'after': sorted(right)})
     budget.check()
-    return {'schema_version': 1, 'report_type': 'availability', 'spec': spec, 'spec_source': spec_source,
+    applicable_limits = asdict(limits)
+    if not include_overlaps:
+        del applicable_limits['pairs']
+    return {'schema_version': 1 if include_overlaps else 2, 'report_type': 'availability', 'spec': spec, 'spec_source': spec_source,
             'complete': audit['complete'], 'scope': 'Only supplied exports and selected policies; not a booking guarantee.',
-            'limits': {**asdict(limits), 'days': max_days}, 'windows': windows, 'candidates': candidates,
+            'limits': {**applicable_limits, 'days': max_days}, 'windows': windows, 'candidates': candidates,
             'candidate_seconds': sum(g['seconds'] for g in candidates) if audit['complete'] else None, 'audit': audit}
