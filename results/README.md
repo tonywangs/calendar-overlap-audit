@@ -43,3 +43,11 @@ implementation. Existing measurement files and examples above are preserved as
 historical evidence and verified against the frozen original source. The initial
 new benchmark exposed inherited RSS accounting; its raw run and corrected
 measurement method are documented rather than presented as a memory improvement.
+
+## Indexed working-window selection
+
+The current availability implementation passed the
+[frozen indexed-selection experiment](indexed-selection.md). It preserves exact
+reports while improving both predefined long-horizon targets. The results retain
+control regressions, fresh-process RSS, all 96 raw observations, the adopted source,
+and the authenticated occurrence-only baseline.

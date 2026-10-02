@@ -1,0 +1,7 @@
+{
+  "adopted": true,
+  "benchmark_sha256": "2908b510c6973e5a9ab272ff0e5c44a81433d6658500079e5f21d1bb77b79c16",
+  "correctness": "289 new index tests passed, including 256 seeded exact comparisons in both report modes and independent interval/provenance oracles; frozen candidate also passed all 457 existing regressions.",
+  "decided_at_utc": "2026-10-02T01:11:10.716524+00:00",
+  "reason": "Both predefined long-horizon targets exceed 20% median end-to-end improvement; every control and RSS gate passes; exact output hashes match throughout."
+}

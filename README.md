@@ -228,3 +228,20 @@ The original `calendar-audit` command continues to enumerate pairs as before.
 paired repetitions of a frozen sparse-to-dense suite, fresh-process peak RSS,
 output hashes, incomplete outcomes and regressions. Measurements are synthetic
 shared-host observations; memory still grows with retained data and report size.
+
+Availability selection now indexes occurrences into working windows, avoiding a
+full scan and sort for every day. The [frozen index experiment](results/indexed-selection.md)
+passed exact-report comparisons and all adoption gates: median end-to-end time
+improved 33.9% and 47.4% on its two 90-day target workloads. The all-day control
+regressed 3.1%; this is not a universal speedup or a constant-memory algorithm.
+No command, policy or report schema changes are required.
+
+Reproduce its correctness checks, historical replays, offline browser/installed
+CLI checks and all six balanced benchmark pairs with one command after the
+preparation above (choose a new output filename):
+
+```sh
+.venv/bin/python scripts/verify_index.py --measure /tmp/calendar-index-new.json
+```
+
+Omit `--measure` to verify saved evidence and replay one pair per workload.

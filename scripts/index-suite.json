@@ -1,0 +1,82 @@
+{
+  "baseline_tree": "b803165876f77ce5fef0c49c6d56cf6848dcd1d7",
+  "candidate": "One global timed tuple sort; bisect half-open window endpoints; ordered buckets; all-day date buckets; merge sorted streams into unchanged complement algorithm. No tuning after measurements.",
+  "frozen_at_utc": "2026-10-02T01:02:52.944506+00:00",
+  "gates": {
+    "control_regression_fraction": 0.1,
+    "control_regression_seconds": 0.02,
+    "correctness": "exact JSON and HTML hashes, complete outputs, 256 seeded exact reports and independent provenance oracle",
+    "minimum_end_to_end_improvement": 0.2,
+    "required_targets": [
+      "long_sparse",
+      "long_dense"
+    ],
+    "rss_regression_fraction": 0.15,
+    "rss_regression_kib": 8192,
+    "rss_statistic": "maximum of six fresh-process VmHWM samples per implementation",
+    "timing_statistic": "median of six samples per implementation"
+  },
+  "limits": {
+    "days": 90,
+    "events": 5000,
+    "occurrences": 20000,
+    "report_bytes": 8388608,
+    "seconds": 30.0
+  },
+  "order": "AB,BA,AB,BA,AB,BA",
+  "process_timeout_seconds": 45,
+  "repetitions": 6,
+  "seed": 20261002,
+  "suite_timeout_seconds": 1800,
+  "version": 1,
+  "workloads": [
+    {
+      "days": 1,
+      "events": 0,
+      "kind": "sparse",
+      "name": "short_empty"
+    },
+    {
+      "days": 1,
+      "events": 60,
+      "kind": "sparse",
+      "name": "short_sparse"
+    },
+    {
+      "days": 1,
+      "events": 60,
+      "kind": "dense",
+      "name": "short_dense"
+    },
+    {
+      "days": 7,
+      "events": 60,
+      "kind": "spanning",
+      "name": "short_spanning"
+    },
+    {
+      "days": 90,
+      "events": 60,
+      "kind": "sparse",
+      "name": "long_sparse"
+    },
+    {
+      "days": 90,
+      "events": 60,
+      "kind": "dense",
+      "name": "long_dense"
+    },
+    {
+      "days": 90,
+      "events": 300,
+      "kind": "spanning",
+      "name": "long_spanning"
+    },
+    {
+      "days": 90,
+      "events": 300,
+      "kind": "all_day",
+      "name": "long_all_day"
+    }
+  ]
+}

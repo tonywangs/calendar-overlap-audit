@@ -210,7 +210,20 @@ def main():
     paired_evidence()
     availability_workloads()
     with tempfile.TemporaryDirectory(prefix='occurrence-replay-') as temp:
-        run([sys.executable, ROOT / 'scripts/benchmark_occurrences.py', '--replay',
+        # Historical measurements describe the pre-index package, not today's
+        # production source. Preserve and execute the original benchmark script
+        # against the authenticated source snapshot in a temporary checkout.
+        from index_experiment import materialize as occurrence_materialize
+        import shutil
+        historical = Path(temp) / 'historical'
+        occurrence_materialize(historical)
+        for name in ('scripts/benchmark_occurrences.py', 'scripts/baseline.py',
+                     'scripts/availability-suite.json', 'tests/baseline/availability-v1.json',
+                     'results/benchmark-v0.2.json', 'results/benchmark-availability-v1.json'):
+            target = historical / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / name, target)
+        run([sys.executable, historical / 'scripts/benchmark_occurrences.py', '--replay',
              ROOT / 'results/benchmark-occurrences.json', '--output', Path(temp) / 'replay.json'], cwd=ROOT)
     publication_bounds()
     print('Verification passed: unit/oracle/CLI/browser checks and isolated installed CLI.', flush=True)
