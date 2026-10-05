@@ -18,6 +18,9 @@ KEYS = {'version', 'start', 'end', 'timezone', 'weekdays', 'work_start', 'work_e
 def validate_spec(value, max_days=90):
     if type(max_days) is not int or not 1 <= max_days <= 90:
         raise AuditError('max-days must be an integer from 1 to 90')
+    if isinstance(value, dict) and type(value.get('version')) is int and value['version'] == 2:
+        from .schedule import validate_schedule
+        return validate_schedule(value, max_days)
     if not isinstance(value, dict) or set(value) != KEYS:
         raise AuditError('Availability spec must contain exactly the version-1 keys; see docs/availability-v1.md')
     if type(value['version']) is not int or value['version'] != 1:
@@ -175,13 +178,18 @@ def availability(paths, spec, limits=Limits(), budget=None, spec_source=None, ma
     first, last = date.fromisoformat(spec['start']), date.fromisoformat(spec['end'])
     boundary(first, '00:00', zone)
     boundary(last, '00:00', zone)
-    working = []
-    day = first
-    while day < last:
-        budget.check()
-        if day.weekday() in {WEEKDAYS[d] for d in spec['weekdays']}:
-            working.append((day, boundary(day, spec['work_start'], zone), boundary(day, spec['work_end'], zone)))
-        day += DAY
+    days = None
+    if spec['version'] == 2:
+        from .schedule import effective_schedule
+        working, days = effective_schedule(spec, zone, budget)
+    else:
+        working = []
+        day = first
+        while day < last:
+            budget.check()
+            if day.weekday() in {WEEKDAYS[d] for d in spec['weekdays']}:
+                working.append((day, boundary(day, spec['work_start'], zone), boundary(day, spec['work_end'], zone)))
+            day += DAY
     analyze_input = analyze if include_overlaps else analyze_occurrences
     audit = analyze_input(paths, spec['start'], spec['end'], spec['timezone'], limits, budget)
     windows, candidates = [], []
@@ -201,7 +209,11 @@ def availability(paths, spec, limits=Limits(), budget=None, spec_source=None, ma
     applicable_limits = asdict(limits)
     if not include_overlaps:
         del applicable_limits['pairs']
-    return {'schema_version': 1 if include_overlaps else 2, 'report_type': 'availability', 'spec': spec, 'spec_source': spec_source,
+    report = {'schema_version': 3 if days is not None else 1 if include_overlaps else 2, 'report_type': 'availability', 'spec': spec, 'spec_source': spec_source,
             'complete': audit['complete'], 'scope': 'Only supplied exports and selected policies; not a booking guarantee.',
             'limits': {**applicable_limits, 'days': max_days}, 'windows': windows, 'candidates': candidates,
             'candidate_seconds': sum(g['seconds'] for g in candidates) if audit['complete'] else None, 'audit': audit}
+    if days is not None:
+        from .schedule import explain_days
+        return explain_days(report, days, budget)
+    return report

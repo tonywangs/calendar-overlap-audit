@@ -122,7 +122,7 @@ or libraries fail the suite; browser checks are never silently skipped.
 Then run the complete verification suite with one command:
 
 ```sh
-.venv/bin/python scripts/verify.py
+.venv/bin/python scripts/verify_schedule.py
 ```
 
 This runs unit and seeded exhaustive-oracle tests, actual Chromium interaction with
@@ -198,8 +198,9 @@ availability JSON schema 2 and applicable limits. Working dates are end-exclusiv
 per day. Choose `all_day: "block"` or `"ignore"` explicitly. Minimum duration uses
 elapsed seconds, so daylight-saving transitions can change duration. Ambiguous or
 nonexistent working boundaries are rejected with instructions to change the settings.
-One nonovernight window per weekday is supported; no holidays, split shifts or meeting
-buffers are inferred.
+Version 1 supports one nonovernight window per weekday. For split shifts and
+explicit date replacements, use schedule v2 below. No holidays or meeting buffers
+are inferred.
 
 A **complete** result means only the supplied exports and selected policies. It is
 not a booking guarantee. Unsupported or unresolved input withholds **all** candidates;
@@ -210,7 +211,7 @@ cancellation returns 130. Existing destinations are preserved. Source and specif
 hashes, exact UTC/local-offset endpoints, merged busy intervals and bounding commitment
 links make the result auditable. Date filtering and keyboard navigation work locally.
 
-Run the existing single verification command, `.venv/bin/python scripts/verify.py`,
+Run the existing single verification command, `.venv/bin/python scripts/verify_schedule.py`,
 after the dependency/browser preparation described above. It now also exercises
 256 independent seeded availability cases, failure cleanup, network-blocked Chromium,
 an isolated installed availability CLI and reproducible workload output hashes.
@@ -245,3 +246,53 @@ preparation above (choose a new output filename):
 ```
 
 Omit `--measure` to verify saved evidence and replay one pair per workload.
+
+## Split hours and date replacements
+
+[Schedule v2](docs/schedules-v2.md) supports multiple windows per weekday and explicit
+replacements for individual dates. A replacement with `windows: []` closes that
+date; nonempty windows replace its weekly hours completely and can open a weekend.
+Version 1 remains supported with unchanged JSON and HTML output.
+
+```sh
+.venv/bin/calendar-availability tests/fixtures/synthetic.ics \
+  --spec examples/working-v2.json --output /tmp/calendar-schedule-report
+```
+
+This **synthetic** [complete schedule](examples/working-v2.json) defines weekday
+09:00–12:00 and 13:00–17:00, opens Sunday March 8 at 10:00–12:00, and closes
+Monday March 9. With the synthetic calendar and all-day blocking, Friday is fully
+booked, Saturday and Monday are closed, and Sunday and Tuesday offer **three gaps
+covering 28,800 seconds**. Total working time is 57,600 seconds; 28,800 is occupied.
+Open the [HTML example](examples/schedule-report/report.html) or inspect its
+[JSON](examples/schedule-report/report.json). The report links effective windows to
+the weekly declaration or date replacement that produced them, then to calendar
+occurrences and source fingerprints. Closed dates, fully booked dates, short free
+gaps and incomplete analysis have distinct explanations.
+
+Times are half-open and nonovernight. Overlapping declarations are rejected;
+adjacent windows merge before applying the minimum gap. Ambiguous and nonexistent
+local endpoints fail explicitly. Schedule files are limited to 16 KiB, 16 windows
+per declaration, 256 total declared windows, 90 dated replacements and 90 days;
+existing processing and report limits still apply. This custom JSON format is
+**not RFC 7953 VAVAILABILITY support**. No holiday or personal availability is inferred.
+
+After the same dependency and browser preparation above, verify the whole current
+milestone with one command:
+
+```sh
+.venv/bin/python scripts/verify_schedule.py
+```
+
+This retains historical regressions and replays, compares v1 reports against frozen
+implementations, checks 256 seeded v2 schedules against an independent oracle,
+exercises schedule navigation in offline Chromium, and runs the installed v2 CLI
+outside the checkout with networking blocked. It authenticates and replays the
+[bounded schedule measurements](results/schedules-v2.md). Fresh verification prints
+to stdout; historical test logs and benchmark evidence remain unchanged.
+
+To collect new schedule measurements without overwriting historical evidence:
+
+```sh
+.venv/bin/python scripts/benchmark_schedule.py --output /tmp/calendar-schedule-measurements.json
+```

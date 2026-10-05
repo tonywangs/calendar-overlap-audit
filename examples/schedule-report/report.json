@@ -1,0 +1,803 @@
+{
+  "audit": {
+    "cancellations": [],
+    "complete": true,
+    "counts": {
+      "candidates": 12,
+      "events": 10,
+      "files": 1,
+      "input_bytes": 1866,
+      "occurrences": 11
+    },
+    "daily": [
+      {
+        "all_day_occurrences": 1,
+        "date": "2026-03-06",
+        "day_seconds": 86400,
+        "occupied_seconds": 12600,
+        "timed_occurrences": 7
+      },
+      {
+        "all_day_occurrences": 1,
+        "date": "2026-03-07",
+        "day_seconds": 86400,
+        "occupied_seconds": 3600,
+        "timed_occurrences": 1
+      },
+      {
+        "all_day_occurrences": 0,
+        "date": "2026-03-08",
+        "day_seconds": 82800,
+        "occupied_seconds": 0,
+        "timed_occurrences": 0
+      },
+      {
+        "all_day_occurrences": 0,
+        "date": "2026-03-09",
+        "day_seconds": 86400,
+        "occupied_seconds": 3600,
+        "timed_occurrences": 1
+      },
+      {
+        "all_day_occurrences": 0,
+        "date": "2026-03-10",
+        "day_seconds": 86400,
+        "occupied_seconds": 3600,
+        "timed_occurrences": 1
+      }
+    ],
+    "dependencies": {
+      "icalendar": "6.3.2",
+      "python-dateutil": "2.9.0.post0",
+      "six": "1.17.0",
+      "tzdata": "2025.2"
+    },
+    "events": [
+      {
+        "disposition": "included",
+        "id": "e1",
+        "role": "master",
+        "sources": [
+          {
+            "event": 1,
+            "source": "s1"
+          }
+        ],
+        "summary": "Synthetic planning",
+        "time_basis": "zoned",
+        "timezone": "America/New_York",
+        "uid": "daily-synthetic"
+      },
+      {
+        "disposition": "included",
+        "id": "e2",
+        "role": "master",
+        "sources": [
+          {
+            "event": 2,
+            "source": "s1"
+          }
+        ],
+        "summary": "Synthetic design review",
+        "time_basis": "zoned",
+        "timezone": "America/New_York",
+        "uid": "meeting-synthetic"
+      },
+      {
+        "disposition": "included",
+        "id": "e3",
+        "role": "master",
+        "sources": [
+          {
+            "event": 3,
+            "source": "s1"
+          }
+        ],
+        "summary": "Synthetic nested check-in",
+        "time_basis": "zoned",
+        "timezone": "America/New_York",
+        "uid": "nested-synthetic"
+      },
+      {
+        "disposition": "included",
+        "id": "e4",
+        "role": "master",
+        "sources": [
+          {
+            "event": 4,
+            "source": "s1"
+          }
+        ],
+        "summary": "Synthetic adjacent meeting",
+        "time_basis": "zoned",
+        "timezone": "America/New_York",
+        "uid": "boundary-synthetic"
+      },
+      {
+        "disposition": "included",
+        "id": "e5",
+        "role": "master",
+        "sources": [
+          {
+            "event": 5,
+            "source": "s1"
+          }
+        ],
+        "summary": "Synthetic floating appointment",
+        "time_basis": "floating",
+        "timezone": "America/New_York",
+        "uid": "floating-synthetic"
+      },
+      {
+        "disposition": "included",
+        "id": "e6",
+        "role": "master",
+        "sources": [
+          {
+            "event": 6,
+            "source": "s1"
+          }
+        ],
+        "summary": "Synthetic offsite dates",
+        "time_basis": "date",
+        "timezone": "America/New_York",
+        "uid": "all-day-synthetic"
+      },
+      {
+        "disposition": "transparent",
+        "id": "e7",
+        "role": "master",
+        "sources": [
+          {
+            "event": 7,
+            "source": "s1"
+          }
+        ],
+        "summary": "Synthetic nonblocking reminder",
+        "time_basis": "floating",
+        "timezone": "America/New_York",
+        "uid": "transparent-synthetic"
+      },
+      {
+        "disposition": "cancelled",
+        "id": "e8",
+        "role": "master",
+        "sources": [
+          {
+            "event": 8,
+            "source": "s1"
+          }
+        ],
+        "summary": "Synthetic cancelled meeting",
+        "uid": "cancelled-synthetic"
+      },
+      {
+        "disposition": "included",
+        "id": "e9",
+        "role": "master",
+        "sources": [
+          {
+            "event": 9,
+            "source": "s1"
+          }
+        ],
+        "summary": "Synthetic zero-duration reminder",
+        "time_basis": "floating",
+        "timezone": "America/New_York",
+        "uid": "instant-synthetic"
+      },
+      {
+        "disposition": "included",
+        "id": "e10",
+        "role": "master",
+        "sources": [
+          {
+            "event": 10,
+            "source": "s1"
+          }
+        ],
+        "summary": "Synthetic <img src=\"https://invalid.example/steal\" onerror=\"window.pwned=1\"> </script><script>window.pwned=2</script> & \"quotes\"",
+        "time_basis": "floating",
+        "timezone": "America/New_York",
+        "uid": "hostile-synthetic"
+      }
+    ],
+    "issues": [],
+    "limits": {
+      "candidates": 200000,
+      "events": 5000,
+      "files": 32,
+      "input_bytes": 8388608,
+      "line_bytes": 65536,
+      "occurrences": 20000,
+      "report_bytes": 8388608,
+      "resolutions": 200000,
+      "seconds": 30.0
+    },
+    "occupied_seconds": 23400,
+    "occurrences": [
+      {
+        "all_day": false,
+        "clipped_end": "2026-03-06T15:00:00Z",
+        "clipped_start": "2026-03-06T14:00:00Z",
+        "end": "2026-03-06T15:00:00Z",
+        "event": "e1",
+        "id": "o1",
+        "local_end": "2026-03-06T10:00:00-05:00",
+        "local_start": "2026-03-06T09:00:00-05:00",
+        "master": "e1",
+        "override": null,
+        "recurrence_id": "2026-03-06T09:00:00-05:00",
+        "start": "2026-03-06T14:00:00Z"
+      },
+      {
+        "all_day": false,
+        "clipped_end": "2026-03-07T15:00:00Z",
+        "clipped_start": "2026-03-07T14:00:00Z",
+        "end": "2026-03-07T15:00:00Z",
+        "event": "e1",
+        "id": "o2",
+        "local_end": "2026-03-07T10:00:00-05:00",
+        "local_start": "2026-03-07T09:00:00-05:00",
+        "master": "e1",
+        "override": null,
+        "recurrence_id": "2026-03-07T09:00:00-05:00",
+        "start": "2026-03-07T14:00:00Z"
+      },
+      {
+        "all_day": false,
+        "clipped_end": "2026-03-09T14:00:00Z",
+        "clipped_start": "2026-03-09T13:00:00Z",
+        "end": "2026-03-09T14:00:00Z",
+        "event": "e1",
+        "id": "o3",
+        "local_end": "2026-03-09T10:00:00-04:00",
+        "local_start": "2026-03-09T09:00:00-04:00",
+        "master": "e1",
+        "override": null,
+        "recurrence_id": "2026-03-09T09:00:00-04:00",
+        "start": "2026-03-09T13:00:00Z"
+      },
+      {
+        "all_day": false,
+        "clipped_end": "2026-03-10T14:00:00Z",
+        "clipped_start": "2026-03-10T13:00:00Z",
+        "end": "2026-03-10T14:00:00Z",
+        "event": "e1",
+        "id": "o4",
+        "local_end": "2026-03-10T10:00:00-04:00",
+        "local_start": "2026-03-10T09:00:00-04:00",
+        "master": "e1",
+        "override": null,
+        "recurrence_id": "2026-03-10T09:00:00-04:00",
+        "start": "2026-03-10T13:00:00Z"
+      },
+      {
+        "all_day": false,
+        "clipped_end": "2026-03-06T15:30:00Z",
+        "clipped_start": "2026-03-06T14:30:00Z",
+        "end": "2026-03-06T15:30:00Z",
+        "event": "e2",
+        "id": "o5",
+        "local_end": "2026-03-06T10:30:00-05:00",
+        "local_start": "2026-03-06T09:30:00-05:00",
+        "master": "e2",
+        "override": null,
+        "recurrence_id": "2026-03-06T09:30:00-05:00",
+        "start": "2026-03-06T14:30:00Z"
+      },
+      {
+        "all_day": false,
+        "clipped_end": "2026-03-06T14:55:00Z",
+        "clipped_start": "2026-03-06T14:45:00Z",
+        "end": "2026-03-06T14:55:00Z",
+        "event": "e3",
+        "id": "o6",
+        "local_end": "2026-03-06T09:55:00-05:00",
+        "local_start": "2026-03-06T09:45:00-05:00",
+        "master": "e3",
+        "override": null,
+        "recurrence_id": "2026-03-06T09:45:00-05:00",
+        "start": "2026-03-06T14:45:00Z"
+      },
+      {
+        "all_day": false,
+        "clipped_end": "2026-03-06T16:00:00Z",
+        "clipped_start": "2026-03-06T15:30:00Z",
+        "end": "2026-03-06T16:00:00Z",
+        "event": "e4",
+        "id": "o7",
+        "local_end": "2026-03-06T11:00:00-05:00",
+        "local_start": "2026-03-06T10:30:00-05:00",
+        "master": "e4",
+        "override": null,
+        "recurrence_id": "2026-03-06T10:30:00-05:00",
+        "start": "2026-03-06T15:30:00Z"
+      },
+      {
+        "all_day": false,
+        "clipped_end": "2026-03-06T16:30:00Z",
+        "clipped_start": "2026-03-06T16:00:00Z",
+        "end": "2026-03-06T16:30:00Z",
+        "event": "e5",
+        "id": "o8",
+        "local_end": "2026-03-06T11:30:00-05:00",
+        "local_start": "2026-03-06T11:00:00-05:00",
+        "master": "e5",
+        "override": null,
+        "recurrence_id": "2026-03-06T11:00:00",
+        "start": "2026-03-06T16:00:00Z"
+      },
+      {
+        "all_day": true,
+        "clipped_end": "2026-03-08",
+        "clipped_start": "2026-03-06",
+        "end": "2026-03-08",
+        "event": "e6",
+        "id": "o9",
+        "master": "e6",
+        "override": null,
+        "recurrence_id": "2026-03-06",
+        "start": "2026-03-06"
+      },
+      {
+        "all_day": false,
+        "clipped_end": "2026-03-06T17:00:00Z",
+        "clipped_start": "2026-03-06T17:00:00Z",
+        "end": "2026-03-06T17:00:00Z",
+        "event": "e9",
+        "id": "o10",
+        "local_end": "2026-03-06T12:00:00-05:00",
+        "local_start": "2026-03-06T12:00:00-05:00",
+        "master": "e9",
+        "override": null,
+        "recurrence_id": "2026-03-06T12:00:00",
+        "start": "2026-03-06T17:00:00Z"
+      },
+      {
+        "all_day": false,
+        "clipped_end": "2026-03-06T19:00:00Z",
+        "clipped_start": "2026-03-06T18:00:00Z",
+        "end": "2026-03-06T19:00:00Z",
+        "event": "e10",
+        "id": "o11",
+        "local_end": "2026-03-06T14:00:00-05:00",
+        "local_start": "2026-03-06T13:00:00-05:00",
+        "master": "e10",
+        "override": null,
+        "recurrence_id": "2026-03-06T13:00:00",
+        "start": "2026-03-06T18:00:00Z"
+      }
+    ],
+    "report_type": "occurrences",
+    "schema_version": 1,
+    "sources": [
+      {
+        "bytes": 1866,
+        "id": "s1",
+        "name": "synthetic.ics",
+        "sha256": "6809ef9fb1fb266b7da77e0e5b085b7b4eca3d9048f4312c7b7c86b4a7b554c4"
+      }
+    ],
+    "tool_version": "0.2.0",
+    "window": {
+      "end": "2026-03-11",
+      "end_utc": "2026-03-11T04:00:00Z",
+      "start": "2026-03-06",
+      "start_utc": "2026-03-06T05:00:00Z",
+      "timezone": "America/New_York"
+    }
+  },
+  "candidate_seconds": 28800,
+  "candidates": [
+    {
+      "after": [],
+      "before": [],
+      "date": "2026-03-08",
+      "end": "2026-03-08T16:00:00Z",
+      "id": "g1",
+      "local_end": "2026-03-08T12:00:00-04:00",
+      "local_start": "2026-03-08T10:00:00-04:00",
+      "seconds": 7200,
+      "start": "2026-03-08T14:00:00Z",
+      "window": "w3"
+    },
+    {
+      "after": [],
+      "before": [
+        "o4"
+      ],
+      "date": "2026-03-10",
+      "end": "2026-03-10T16:00:00Z",
+      "id": "g2",
+      "local_end": "2026-03-10T12:00:00-04:00",
+      "local_start": "2026-03-10T10:00:00-04:00",
+      "seconds": 7200,
+      "start": "2026-03-10T14:00:00Z",
+      "window": "w4"
+    },
+    {
+      "after": [],
+      "before": [],
+      "date": "2026-03-10",
+      "end": "2026-03-10T21:00:00Z",
+      "id": "g3",
+      "local_end": "2026-03-10T17:00:00-04:00",
+      "local_start": "2026-03-10T13:00:00-04:00",
+      "seconds": 14400,
+      "start": "2026-03-10T17:00:00Z",
+      "window": "w5"
+    }
+  ],
+  "complete": true,
+  "days": [
+    {
+      "analysis_complete": true,
+      "applied_exception": false,
+      "candidate_seconds": 0,
+      "date": "2026-03-06",
+      "declared_windows": [
+        [
+          "09:00",
+          "12:00"
+        ],
+        [
+          "13:00",
+          "17:00"
+        ]
+      ],
+      "free_seconds": 0,
+      "id": "d2026-03-06",
+      "observed_occupied_seconds": 25200,
+      "occupied_seconds": 25200,
+      "replacement": null,
+      "status": "fully_booked",
+      "weekday": "FR",
+      "weekly_windows": [
+        [
+          "09:00",
+          "12:00"
+        ],
+        [
+          "13:00",
+          "17:00"
+        ]
+      ],
+      "windows": [
+        "w1",
+        "w2"
+      ],
+      "working_seconds": 25200
+    },
+    {
+      "analysis_complete": true,
+      "applied_exception": false,
+      "candidate_seconds": 0,
+      "date": "2026-03-07",
+      "declared_windows": [],
+      "free_seconds": 0,
+      "id": "d2026-03-07",
+      "observed_occupied_seconds": 0,
+      "occupied_seconds": 0,
+      "replacement": null,
+      "status": "closed",
+      "weekday": "SA",
+      "weekly_windows": [],
+      "windows": [],
+      "working_seconds": 0
+    },
+    {
+      "analysis_complete": true,
+      "applied_exception": true,
+      "candidate_seconds": 7200,
+      "date": "2026-03-08",
+      "declared_windows": [
+        [
+          "10:00",
+          "12:00"
+        ]
+      ],
+      "free_seconds": 7200,
+      "id": "d2026-03-08",
+      "observed_occupied_seconds": 0,
+      "occupied_seconds": 0,
+      "replacement": [
+        [
+          "10:00",
+          "12:00"
+        ]
+      ],
+      "status": "available",
+      "weekday": "SU",
+      "weekly_windows": [],
+      "windows": [
+        "w3"
+      ],
+      "working_seconds": 7200
+    },
+    {
+      "analysis_complete": true,
+      "applied_exception": true,
+      "candidate_seconds": 0,
+      "date": "2026-03-09",
+      "declared_windows": [],
+      "free_seconds": 0,
+      "id": "d2026-03-09",
+      "observed_occupied_seconds": 0,
+      "occupied_seconds": 0,
+      "replacement": [],
+      "status": "closed",
+      "weekday": "MO",
+      "weekly_windows": [
+        [
+          "09:00",
+          "12:00"
+        ],
+        [
+          "13:00",
+          "17:00"
+        ]
+      ],
+      "windows": [],
+      "working_seconds": 0
+    },
+    {
+      "analysis_complete": true,
+      "applied_exception": false,
+      "candidate_seconds": 21600,
+      "date": "2026-03-10",
+      "declared_windows": [
+        [
+          "09:00",
+          "12:00"
+        ],
+        [
+          "13:00",
+          "17:00"
+        ]
+      ],
+      "free_seconds": 21600,
+      "id": "d2026-03-10",
+      "observed_occupied_seconds": 3600,
+      "occupied_seconds": 3600,
+      "replacement": null,
+      "status": "available",
+      "weekday": "TU",
+      "weekly_windows": [
+        [
+          "09:00",
+          "12:00"
+        ],
+        [
+          "13:00",
+          "17:00"
+        ]
+      ],
+      "windows": [
+        "w4",
+        "w5"
+      ],
+      "working_seconds": 25200
+    }
+  ],
+  "free_seconds": 28800,
+  "limits": {
+    "candidates": 200000,
+    "days": 90,
+    "declared_windows": 256,
+    "effective_windows": 1440,
+    "events": 5000,
+    "exceptions": 90,
+    "files": 32,
+    "input_bytes": 8388608,
+    "line_bytes": 65536,
+    "occurrences": 20000,
+    "report_bytes": 8388608,
+    "resolutions": 200000,
+    "schedule_bytes": 16384,
+    "seconds": 30.0,
+    "windows_per_declaration": 16
+  },
+  "observed_occupied_seconds": 28800,
+  "occupied_seconds": 28800,
+  "report_type": "availability",
+  "schema_version": 3,
+  "scope": "Only supplied exports and selected policies; not a booking guarantee.",
+  "spec": {
+    "all_day": "block",
+    "end": "2026-03-11",
+    "exceptions": [
+      {
+        "date": "2026-03-08",
+        "windows": [
+          [
+            "10:00",
+            "12:00"
+          ]
+        ]
+      },
+      {
+        "date": "2026-03-09",
+        "windows": []
+      }
+    ],
+    "minimum_seconds": 1800,
+    "start": "2026-03-06",
+    "timezone": "America/New_York",
+    "version": 2,
+    "weekly": {
+      "FR": [
+        [
+          "09:00",
+          "12:00"
+        ],
+        [
+          "13:00",
+          "17:00"
+        ]
+      ],
+      "MO": [
+        [
+          "09:00",
+          "12:00"
+        ],
+        [
+          "13:00",
+          "17:00"
+        ]
+      ],
+      "TH": [
+        [
+          "09:00",
+          "12:00"
+        ],
+        [
+          "13:00",
+          "17:00"
+        ]
+      ],
+      "TU": [
+        [
+          "09:00",
+          "12:00"
+        ],
+        [
+          "13:00",
+          "17:00"
+        ]
+      ],
+      "WE": [
+        [
+          "09:00",
+          "12:00"
+        ],
+        [
+          "13:00",
+          "17:00"
+        ]
+      ]
+    }
+  },
+  "spec_source": {
+    "bytes": 554,
+    "name": "working-v2.json",
+    "sha256": "842b5b4a7f066cde4bee3bf07938a42343cf5bc2aef47ce4028d3edfe30e693c"
+  },
+  "windows": [
+    {
+      "busy": [
+        {
+          "end": "2026-03-06T17:00:00Z",
+          "end_occurrences": [
+            "o9"
+          ],
+          "local_end": "2026-03-06T12:00:00-05:00",
+          "local_start": "2026-03-06T09:00:00-05:00",
+          "occurrences": [
+            "o1",
+            "o5",
+            "o6",
+            "o7",
+            "o8",
+            "o9"
+          ],
+          "seconds": 10800,
+          "start": "2026-03-06T14:00:00Z",
+          "start_occurrences": [
+            "o1",
+            "o9"
+          ]
+        }
+      ],
+      "date": "2026-03-06",
+      "end": "2026-03-06T17:00:00Z",
+      "id": "w1",
+      "local_end": "2026-03-06T12:00:00-05:00",
+      "local_start": "2026-03-06T09:00:00-05:00",
+      "schedule_day": "d2026-03-06",
+      "seconds": 10800,
+      "start": "2026-03-06T14:00:00Z"
+    },
+    {
+      "busy": [
+        {
+          "end": "2026-03-06T22:00:00Z",
+          "end_occurrences": [
+            "o9"
+          ],
+          "local_end": "2026-03-06T17:00:00-05:00",
+          "local_start": "2026-03-06T13:00:00-05:00",
+          "occurrences": [
+            "o11",
+            "o9"
+          ],
+          "seconds": 14400,
+          "start": "2026-03-06T18:00:00Z",
+          "start_occurrences": [
+            "o11",
+            "o9"
+          ]
+        }
+      ],
+      "date": "2026-03-06",
+      "end": "2026-03-06T22:00:00Z",
+      "id": "w2",
+      "local_end": "2026-03-06T17:00:00-05:00",
+      "local_start": "2026-03-06T13:00:00-05:00",
+      "schedule_day": "d2026-03-06",
+      "seconds": 14400,
+      "start": "2026-03-06T18:00:00Z"
+    },
+    {
+      "busy": [],
+      "date": "2026-03-08",
+      "end": "2026-03-08T16:00:00Z",
+      "id": "w3",
+      "local_end": "2026-03-08T12:00:00-04:00",
+      "local_start": "2026-03-08T10:00:00-04:00",
+      "schedule_day": "d2026-03-08",
+      "seconds": 7200,
+      "start": "2026-03-08T14:00:00Z"
+    },
+    {
+      "busy": [
+        {
+          "end": "2026-03-10T14:00:00Z",
+          "end_occurrences": [
+            "o4"
+          ],
+          "local_end": "2026-03-10T10:00:00-04:00",
+          "local_start": "2026-03-10T09:00:00-04:00",
+          "occurrences": [
+            "o4"
+          ],
+          "seconds": 3600,
+          "start": "2026-03-10T13:00:00Z",
+          "start_occurrences": [
+            "o4"
+          ]
+        }
+      ],
+      "date": "2026-03-10",
+      "end": "2026-03-10T16:00:00Z",
+      "id": "w4",
+      "local_end": "2026-03-10T12:00:00-04:00",
+      "local_start": "2026-03-10T09:00:00-04:00",
+      "schedule_day": "d2026-03-10",
+      "seconds": 10800,
+      "start": "2026-03-10T13:00:00Z"
+    },
+    {
+      "busy": [],
+      "date": "2026-03-10",
+      "end": "2026-03-10T21:00:00Z",
+      "id": "w5",
+      "local_end": "2026-03-10T17:00:00-04:00",
+      "local_start": "2026-03-10T13:00:00-04:00",
+      "schedule_day": "d2026-03-10",
+      "seconds": 14400,
+      "start": "2026-03-10T17:00:00Z"
+    }
+  ],
+  "working_seconds": 57600
+}

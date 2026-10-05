@@ -49,7 +49,7 @@ def html_bytes(report, budget):
     else:
         add('<p class="warning" role="status"><strong>INCOMPLETE: candidate intervals withheld.</strong> '
             'Busy blocks below are provisional. An empty candidate list does not mean no availability.</p>')
-    add(f'<p>{esc(report["scope"])}</p><h3>Working-window settings · specification v1</h3><pre>'
+    add(f'<p>{esc(report["scope"])}</p><h3>Working-window settings · specification v{report["spec"]["version"]}</h3><pre>'
         + esc(json.dumps(report['spec'], indent=2, sort_keys=True)) + '</pre>')
     if report['spec_source']:
         s = report['spec_source']
@@ -58,8 +58,15 @@ def html_bytes(report, budget):
         '<div class="controls"><label for="availability-date">Working date<input type="date" id="availability-date"></label>'
         '<button type="button" id="clear-date">Clear date</button></div>'
         '<p id="availability-status" aria-live="polite"></p><p>Tab and Enter navigate; Escape clears all filters. '
-        'The date filter affects working windows and candidates only. The audit below has separate occurrence filters.</p>'
-        '<noscript>All dates are shown with JavaScript disabled.</noscript><h3>Candidate intervals</h3>')
+        + ('The date filter affects working windows and candidates only. ' if report['spec']['version'] == 1 else
+           'The date filter affects schedule explanations, working windows and candidates. ')
+        + 'The audit below has separate occurrence filters.</p>'
+        '<noscript>All dates are shown with JavaScript disabled.</noscript>'
+        + ('<h3>Candidate intervals</h3>' if report['spec']['version'] == 1 else ''))
+    if report['spec']['version'] == 2:
+        from .schedule_report import explanations
+        explanations(report, add)
+        add('<h3>Candidate intervals</h3>')
     if report['complete'] and not report['candidates']:
         add('<p>No interval meets the selected minimum within the working windows.</p>')
     for g in report['candidates']:
@@ -71,6 +78,8 @@ def html_bytes(report, budget):
     for w in report['windows']:
         add(f'<article class="card" id="{w["id"]}" data-availability-date="{w["date"]}" tabindex="-1">'
             f'<h4>{w["date"]} · {w["id"]}</h4><p>{bounds(w)}</p>')
+        if 'schedule_day' in w:
+            add(f'<p><a href="#{w["schedule_day"]}">Schedule explanation for {w["date"]}</a></p>')
         for b in w['busy']:
             add(f'<p>Busy: {bounds(b)}<br>Contributing occurrences: {links(b["occurrences"])}</p>')
         if not w['busy']:

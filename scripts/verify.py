@@ -87,6 +87,23 @@ def installed_example():
              '--output', legacy_output, '--include-overlaps'], cwd=base, env=env)
         for name in ('report.json', 'report.html'):
             assert (legacy_output / name).read_bytes() == (ROOT / 'examples/availability-report' / name).read_bytes()
+        schedule = base / 'working-v2.json'
+        schedule.write_bytes((ROOT / 'examples/working-v2.json').read_bytes())
+        schedule_hash = hashlib.sha256(schedule.read_bytes()).hexdigest()
+        for folder in ('schedule-report', 'schedule-repeat'):
+            destination = base / folder
+            run([envdir / 'bin/calendar-availability', source, '--spec', schedule,
+                 '--output', destination], cwd=base, env=env)
+            result = json.loads((destination / 'report.json').read_text())
+            assert result['schema_version'] == 3 and result['complete']
+            assert result['working_seconds'] == 57600 and result['occupied_seconds'] == 28800
+            assert result['candidate_seconds'] == result['free_seconds'] == 28800
+            assert [d['status'] for d in result['days']] == [
+                'fully_booked', 'closed', 'available', 'closed', 'available']
+            for name in ('report.json', 'report.html'):
+                assert (destination / name).read_bytes() == (ROOT / 'examples/schedule-report' / name).read_bytes()
+            assert schedule_hash == hashlib.sha256(schedule.read_bytes()).hexdigest()
+            assert before == hashlib.sha256(source.read_bytes()).hexdigest()
         dense = base / 'dense.ics'
         dense.write_text('BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Synthetic installed check//EN\n' + ''.join(
             f'BEGIN:VEVENT\nUID:{i}\nDTSTART:20260309T140000Z\nDTEND:20260309T150000Z\nEND:VEVENT\n'
@@ -198,8 +215,7 @@ def main():
     print('+', ' '.join(command), flush=True)
     result = subprocess.run(command, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     print(result.stdout, end='', flush=True)
-    (ROOT / 'results').mkdir(exist_ok=True)
-    (ROOT / 'results/tests.log').write_text(result.stdout)
+    # Preserve historical tests.log; fresh verification evidence goes to stdout.
     result.check_returncode()
     installed_example()
     with tempfile.TemporaryDirectory(prefix='calendar-comparison-') as temp:

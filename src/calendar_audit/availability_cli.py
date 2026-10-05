@@ -13,12 +13,12 @@ from .report import json_bytes
 
 
 def parser():
-    p = argparse.ArgumentParser(description='Find bounded candidate gaps in local ICS exports. Specification v1.')
+    p = argparse.ArgumentParser(description='Find bounded candidate gaps in local ICS exports. Schedule specifications v1 and v2.')
     p.add_argument('inputs', nargs='+', type=Path)
-    p.add_argument('--spec', type=Path, required=True, help='Version-1 working-window JSON specification')
+    p.add_argument('--spec', type=Path, required=True, help='Version-1 or version-2 working-schedule JSON specification')
     p.add_argument('--output', type=Path, required=True, help='New directory; never overwritten')
     p.add_argument('--include-overlaps', action='store_true',
-                   help='Legacy availability schema 1 with overlap pairs; pair limit applies')
+                   help='Include overlap pairs (v1 schedule: legacy schema 1); pair limit applies')
     p.add_argument('--max-days', type=int, default=90)
     for field in fields(Limits):
         default = getattr(Limits(), field.name)

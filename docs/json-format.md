@@ -82,3 +82,12 @@ files represent all commitments. It also does not imply attendance acceptance:
 Availability JSON schema 2 and its nested occurrence audit are described in
 [the occurrence pipeline](occurrence-pipeline.md). The overlap-audit schema above
 is unchanged. Select `--include-overlaps` for the original availability format.
+
+## Version-2 schedules
+
+Custom schedule v2 produces availability schema 3. It retains `windows`,
+`candidates`, source fingerprints and the nested audit; it adds per-date schedule
+explanations, applied replacements, status and working-time totals. See
+[schedule v2 fields and semantics](schedules-v2.md). `--include-overlaps` adds the
+legacy nested overlap audit but still uses availability schema 3 for v2 schedules.
+V1 schedules retain their original schema 1/2 and byte-identical report behavior.
