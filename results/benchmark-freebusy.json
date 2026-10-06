@@ -1,0 +1,397 @@
+{
+  "dependencies": {
+    "icalendar": "6.3.2",
+    "python-dateutil": "2.9.0.post0",
+    "six": "1.17.0",
+    "tzdata": "2025.2"
+  },
+  "implementation_sha256": {
+    "pyproject.toml": "f3b306ae8ecc6c33c1c04e0f66ce5bcdaa57bbf26fcb3c6752a99418f2c8ad0d",
+    "scripts/benchmark_freebusy.py": "7f83ca8380eea1578c89aaf30e3cd1140bef6db3270d727a582d98b2d5c39af1",
+    "scripts/freebusy_cases.py": "5a9c4ef0ca10188b9ef1de614f63ea1be45c39312c852a4aecddec00cf33adcf",
+    "src/calendar_audit/__init__.py": "47eba8d65676af96be1fbe080d68cf89781c92529a5056cee46c77dfb6166263",
+    "src/calendar_audit/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/calendar_audit/availability.py": "73e1236b6f38bf95750778e27e9c96dbf17a2f62d59fc02f8287ef687cb82196",
+    "src/calendar_audit/availability_cli.py": "05d2dc6a4d2c140c5c897a970187d9aeee2b43aa967dddbdfb0809d41161e680",
+    "src/calendar_audit/availability_report.py": "6bdb246b3dc4f751723c8a3af30453c4f4e39d58cebe76c1d8a4faa9e1d1e684",
+    "src/calendar_audit/cli.py": "70e70461d7ae9c5ba6e682633366a7eeb16c1ec42e125f222d1379944ec48a3d",
+    "src/calendar_audit/core.py": "da9b134afafbf49f2a776834483d492017e3580c89d2c75ced0f83f8ab5bcdc8",
+    "src/calendar_audit/freebusy.py": "6f99273110b89d85e79c9cf96b2abe0ef4460c13678abd810319bb8ea05f62ee",
+    "src/calendar_audit/freebusy_cli.py": "093d0b460f2ba6fb622add3ca225aa58fb0f229e7c5753992b431034a11b69d4",
+    "src/calendar_audit/report.py": "141f7937a9d71bd1d0966ee8b6fea4a1764462f973e185a3910208cdf8a95f70",
+    "src/calendar_audit/schedule.py": "3d8ac11f7abc0f00edd4e8ceca3bc70fc543f1523116732848770680fc3900f8",
+    "src/calendar_audit/schedule_report.py": "15c02586cef6011976a1e35b423571c597fa1c64c0bf299085ed79a741c776fa"
+  },
+  "limits": {
+    "candidates": 200000,
+    "events": 5000,
+    "files": 32,
+    "input_bytes": 8388608,
+    "line_bytes": 65536,
+    "occurrences": 20000,
+    "pairs": 20000,
+    "report_bytes": 8388608,
+    "resolutions": 200000,
+    "seconds": 30.0
+  },
+  "max_intervals": 20000,
+  "measured_at_utc": "2026-10-06T01:10:31.884528+00:00",
+  "method": "Two fresh offline processes per workload. Linux VmHWM; parent elapsed includes startup. Synthetic endpoint-cell oracle. No performance improvement claim.",
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "repetitions": 2,
+  "schema_version": 1,
+  "workloads": [
+    {
+      "all_day": "ignore",
+      "end": "2026-04-01",
+      "flags": [],
+      "input_bytes": 87,
+      "input_sha256": {
+        "empty-0.ics": "392ac742dcf1eed74f69de71686657cd74f57a9e9c14aca03b33acaf1c71125c"
+      },
+      "name": "empty",
+      "runs": [
+        {
+          "cli_seconds": 0.035701348911970854,
+          "elapsed_seconds": 0.30232758866623044,
+          "exit_code": 0,
+          "occupied_seconds": 0,
+          "output_bytes": 259,
+          "output_sha256": "9f3f20704b7932d701ded9714a5b132a1dc5a01e9270382be710698292043d59",
+          "peak_rss_kib": 25420,
+          "periods": 0
+        },
+        {
+          "cli_seconds": 0.016658149659633636,
+          "elapsed_seconds": 0.251839024014771,
+          "exit_code": 0,
+          "occupied_seconds": 0,
+          "output_bytes": 259,
+          "output_sha256": "9f3f20704b7932d701ded9714a5b132a1dc5a01e9270382be710698292043d59",
+          "peak_rss_kib": 25448,
+          "periods": 0
+        }
+      ],
+      "start": "2026-01-01",
+      "timezone": "UTC"
+    },
+    {
+      "all_day": "ignore",
+      "end": "2026-04-01",
+      "flags": [],
+      "input_bytes": 371977,
+      "input_sha256": {
+        "sparse_1000-0.ics": "34aba2875e667abdd545e77abba216b8964d09400b26974250aa5d3a5e3128a2"
+      },
+      "name": "sparse_1000",
+      "runs": [
+        {
+          "cli_seconds": 0.651701517868787,
+          "elapsed_seconds": 0.9422752070240676,
+          "exit_code": 0,
+          "occupied_seconds": 60000,
+          "output_bytes": 56259,
+          "output_sha256": "75f158c967af2dadbec4e12e1035e3b5b03a42b99dd9e0b6afdbb1c5d59f58e8",
+          "peak_rss_kib": 33228,
+          "periods": 1000
+        },
+        {
+          "cli_seconds": 0.5657945992425084,
+          "elapsed_seconds": 0.8247385751456022,
+          "exit_code": 0,
+          "occupied_seconds": 60000,
+          "output_bytes": 56259,
+          "output_sha256": "75f158c967af2dadbec4e12e1035e3b5b03a42b99dd9e0b6afdbb1c5d59f58e8",
+          "peak_rss_kib": 33356,
+          "periods": 1000
+        }
+      ],
+      "start": "2026-01-01",
+      "timezone": "UTC"
+    },
+    {
+      "all_day": "ignore",
+      "end": "2026-04-01",
+      "flags": [],
+      "input_bytes": 744977,
+      "input_sha256": {
+        "dense_2000-0.ics": "511675381e2859ab94852fa334707e450c618b3e33e56c6a6f4577f32a546420"
+      },
+      "name": "dense_2000",
+      "runs": [
+        {
+          "cli_seconds": 1.031186391133815,
+          "elapsed_seconds": 1.2793268193490803,
+          "exit_code": 0,
+          "occupied_seconds": 3600,
+          "output_bytes": 315,
+          "output_sha256": "2fd8d3ab317473a173971c1807ec61d00f87bec3f54b4e1c4b20edfdb28e1aed",
+          "peak_rss_kib": 41356,
+          "periods": 1
+        },
+        {
+          "cli_seconds": 1.2989029251039028,
+          "elapsed_seconds": 1.5562479388900101,
+          "exit_code": 0,
+          "occupied_seconds": 3600,
+          "output_bytes": 315,
+          "output_sha256": "2fd8d3ab317473a173971c1807ec61d00f87bec3f54b4e1c4b20edfdb28e1aed",
+          "peak_rss_kib": 41224,
+          "periods": 1
+        }
+      ],
+      "start": "2026-01-01",
+      "timezone": "UTC"
+    },
+    {
+      "all_day": "ignore",
+      "end": "2026-04-01",
+      "flags": [],
+      "input_bytes": 15957,
+      "input_sha256": {
+        "recurring_40x90-0.ics": "6485c6e73f8814f87789b4df0902acc096156bc0e85cf7c0da6354af45e4a99a"
+      },
+      "name": "recurring_40x90",
+      "runs": [
+        {
+          "cli_seconds": 0.33384590223431587,
+          "elapsed_seconds": 0.5622878349386156,
+          "exit_code": 0,
+          "occupied_seconds": 327510,
+          "output_bytes": 5299,
+          "output_sha256": "ecbfc62819c28fcfd5050765a82793be35a32607c5def9076569885eb106ebaf",
+          "peak_rss_kib": 30244,
+          "periods": 90
+        },
+        {
+          "cli_seconds": 0.33140240935608745,
+          "elapsed_seconds": 0.5888541550375521,
+          "exit_code": 0,
+          "occupied_seconds": 327510,
+          "output_bytes": 5299,
+          "output_sha256": "ecbfc62819c28fcfd5050765a82793be35a32607c5def9076569885eb106ebaf",
+          "peak_rss_kib": 30156,
+          "periods": 90
+        }
+      ],
+      "start": "2026-01-01",
+      "timezone": "UTC"
+    },
+    {
+      "all_day": "block",
+      "end": "2026-03-11",
+      "flags": [],
+      "input_bytes": 10433,
+      "input_sha256": {
+        "spring-0.ics": "7ae69ad41562794753423ac96f553614d4e976b1344dc547a975617b6c1b358a",
+        "spring-1.ics": "61067ad170880dc74d288e3c63277fdf9d6cfa975fdcbdade331dc5aa63a4307"
+      },
+      "name": "spring",
+      "runs": [
+        {
+          "cli_seconds": 0.0308251460082829,
+          "elapsed_seconds": 0.275458425283432,
+          "exit_code": 0,
+          "occupied_seconds": 206244,
+          "output_bytes": 819,
+          "output_sha256": "d0348ccbd554ca4840491e360f23520b2252d9f134883f82dd29522b656357ef",
+          "peak_rss_kib": 25728,
+          "periods": 10
+        },
+        {
+          "cli_seconds": 0.03958201501518488,
+          "elapsed_seconds": 0.27270671306177974,
+          "exit_code": 0,
+          "occupied_seconds": 206244,
+          "output_bytes": 819,
+          "output_sha256": "d0348ccbd554ca4840491e360f23520b2252d9f134883f82dd29522b656357ef",
+          "peak_rss_kib": 25756,
+          "periods": 10
+        }
+      ],
+      "start": "2026-03-06",
+      "timezone": "America/New_York"
+    },
+    {
+      "all_day": "block",
+      "end": "2026-11-04",
+      "flags": [],
+      "input_bytes": 9558,
+      "input_sha256": {
+        "fall-0.ics": "e18216d575076d1b225a299790545fda0a1d083e973941d9377abb67fd50902d",
+        "fall-1.ics": "5022c7950bc7d4a3453b08e7bff52b280e4ede992df6d603d37c55093135d402"
+      },
+      "name": "fall",
+      "runs": [
+        {
+          "cli_seconds": 0.039292775094509125,
+          "elapsed_seconds": 0.26832542894408107,
+          "exit_code": 0,
+          "occupied_seconds": 220607,
+          "output_bytes": 931,
+          "output_sha256": "4caadd8dffb29e84b659b1adb43fcd156b92a7bcba42012be363878a30bc72b3",
+          "peak_rss_kib": 25660,
+          "periods": 12
+        },
+        {
+          "cli_seconds": 0.04015464708209038,
+          "elapsed_seconds": 0.2920321789570153,
+          "exit_code": 0,
+          "occupied_seconds": 220607,
+          "output_bytes": 931,
+          "output_sha256": "4caadd8dffb29e84b659b1adb43fcd156b92a7bcba42012be363878a30bc72b3",
+          "peak_rss_kib": 25732,
+          "periods": 12
+        }
+      ],
+      "start": "2026-10-30",
+      "timezone": "America/New_York"
+    },
+    {
+      "all_day": "ignore",
+      "end": "2026-04-01",
+      "flags": [
+        "--max-intervals",
+        "10"
+      ],
+      "input_bytes": 371977,
+      "input_sha256": {
+        "interval_limit-0.ics": "34aba2875e667abdd545e77abba216b8964d09400b26974250aa5d3a5e3128a2"
+      },
+      "name": "interval_limit",
+      "runs": [
+        {
+          "cli_seconds": 0.6096446118317544,
+          "elapsed_seconds": 0.8649219018407166,
+          "exit_code": 2,
+          "occupied_seconds": null,
+          "output_bytes": 0,
+          "output_sha256": null,
+          "peak_rss_kib": 33224,
+          "periods": null
+        },
+        {
+          "cli_seconds": 0.6596086672507226,
+          "elapsed_seconds": 0.903444791212678,
+          "exit_code": 2,
+          "occupied_seconds": null,
+          "output_bytes": 0,
+          "output_sha256": null,
+          "peak_rss_kib": 33224,
+          "periods": null
+        }
+      ],
+      "start": "2026-01-01",
+      "timezone": "UTC"
+    },
+    {
+      "all_day": "ignore",
+      "end": "2026-04-01",
+      "flags": [
+        "--max-occurrences",
+        "100"
+      ],
+      "input_bytes": 15957,
+      "input_sha256": {
+        "occurrence_limit-0.ics": "6485c6e73f8814f87789b4df0902acc096156bc0e85cf7c0da6354af45e4a99a"
+      },
+      "name": "occurrence_limit",
+      "runs": [
+        {
+          "cli_seconds": 0.04094790481030941,
+          "elapsed_seconds": 0.34227721113711596,
+          "exit_code": 2,
+          "occupied_seconds": null,
+          "output_bytes": 0,
+          "output_sha256": null,
+          "peak_rss_kib": 25668,
+          "periods": null
+        },
+        {
+          "cli_seconds": 0.03534335410222411,
+          "elapsed_seconds": 0.29819132713600993,
+          "exit_code": 2,
+          "occupied_seconds": null,
+          "output_bytes": 0,
+          "output_sha256": null,
+          "peak_rss_kib": 25804,
+          "periods": null
+        }
+      ],
+      "start": "2026-01-01",
+      "timezone": "UTC"
+    },
+    {
+      "all_day": "ignore",
+      "end": "2026-04-01",
+      "flags": [
+        "--max-report-bytes",
+        "50"
+      ],
+      "input_bytes": 371977,
+      "input_sha256": {
+        "output_limit-0.ics": "34aba2875e667abdd545e77abba216b8964d09400b26974250aa5d3a5e3128a2"
+      },
+      "name": "output_limit",
+      "runs": [
+        {
+          "cli_seconds": 0.8215598370879889,
+          "elapsed_seconds": 1.0896657099947333,
+          "exit_code": 2,
+          "occupied_seconds": null,
+          "output_bytes": 0,
+          "output_sha256": null,
+          "peak_rss_kib": 33224,
+          "periods": null
+        },
+        {
+          "cli_seconds": 0.5795501410029829,
+          "elapsed_seconds": 0.8253041580319405,
+          "exit_code": 2,
+          "occupied_seconds": null,
+          "output_bytes": 0,
+          "output_sha256": null,
+          "peak_rss_kib": 33220,
+          "periods": null
+        }
+      ],
+      "start": "2026-01-01",
+      "timezone": "UTC"
+    },
+    {
+      "all_day": "ignore",
+      "end": "2026-04-01",
+      "flags": [],
+      "input_bytes": 463,
+      "input_sha256": {
+        "incomplete-0.ics": "76b0ada872a80a86eef81b78ec1ec932baaaf667bf4a2ec7ec5c631dc86e09e0"
+      },
+      "name": "incomplete",
+      "runs": [
+        {
+          "cli_seconds": 0.014958374202251434,
+          "elapsed_seconds": 0.2568349391222,
+          "exit_code": 2,
+          "occupied_seconds": null,
+          "output_bytes": 0,
+          "output_sha256": null,
+          "peak_rss_kib": 25560,
+          "periods": null
+        },
+        {
+          "cli_seconds": 0.014298828318715096,
+          "elapsed_seconds": 0.263798373285681,
+          "exit_code": 2,
+          "occupied_seconds": null,
+          "output_bytes": 0,
+          "output_sha256": null,
+          "peak_rss_kib": 25456,
+          "periods": null
+        }
+      ],
+      "start": "2026-01-01",
+      "timezone": "UTC"
+    }
+  ]
+}

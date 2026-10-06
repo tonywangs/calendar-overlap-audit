@@ -1,0 +1,2 @@
+# Generated RFC 5545 artifacts require byte-exact CRLF, including in Git blobs.
+examples/freebusy/*-busy.ics -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

@@ -10,6 +10,7 @@ requires-python = ">=3.11"
 dependencies = ["icalendar==6.3.2", "tzdata==2025.2", "python-dateutil==2.9.0.post0", "six==1.17.0"]
 
 [project.scripts]
+calendar-freebusy = "calendar_audit.freebusy_cli:main"
 calendar-audit = "calendar_audit.cli:main"
 calendar-availability = "calendar_audit.availability_cli:main"
 

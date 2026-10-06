@@ -51,3 +51,11 @@ The current availability implementation passed the
 reports while improving both predefined long-horizon targets. The results retain
 control regressions, fresh-process RSS, all 96 raw observations, the adopted source,
 and the authenticated occurrence-only baseline.
+
+## Offline free/busy export
+
+[Validation and bounded observations](freebusy.md) describe the independent
+interval oracle, pinned reader, installed workflows and withheld failures.
+[Raw measurements](benchmark-freebusy.json) include both observations per workload,
+hashes, limits, versions and resource usage. Reproduce all gates with
+`.venv/bin/python scripts/verify_freebusy.py`. Historical evidence above is unchanged.

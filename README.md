@@ -35,6 +35,19 @@ verification dependencies are pinned in `requirements-dev.txt`.
 If your Linux distribution omits `venv`/`ensurepip`, install its Python venv package
 through your normal environment setup before following these instructions.
 
+## Share occupied time without event descriptions
+
+`calendar-freebusy` exports a minimal VFREEBUSY calendar with merged UTC BUSY
+periods. It requires a finite horizon and an explicit `--all-day block|ignore`
+policy, and withholds output if any analysis is incomplete. It does not copy event
+identities or descriptive fields. **Precise occupied times remain disclosed; this
+is not anonymization or working-hour availability.**
+
+See [setup, limits and semantics](docs/freebusy.md), [complete synthetic examples](examples/freebusy/README.md)
+and [actual validation evidence](results/freebusy.md). After the verification
+prerequisites below, run `.venv/bin/python scripts/verify_freebusy.py` for the full
+verification chain, including historical gates and isolated installed exports.
+
 ## What the report means
 
 * Occupied time is the **union** of positive-duration timed intervals, clipped to
@@ -122,7 +135,7 @@ or libraries fail the suite; browser checks are never silently skipped.
 Then run the complete verification suite with one command:
 
 ```sh
-.venv/bin/python scripts/verify_schedule.py
+.venv/bin/python scripts/verify_freebusy.py
 ```
 
 This runs unit and seeded exhaustive-oracle tests, actual Chromium interaction with
@@ -277,8 +290,8 @@ per declaration, 256 total declared windows, 90 dated replacements and 90 days;
 existing processing and report limits still apply. This custom JSON format is
 **not RFC 7953 VAVAILABILITY support**. No holiday or personal availability is inferred.
 
-After the same dependency and browser preparation above, verify the whole current
-milestone with one command:
+After the same dependency and browser preparation above, the schedule milestone
+retains its verification command (also included by `verify_freebusy.py`):
 
 ```sh
 .venv/bin/python scripts/verify_schedule.py

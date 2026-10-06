@@ -84,7 +84,7 @@ def candidate_regressions():
                'PLAYWRIGHT_BROWSERS_PATH':str(ROOT/'.cache/ms-playwright')}
         run([sys.executable,'-c','import calendar_audit; from pathlib import Path; '
              'assert Path(calendar_audit.__file__).is_relative_to('+repr(str(src))+')'],cwd=ROOT,env=env)
-        run([sys.executable,'-m','pytest','-q','tests','--ignore=tests/test_indexed_availability.py','--ignore-glob=tests/test_schedule*.py'],cwd=ROOT,env=env)
+        run([sys.executable,'-m','pytest','-q','tests','--ignore=tests/test_indexed_availability.py','--ignore-glob=tests/test_schedule*.py','--ignore-glob=tests/test_freebusy*.py'],cwd=ROOT,env=env)
     print('Frozen candidate passed existing regressions with authenticated import origin.',flush=True)
 
 
