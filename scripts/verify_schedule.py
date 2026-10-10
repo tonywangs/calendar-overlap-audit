@@ -2,6 +2,7 @@
 """One-command offline schedule verification, including preserved historical gates."""
 import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -39,9 +40,12 @@ def main():
     evidence()
     subprocess.run([sys.executable, str(ROOT/'scripts/verify_index.py')], cwd=ROOT, check=True)
     with tempfile.TemporaryDirectory(prefix='schedule-replay-') as temp:
-        subprocess.run([sys.executable, str(ROOT/'scripts/benchmark_schedule.py'), '--replay',
+        from historical_freebusy import materialize
+        historical = Path(temp)/'historical'
+        src = materialize('schedule', historical)
+        subprocess.run([sys.executable, str(historical/'scripts/benchmark_schedule.py'), '--replay',
                         str(ROOT/'results/benchmark-schedule.json'), '--output', str(Path(temp)/'replay.json')],
-                       cwd=ROOT, check=True)
+                       cwd=ROOT, check=True, env={**os.environ, 'PYTHONPATH':str(src), 'PYTHONNOUSERSITE':'1'})
     subprocess.run(['git', 'diff', '--check'], cwd=ROOT, check=True)
     print('Schedule verification passed: production, frozen v1, oracle, browser, installed CLIs and workload replay.', flush=True)
 

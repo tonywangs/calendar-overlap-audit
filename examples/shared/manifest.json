@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "start": "2026-03-09T00:00:00Z",
+  "end": "2026-03-11T00:00:00Z",
+  "duration_seconds": 1800,
+  "participants": [
+    {
+      "alias": "Alex (synthetic)",
+      "timezone": "America/New_York",
+      "weekly": {
+        "MO": [
+          [
+            "09:00",
+            "17:00"
+          ]
+        ],
+        "TU": [
+          [
+            "09:00",
+            "17:00"
+          ]
+        ]
+      },
+      "sources": [
+        {
+          "path": "alex-busy.ics",
+          "complete_occupancy": true
+        }
+      ]
+    },
+    {
+      "alias": "Sam (synthetic)",
+      "timezone": "Europe/London",
+      "weekly": {
+        "MO": [
+          [
+            "09:00",
+            "17:00"
+          ]
+        ],
+        "TU": [
+          [
+            "09:00",
+            "17:00"
+          ]
+        ]
+      },
+      "sources": [
+        {
+          "path": "sam-busy.ics",
+          "complete_occupancy": true
+        }
+      ]
+    }
+  ]
+}

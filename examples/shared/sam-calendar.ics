@@ -1,0 +1,10 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Synthetic meeting example//EN
+BEGIN:VEVENT
+UID:synthetic-event
+DTSTART:20260309T153000Z
+DTEND:20260309T160000Z
+SUMMARY:Synthetic commitment (excluded from occupancy export)
+END:VEVENT
+END:VCALENDAR

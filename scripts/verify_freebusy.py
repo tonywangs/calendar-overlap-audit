@@ -54,8 +54,8 @@ def installed():
 
 def evidence():
     from benchmark_freebusy import NAMES, implementation_hashes, inputs, stable
-    saved=json.loads((ROOT/'results/benchmark-freebusy.json').read_text())
-    assert saved['implementation_sha256'] == implementation_hashes()
+    from historical_freebusy import authenticate
+    saved, _ = authenticate('freebusy')
     assert saved['repetitions'] == 2 and [w['name'] for w in saved['workloads']] == NAMES
     for workload in saved['workloads']:
         raws,*_=inputs(workload['name'])
@@ -72,8 +72,12 @@ def main():
     run([sys.executable,ROOT/'scripts/verify_schedule.py'],cwd=ROOT)
     installed()
     with tempfile.TemporaryDirectory(prefix='freebusy-replay-') as temp:
-        run([sys.executable,ROOT/'scripts/benchmark_freebusy.py','--replay',ROOT/'results/benchmark-freebusy.json',
-             '--output',Path(temp)/'replay.json'],cwd=ROOT)
+        from historical_freebusy import materialize
+        historical = Path(temp)/'historical'
+        src = materialize('freebusy', historical)
+        run([sys.executable,historical/'scripts/benchmark_freebusy.py','--replay',ROOT/'results/benchmark-freebusy.json',
+             '--output',Path(temp)/'replay.json'],cwd=ROOT,
+            env={**os.environ, 'PYTHONPATH':str(src), 'PYTHONNOUSERSITE':'1'})
     publication_bounds()
     run(['git','diff','--check'],cwd=ROOT)
     print('Free/busy verification passed: seeded oracle, independent parser, CLI failures, installed workflows and measured workload replay.',flush=True)

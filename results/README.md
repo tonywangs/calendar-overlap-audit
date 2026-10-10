@@ -59,3 +59,11 @@ interval oracle, pinned reader, installed workflows and withheld failures.
 [Raw measurements](benchmark-freebusy.json) include both observations per workload,
 hashes, limits, versions and resource usage. Reproduce all gates with
 `.venv/bin/python scripts/verify_freebusy.py`. Historical evidence above is unchanged.
+
+## Shared meeting-window discovery
+
+[Shared-window validation](shared-windows.md) covers explicit occupancy coverage,
+unknown gaps, weekly participant schedules, independent decoding and a seeded
+second-cell oracle. [Raw observations](benchmark-shared.json) retain fresh-process
+runtime/RSS, artifact sizes and hashes, including five bounded rejection cases.
+`.venv/bin/python scripts/verify_shared.py` includes all historical gates above.

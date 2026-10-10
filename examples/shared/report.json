@@ -1,0 +1,333 @@
+{
+  "complete": true,
+  "coverage_complete": false,
+  "duration_seconds": 1800,
+  "horizon": {
+    "end": "2026-03-11T00:00:00Z",
+    "seconds": 172800,
+    "start": "2026-03-09T00:00:00Z"
+  },
+  "limitations": [
+    "Candidate windows are not booked meetings or a guarantee of willingness to meet.",
+    "Complete occupancy and sole ownership are operator assertions, not independently established facts.",
+    "Uncovered time is unknown. FREE never overrides busy; all supported busy types block.",
+    "No freshness or revision precedence is inferred. Conflicting complete sources are unioned conservatively.",
+    "Working hours are explicit weekly schedules; holidays and date exceptions are not inferred.",
+    "Provider interoperability, human usability and real participant availability remain unvalidated.",
+    "Aliases, exact times, working schedules and input hashes may disclose sensitive information."
+  ],
+  "limits": {
+    "files": 32,
+    "input_bytes": 8388608,
+    "intervals": 100000,
+    "line_bytes": 65536,
+    "manifest_bytes": 262144,
+    "operations": 2000000,
+    "periods": 20000,
+    "report_bytes": 8388608,
+    "seconds": 30.0,
+    "windows": 20000
+  },
+  "manifest_source": {
+    "bytes": 964,
+    "sha256": "33d10f78396ef5b1d82086f8ef2d96c7f01026c27d377536018ef7190e200b79"
+  },
+  "participants": [
+    {
+      "alias": "Alex (synthetic)",
+      "busy": [
+        {
+          "end": "2026-03-09T15:00:00Z",
+          "seconds": 3600,
+          "start": "2026-03-09T14:00:00Z"
+        }
+      ],
+      "coverage": [
+        {
+          "end": "2026-03-11T00:00:00Z",
+          "seconds": 172800,
+          "start": "2026-03-09T00:00:00Z"
+        }
+      ],
+      "coverage_complete": true,
+      "coverage_gaps": [],
+      "free": [
+        {
+          "end": "2026-03-09T14:00:00Z",
+          "seconds": 3600,
+          "start": "2026-03-09T13:00:00Z"
+        },
+        {
+          "end": "2026-03-09T21:00:00Z",
+          "seconds": 21600,
+          "start": "2026-03-09T15:00:00Z"
+        },
+        {
+          "end": "2026-03-10T21:00:00Z",
+          "seconds": 28800,
+          "start": "2026-03-10T13:00:00Z"
+        }
+      ],
+      "id": "p1",
+      "known_working": [
+        {
+          "end": "2026-03-09T21:00:00Z",
+          "seconds": 28800,
+          "start": "2026-03-09T13:00:00Z"
+        },
+        {
+          "end": "2026-03-10T21:00:00Z",
+          "seconds": 28800,
+          "start": "2026-03-10T13:00:00Z"
+        }
+      ],
+      "sources": [
+        {
+          "bytes": 315,
+          "complete_occupancy": true,
+          "coverage": {
+            "end": "2026-03-11T00:00:00Z",
+            "seconds": 172800,
+            "start": "2026-03-09T00:00:00Z"
+          },
+          "id": "p1s1",
+          "period_counts": {
+            "BUSY": 1,
+            "BUSY-TENTATIVE": 0,
+            "BUSY-UNAVAILABLE": 0,
+            "FREE": 0
+          },
+          "sha256": "9ce75d6b31568f795e9f4fe772e19934fe2a7ef815ba878579a342a7648cfa57"
+        }
+      ],
+      "timezone": "America/New_York",
+      "weekly": {
+        "FR": [],
+        "MO": [
+          [
+            "09:00",
+            "17:00"
+          ]
+        ],
+        "SA": [],
+        "SU": [],
+        "TH": [],
+        "TU": [
+          [
+            "09:00",
+            "17:00"
+          ]
+        ],
+        "WE": []
+      },
+      "working": [
+        {
+          "end": "2026-03-09T21:00:00Z",
+          "seconds": 28800,
+          "start": "2026-03-09T13:00:00Z"
+        },
+        {
+          "end": "2026-03-10T21:00:00Z",
+          "seconds": 28800,
+          "start": "2026-03-10T13:00:00Z"
+        }
+      ]
+    },
+    {
+      "alias": "Sam (synthetic)",
+      "busy": [
+        {
+          "end": "2026-03-09T16:00:00Z",
+          "seconds": 1800,
+          "start": "2026-03-09T15:30:00Z"
+        }
+      ],
+      "coverage": [
+        {
+          "end": "2026-03-10T15:00:00Z",
+          "seconds": 140400,
+          "start": "2026-03-09T00:00:00Z"
+        }
+      ],
+      "coverage_complete": false,
+      "coverage_gaps": [
+        {
+          "end": "2026-03-11T00:00:00Z",
+          "seconds": 32400,
+          "start": "2026-03-10T15:00:00Z"
+        }
+      ],
+      "free": [
+        {
+          "end": "2026-03-09T15:30:00Z",
+          "seconds": 23400,
+          "start": "2026-03-09T09:00:00Z"
+        },
+        {
+          "end": "2026-03-09T17:00:00Z",
+          "seconds": 3600,
+          "start": "2026-03-09T16:00:00Z"
+        },
+        {
+          "end": "2026-03-10T15:00:00Z",
+          "seconds": 21600,
+          "start": "2026-03-10T09:00:00Z"
+        }
+      ],
+      "id": "p2",
+      "known_working": [
+        {
+          "end": "2026-03-09T17:00:00Z",
+          "seconds": 28800,
+          "start": "2026-03-09T09:00:00Z"
+        },
+        {
+          "end": "2026-03-10T15:00:00Z",
+          "seconds": 21600,
+          "start": "2026-03-10T09:00:00Z"
+        }
+      ],
+      "sources": [
+        {
+          "bytes": 315,
+          "complete_occupancy": true,
+          "coverage": {
+            "end": "2026-03-10T15:00:00Z",
+            "seconds": 172800,
+            "start": "2026-03-08T15:00:00Z"
+          },
+          "id": "p2s1",
+          "period_counts": {
+            "BUSY": 1,
+            "BUSY-TENTATIVE": 0,
+            "BUSY-UNAVAILABLE": 0,
+            "FREE": 0
+          },
+          "sha256": "2366f026ff199ee676a3cbfb5ef1fb8b574ba11aa8ebddc3e59612589e47b32e"
+        }
+      ],
+      "timezone": "Europe/London",
+      "weekly": {
+        "FR": [],
+        "MO": [
+          [
+            "09:00",
+            "17:00"
+          ]
+        ],
+        "SA": [],
+        "SU": [],
+        "TH": [],
+        "TU": [
+          [
+            "09:00",
+            "17:00"
+          ]
+        ],
+        "WE": []
+      },
+      "working": [
+        {
+          "end": "2026-03-09T17:00:00Z",
+          "seconds": 28800,
+          "start": "2026-03-09T09:00:00Z"
+        },
+        {
+          "end": "2026-03-10T17:00:00Z",
+          "seconds": 28800,
+          "start": "2026-03-10T09:00:00Z"
+        }
+      ]
+    }
+  ],
+  "report_type": "shared-windows",
+  "schema_version": 1,
+  "timezone_database": "tzdata 2025.2",
+  "window_seconds": 16200,
+  "windows": [
+    {
+      "end": "2026-03-09T14:00:00Z",
+      "id": "w1",
+      "latest_start": "2026-03-09T13:30:00Z",
+      "local": [
+        {
+          "end": "2026-03-09T10:00:00-04:00",
+          "latest_start": "2026-03-09T09:30:00-04:00",
+          "participant": "p1",
+          "start": "2026-03-09T09:00:00-04:00"
+        },
+        {
+          "end": "2026-03-09T14:00:00+00:00",
+          "latest_start": "2026-03-09T13:30:00+00:00",
+          "participant": "p2",
+          "start": "2026-03-09T13:00:00+00:00"
+        }
+      ],
+      "seconds": 3600,
+      "start": "2026-03-09T13:00:00Z"
+    },
+    {
+      "end": "2026-03-09T15:30:00Z",
+      "id": "w2",
+      "latest_start": "2026-03-09T15:00:00Z",
+      "local": [
+        {
+          "end": "2026-03-09T11:30:00-04:00",
+          "latest_start": "2026-03-09T11:00:00-04:00",
+          "participant": "p1",
+          "start": "2026-03-09T11:00:00-04:00"
+        },
+        {
+          "end": "2026-03-09T15:30:00+00:00",
+          "latest_start": "2026-03-09T15:00:00+00:00",
+          "participant": "p2",
+          "start": "2026-03-09T15:00:00+00:00"
+        }
+      ],
+      "seconds": 1800,
+      "start": "2026-03-09T15:00:00Z"
+    },
+    {
+      "end": "2026-03-09T17:00:00Z",
+      "id": "w3",
+      "latest_start": "2026-03-09T16:30:00Z",
+      "local": [
+        {
+          "end": "2026-03-09T13:00:00-04:00",
+          "latest_start": "2026-03-09T12:30:00-04:00",
+          "participant": "p1",
+          "start": "2026-03-09T12:00:00-04:00"
+        },
+        {
+          "end": "2026-03-09T17:00:00+00:00",
+          "latest_start": "2026-03-09T16:30:00+00:00",
+          "participant": "p2",
+          "start": "2026-03-09T16:00:00+00:00"
+        }
+      ],
+      "seconds": 3600,
+      "start": "2026-03-09T16:00:00Z"
+    },
+    {
+      "end": "2026-03-10T15:00:00Z",
+      "id": "w4",
+      "latest_start": "2026-03-10T14:30:00Z",
+      "local": [
+        {
+          "end": "2026-03-10T11:00:00-04:00",
+          "latest_start": "2026-03-10T10:30:00-04:00",
+          "participant": "p1",
+          "start": "2026-03-10T09:00:00-04:00"
+        },
+        {
+          "end": "2026-03-10T15:00:00+00:00",
+          "latest_start": "2026-03-10T14:30:00+00:00",
+          "participant": "p2",
+          "start": "2026-03-10T13:00:00+00:00"
+        }
+      ],
+      "seconds": 7200,
+      "start": "2026-03-10T13:00:00Z"
+    }
+  ]
+}

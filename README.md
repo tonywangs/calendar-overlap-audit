@@ -48,6 +48,24 @@ and [actual validation evidence](results/freebusy.md). After the verification
 prerequisites below, run `.venv/bin/python scripts/verify_freebusy.py` for the full
 verification chain, including historical gates and isolated installed exports.
 
+## Find shared meeting windows
+
+`calendar-shared` intersects explicit participant working schedules with bounded
+VFREEBUSY occupancy. Each source requires an explicit completeness assertion;
+uncovered time stays **unknown**, and FREE never overrides busy. Up to 16
+participants and a 90-day UTC horizon are supported. Candidate ranges are not
+booked meetings or a guarantee of real availability.
+
+```sh
+.venv/bin/calendar-shared --manifest examples/shared/manifest.json --output /tmp/shared-report
+```
+
+The [complete synthetic example](examples/shared/README.md) produces four windows
+and shows an intentional coverage gap. See the [strict input contract, resource
+limits and JSON semantics](docs/shared-windows.md) and [validation results](results/shared-windows.md).
+After the verification preparation below, `.venv/bin/python scripts/verify_shared.py`
+checks the new feature and all preserved historical gates in one command.
+
 ## What the report means
 
 * Occupied time is the **union** of positive-duration timed intervals, clipped to
