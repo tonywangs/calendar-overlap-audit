@@ -1,0 +1,156 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Pentabarf//Schedule 0.3//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALDESC;VALUE=TEXT:BSD
+X-WR-CALNAME;VALUE=TEXT:BSD
+X-WR-TIMEZONE;VALUE=TEXT:Europe/Brussels
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:6152@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T150000
+DTEND:20250201T153000
+SUMMARY:How FreeBSD security audits have improved our security culture
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:BSD
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-6152-how-freebsd-security-audits-have-improved-our-security-culture/
+LOCATION:AW1.120
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Pierre Pronchery":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Michael Winser":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:6390@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T153500
+DTEND:20250201T155000
+SUMMARY:Wake up, FreeBSD! Implementing Modern Standby with S0ix
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:BSD
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-6390-wake-up-freebsd-implementing-modern-standby-with-s0ix/
+LOCATION:AW1.120
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Aymeric Wibo":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:4927@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T155500
+DTEND:20250201T162000
+SUMMARY:Tracking bulk builds in pkgsrc - from Cloud to NetBSD Native
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:BSD
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-4927-tracking-bulk-builds-in-pkgsrc-from-cloud-to-netbsd-native/
+LOCATION:AW1.120
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Benny Siegert":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:4399@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T162500
+DTEND:20250201T165000
+SUMMARY:High Performance Packet filtering in BSD. A holistic review
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:BSD
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-4399-high-performance-packet-filtering-in-bsd-a-holistic-review/
+LOCATION:AW1.120
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Emmanuel Nyarko":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:4306@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T165500
+DTEND:20250201T172500
+SUMMARY:A packet's journey through pf
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:BSD
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-4306-a-packet-s-journey-through-pf/
+LOCATION:AW1.120
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Kristof Provost":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:5166@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T173000
+DTEND:20250201T180000
+SUMMARY:Making NetBSD as a fast(er) booting microvm
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:BSD
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-5166-making-netbsd-as-a-fast-er-booting-microvm/
+LOCATION:AW1.120
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Emile 'iMil' Heitor":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:5247@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T180500
+DTEND:20250201T183000
+SUMMARY:Writing about FreeBSD
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:BSD
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-5247-writing-about-freebsd/
+LOCATION:AW1.120
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Tom Jones":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:4553@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T183500
+DTEND:20250201T190000
+SUMMARY:FreeBSD audit source and other syslog-ng news
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:BSD
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-4553-freebsd-audit-source-and-other-syslog-ng-news/
+LOCATION:AW1.120
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Peter Czanik":invalid:nomail
+
+END:VEVENT
+
+END:VCALENDAR

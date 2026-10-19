@@ -150,7 +150,7 @@ def unpack(line):
         raise Unsupported('Malformed content line') from exc
 
 
-def scan(raw: bytes, budget: Budget):
+def scan(raw: bytes, budget: Budget, *, floating_timezone=None):
     """Validate component boundaries before parsing any event properties.
 
     VTIMEZONE is not fed to icalendar, avoiding implicit custom-zone expansion.
@@ -176,6 +176,8 @@ def scan(raw: bytes, budget: Budget):
             lines.append(physical)
     stack, events, current, warnings, calendar_props = [], [], None, [], {}
     roots = 0
+    has_floating = False
+    event_timezone_hint = False
     for line in lines:
         budget.check()
         name, params, value = unpack(line)
@@ -218,6 +220,11 @@ def scan(raw: bytes, budget: Budget):
                 raise Unsupported('Content outside VCALENDAR')
             if current is not None:
                 current.append(line)
+            if stack == ['VCALENDAR', 'VEVENT']:
+                if name == 'TZID':
+                    event_timezone_hint = True
+                if name in ('DTSTART', 'DTEND', 'RECURRENCE-ID', 'EXDATE') and not params.get('TZID') and re.fullmatch(r'\d{8}T\d{6}', value):
+                    has_floating = True
             if len(stack) == 1:
                 if name in calendar_props:
                     raise Unsupported('Duplicate calendar property')
@@ -230,6 +237,8 @@ def scan(raw: bytes, budget: Budget):
         raise Unsupported('Only Gregorian calendars supported')
     if calendar_props.get('METHOD', 'PUBLISH').upper() != 'PUBLISH':
         raise Unsupported('Scheduling METHOD other than PUBLISH unsupported; export a snapshot')
+    if has_floating and floating_timezone is None and ('X-WR-TIMEZONE' in calendar_props or event_timezone_hint):
+        warnings.append('Nonstandard timezone hint with floating times; verify the source timezone and explicitly set --floating-timezone (calendar-audit) before treating occupancy as complete')
     return events, list(dict.fromkeys(warnings))
 
 
@@ -584,9 +593,9 @@ def overlap_pairs(intervals, budget: Budget):
     return result
 
 
-def analyze(paths, start: str, end: str, display: str, limits=Limits(), budget=None):
+def analyze(paths, start: str, end: str, display: str, limits=Limits(), budget=None, *, floating_timezone=None):
     """Legacy schema-2 overlap audit, including bounded pair enumeration."""
-    return _analyze(paths, start, end, display, limits, budget, include_overlaps=True)
+    return _analyze(paths, start, end, display, limits, budget, include_overlaps=True, floating_timezone=floating_timezone)
 
 
 def analyze_occurrences(paths, start: str, end: str, display: str, limits=Limits(), budget=None):
@@ -598,9 +607,11 @@ def analyze_occurrences(paths, start: str, end: str, display: str, limits=Limits
     return _analyze(paths, start, end, display, limits, budget, include_overlaps=False)
 
 
-def _analyze(paths, start, end, display, limits, budget, *, include_overlaps):
+def _analyze(paths, start, end, display, limits, budget, *, include_overlaps, floating_timezone=None):
     budget = budget or Budget(limits)
     zone = get_zone(display)
+    if floating_timezone is not None:
+        get_zone(floating_timezone)
     first, last, lo, hi = window(start, end, zone)
     records, sources, issues, groups = [], [], [], defaultdict(list)
     for source_num, path in enumerate(paths, 1):
@@ -617,7 +628,7 @@ def _analyze(paths, start, end, display, limits, budget, *, include_overlaps):
         source_id = f's{source_num}'
         sources.append({'id': source_id, 'name': path.name, 'sha256': hashlib.sha256(raw).hexdigest(), 'bytes': len(raw)})
         try:
-            events, warnings = scan(raw, budget)
+            events, warnings = scan(raw, budget, floating_timezone=floating_timezone)
         except (ValueError, AssertionError) as exc:
             issues.append({'source': source_id, 'code': 'invalid_calendar', 'message': str(exc) if isinstance(exc, Unsupported) else 'Malformed calendar'})
             continue
@@ -646,7 +657,11 @@ def _analyze(paths, start, end, display, limits, budget, *, include_overlaps):
     for group in groups.values():
         budget.check()
         try:
-            record, event, overrides = prepare_family(group, display)
+            record, event, overrides = prepare_family(group, floating_timezone if floating_timezone is not None else display)
+            # DATE values are civil display dates, independent of the floating DATE-TIME assertion.
+            for family_record, _, _ in group:
+                if family_record.get('time_basis') == 'date':
+                    family_record['timezone'] = display
             pending, cancelled = family_occurrences(record, event, overrides, first, last, lo, hi, zone, budget)
             for occurrence, a, b, is_date in pending:
                 occurrence['id'] = f'o{len(occurrences)+1}'
@@ -681,6 +696,8 @@ def _analyze(paths, start, end, display, limits, budget, *, include_overlaps):
             'cancellations': cancellations, 'sources': sources, 'events': records, 'occurrences': occurrences, 'overlaps': pairs,
             'daily': daily, 'occupied_seconds': int(union_seconds((a, b) for a, b, _ in timed)),
             'counts': dict(sorted(budget.counts.items()))}
+    if floating_timezone is not None:
+        report['floating_timezone'] = floating_timezone
     if not include_overlaps:
         report['schema_version'] = 1
         report['report_type'] = 'occurrences'

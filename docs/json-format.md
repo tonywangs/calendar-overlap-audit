@@ -91,3 +91,13 @@ explanations, applied replacements, status and working-time totals. See
 [schedule v2 fields and semantics](schedules-v2.md). `--include-overlaps` adds the
 legacy nested overlap audit but still uses availability schema 3 for v2 schedules.
 V1 schedules retain their original schema 1/2 and byte-identical report behavior.
+
+## Explicit floating-time interpretation
+
+Overlap reports optionally include top-level `floating_timezone` when the operator
+sets `--floating-timezone`. It is an IANA zone used for floating DATE-TIME values
+in all inputs; `window.timezone` still controls display and civil-day boundaries.
+Omission preserves the display-zone default. UTC and standard TZID datetimes are
+unchanged; all-day DATE records retain the display timezone. Nonstandard timezone
+hints accompanying floating times without an explicit assertion produce issues
+and `complete: false`. This is an additive schema-2 field.

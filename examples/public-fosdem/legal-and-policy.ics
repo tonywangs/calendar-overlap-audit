@@ -1,0 +1,342 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Pentabarf//Schedule 0.3//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALDESC;VALUE=TEXT:Legal and Policy
+X-WR-CALNAME;VALUE=TEXT:Legal and Policy
+X-WR-TIMEZONE;VALUE=TEXT:Europe/Brussels
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:6602@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T103000
+DTEND:20250201T103500
+SUMMARY:Welcome to the Legal and Policy Issues DevRoom
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:Legal and Policy
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-6602-welcome-to-the-legal-and-policy-issues-devroom/
+LOCATION:H.1301 (Cornil)
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Karen Sandler":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Tom Marble":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Alexander Sander":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Bradley M. Kuhn":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Matthias Kirschner":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Richard Fontana":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:4205@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T103500
+DTEND:20250201T110000
+SUMMARY:Europe's Way to Mandatory B2B-E-Invoices
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:Legal and Policy
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-4205-europe-s-way-to-mandatory-b2b-e-invoices/
+LOCATION:H.1301 (Cornil)
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Jochen Stärk":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:6155@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T110000
+DTEND:20250201T112500
+SUMMARY:Is There Really an SBOM Mandate?
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:Legal and Policy
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-6155-is-there-really-an-sbom-mandate-/
+LOCATION:H.1301 (Cornil)
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Bradley M. Kuhn":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:6544@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T113000
+DTEND:20250201T115500
+SUMMARY:How Does Heinz Have 80% of a Commodity Market?* – Leveraging Trademarks in Free Software
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:Legal and Policy
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-6544-how-does-heinz-have-80-of-a-commodity-market-leveraging-trademarks-in-free-software/
+LOCATION:H.1301 (Cornil)
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Pamela Chestek":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:6169@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T120000
+DTEND:20250201T122500
+SUMMARY:LGPL enforced in Germany: how we helped a purchaser use the courts to compel compliance
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:Legal and Policy
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-6169-lgpl-enforced-in-germany-how-we-helped-a-purchaser-use-the-courts-to-compel-compliance/
+LOCATION:H.1301 (Cornil)
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Denver Gingerich":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:5376@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T123000
+DTEND:20250201T125500
+SUMMARY:Managing copyrights in free software projects - discussion panel
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:Legal and Policy
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-5376-managing-copyrights-in-free-software-projects-discussion-panel/
+LOCATION:H.1301 (Cornil)
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Krzysztof Siewicz":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:4794@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T130000
+DTEND:20250201T132500
+SUMMARY:To Mine Or Not To Mine - Training of (Generative) AI Models under the TDM Exception in EU Copyright Laws
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:Legal and Policy
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-4794-to-mine-or-not-to-mine-training-of-generative-ai-models-under-the-tdm-exception-in-eu-copyright-laws/
+LOCATION:H.1301 (Cornil)
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Lisa Käde":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:6639@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T133000
+DTEND:20250201T142000
+SUMMARY:Panel: When is an AI system free/open?
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:Legal and Policy
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-6639-panel-when-is-an-ai-system-free-open-/
+LOCATION:H.1301 (Cornil)
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="julia ferraioli":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Ciarán O'Riordan":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Aeva Black":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Richard Fontana":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Zoë Kooyman":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:5120@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T143000
+DTEND:20250201T145500
+SUMMARY:Auditing Web Trackers with the EDPB's Open-Source Website Compliance Tool
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:Legal and Policy
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-5120-auditing-web-trackers-with-the-edpb-s-open-source-website-compliance-tool/
+LOCATION:H.1301 (Cornil)
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Jerome Gorin":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Amandine JAMBERT":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:5488@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T150000
+DTEND:20250201T152500
+SUMMARY:A Free Software App Store for iOS: the App Fair Project's perspective on the DMA
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:Legal and Policy
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-5488-a-free-software-app-store-for-ios-the-app-fair-project-s-perspective-on-the-dma/
+LOCATION:H.1301 (Cornil)
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Marc Prud'hommeaux":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:5432@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T153000
+DTEND:20250201T155500
+SUMMARY:Breaking tech monopolies in Europe: A fireside chat with the European Commission
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:Legal and Policy
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-5432-breaking-tech-monopolies-in-europe-a-fireside-chat-with-the-european-commission/
+LOCATION:H.1301 (Cornil)
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Lucas Lasota":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Alexandre Ruiz Feases":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Victor Le Pochat":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:6637@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T160000
+DTEND:20250201T162500
+SUMMARY:Let's talk about anti-trust!
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:Legal and Policy
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-6637-let-s-talk-about-anti-trust-/
+LOCATION:H.1301 (Cornil)
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Karen Sandler":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Alanna Rutherford":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:5291@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T163000
+DTEND:20250201T165500
+SUMMARY:The EU CRA and Copyleft
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:Legal and Policy
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-5291-the-eu-cra-and-copyleft/
+LOCATION:H.1301 (Cornil)
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Jimmy Ahlberg":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:5325@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T170000
+DTEND:20250201T172500
+SUMMARY:Legislative overlay: anticipating and navigating through regulatory vectors
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:Legal and Policy
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-5325-legislative-overlay-anticipating-and-navigating-through-regulatory-vectors/
+LOCATION:H.1301 (Cornil)
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Alexander Sander":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="fukami":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Michael Schuster":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:6638@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T173000
+DTEND:20250201T175500
+SUMMARY:CRA Q&A on Open Source Stewards under the Cyber Resilience Act
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:Legal and Policy
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-6638-cra-q-a-on-open-source-stewards-under-the-cyber-resilience-act/
+LOCATION:H.1301 (Cornil)
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Alexander Sander":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Bradley M. Kuhn":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Michael Schuster":invalid:nomail
+
+END:VEVENT
+
+BEGIN:VEVENT
+METHOD:PUBLISH
+UID:6607@fosdem-2025@fosdem.org
+TZID:Europe-Brussels
+DTSTART:20250201T180000
+DTEND:20250201T190000
+SUMMARY:Organizer's Panel
+
+CLASS:PUBLIC
+STATUS:CONFIRMED
+CATEGORIES:Legal and Policy
+URL:https:/fosdem.org/2025/schedule/2025/schedule/event/fosdem-2025-6607-organizer-s-panel/
+LOCATION:H.1301 (Cornil)
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Karen Sandler":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Tom Marble":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Alexander Sander":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Bradley M. Kuhn":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Matthias Kirschner":invalid:nomail
+
+ATTENDEE;ROLE=REQ-PARTICIPANT;CUTYPE=INDIVIDUAL;CN="Richard Fontana":invalid:nomail
+
+END:VEVENT
+
+END:VCALENDAR

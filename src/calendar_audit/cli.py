@@ -90,7 +90,8 @@ def parser():
     p.add_argument('inputs', nargs='+', type=Path)
     p.add_argument('--start', required=True, help='YYYY-MM-DD in display timezone')
     p.add_argument('--end', required=True, help='YYYY-MM-DD, exclusive; maximum 90 days')
-    p.add_argument('--timezone', required=True, help='IANA display zone; also used for floating times')
+    p.add_argument('--timezone', required=True, help='IANA display zone; default interpretation of floating times')
+    p.add_argument('--floating-timezone', help='Explicit IANA interpretation of floating times in ALL inputs; does not override TZID parameters or UTC')
     p.add_argument('--output', required=True, type=Path, help='New output directory; never overwritten')
     p.add_argument('--version', action='version', version=__version__)
     for field in fields(Limits):
@@ -108,7 +109,7 @@ def main(argv=None):
             budget = Budget(limits)
             if os.path.lexists(args.output):
                 raise AuditError('Output path already exists; choose a new directory')
-            report = analyze(args.inputs, args.start, args.end, args.timezone, limits, budget)
+            report = analyze(args.inputs, args.start, args.end, args.timezone, limits, budget, floating_timezone=args.floating_timezone)
             data = json_bytes(report)
             if len(data) > limits.report_bytes:
                 raise AuditError('report_bytes limit exceeded (JSON)')

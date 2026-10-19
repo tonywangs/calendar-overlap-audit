@@ -117,6 +117,9 @@ def html_bytes(report, budget):
     w = report['window']
     add(f'<p><strong>{esc(w["start"])} to {esc(w["end"])} (end exclusive)</strong> · Display timezone: '
         f'<strong>{esc(w["timezone"])}</strong></p>')
+    if 'floating_timezone' in report:
+        add('<p>Public event calendars describe scheduled programming, not your personal commitments or attendance.</p>')
+        add(f'<p>Operator-selected timezone for floating times in all inputs: <strong>{esc(report["floating_timezone"])}</strong>. Explicit event TZID parameters and UTC times are unchanged.</p>')
     if report['complete']:
         add('<p class="warning"><strong>Complete within the supported subset.</strong> '
             'No unsupported input was detected. This does not validate provider compatibility or establish availability.</p>')

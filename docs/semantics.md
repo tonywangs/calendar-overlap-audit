@@ -25,7 +25,11 @@ candidate budgets and exclusions explicit; it is not a replacement for that libr
   Timed DTEND defines a fixed elapsed duration for every occurrence; all-day spans
   retain their number of civil dates. UNTIL is inclusive and must match DTSTART's
   type, with UTC UNTIL for zoned/UTC starts and local UNTIL for floating starts.
-* Floating times use the display timezone, visibly recorded. IANA zones come from
+* Floating times use the display timezone unless `calendar-audit --floating-timezone`
+  explicitly chooses a source zone for all inputs, visibly recorded in JSON/HTML.
+  Calendar `X-WR-TIMEZONE` or standalone event `TZID` hints with floating times
+  require that operator assertion; otherwise the report is incomplete. Explicit
+  UTC/TZID parameters and all-day civil dates are unaffected. IANA zones come from
   pinned tzdata, not the host. Unknown TZIDs are incomplete. Embedded VTIMEZONE
   definitions are unsupported and mark the file incomplete; recognized IANA TZIDs
   may still yield provisional results. There is no timezone alias guessing.

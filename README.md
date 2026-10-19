@@ -11,6 +11,15 @@ inflate occupancy. All-day entries are shown separately.
 A [checked-in synthetic HTML report](examples/synthetic-report/report.html) and its
 [JSON data](examples/synthetic-report/report.json) are included for local inspection.
 
+## Real public calendar example
+
+The [FOSDEM 2025 example](examples/public-fosdem/README.md) includes unchanged
+public exports, provenance and reuse notices, a [visible HTML report](examples/public-fosdem/report/report.html),
+and an installed/browser verification command. Its 24 events produce 8 overlap
+pairs and 7 h 45 min of occupied programming. These are public sessions, not personal
+commitments. It demonstrates Brussels → New York conversion and independent
+checks in three timezones, including a local-midnight split.
+
 ## Install and run
 
 Python 3.11+ on Linux or macOS with POSIX signals is required. Linux/Python 3.12 is
@@ -74,7 +83,9 @@ checks the new feature and all preserved historical gates in one command.
 * Daily and weekly recurrence supports `COUNT`, inclusive `UNTIL`, `INTERVAL`,
   `EXDATE`, and weekly `BYDAY`/`WKST`. The analysis window and candidate limit bound
   rules without `COUNT` or `UNTIL`.
-* Floating times use the explicitly chosen display timezone. All-day events,
+* Floating times use the display timezone unless `calendar-audit --floating-timezone`
+  explicitly selects a source zone for all inputs. Nonstandard timezone hints with
+  floating times require that assertion or produce an incomplete report. All-day events,
   cancelled events and transparent events do not consume timed occupancy.
 * Identical unfolded event definitions with the same UID are counted once across
   files, retaining source citations. Single-instance overrides match their original

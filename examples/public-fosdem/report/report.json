@@ -1,0 +1,838 @@
+{
+  "cancellations": [],
+  "complete": true,
+  "counts": {
+    "candidates": 24,
+    "events": 24,
+    "files": 2,
+    "input_bytes": 14740,
+    "occurrences": 24,
+    "pairs": 8
+  },
+  "daily": [
+    {
+      "all_day_occurrences": 0,
+      "date": "2025-02-01",
+      "day_seconds": 86400,
+      "occupied_seconds": 27900,
+      "timed_occurrences": 24
+    },
+    {
+      "all_day_occurrences": 0,
+      "date": "2025-02-02",
+      "day_seconds": 86400,
+      "occupied_seconds": 0,
+      "timed_occurrences": 0
+    }
+  ],
+  "dependencies": {
+    "icalendar": "6.3.2",
+    "python-dateutil": "2.9.0.post0",
+    "six": "1.17.0",
+    "tzdata": "2025.2"
+  },
+  "events": [
+    {
+      "disposition": "included",
+      "id": "e1",
+      "role": "master",
+      "sources": [
+        {
+          "event": 1,
+          "source": "s1"
+        }
+      ],
+      "summary": "How FreeBSD security audits have improved our security culture",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "6152@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e2",
+      "role": "master",
+      "sources": [
+        {
+          "event": 2,
+          "source": "s1"
+        }
+      ],
+      "summary": "Wake up, FreeBSD! Implementing Modern Standby with S0ix",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "6390@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e3",
+      "role": "master",
+      "sources": [
+        {
+          "event": 3,
+          "source": "s1"
+        }
+      ],
+      "summary": "Tracking bulk builds in pkgsrc - from Cloud to NetBSD Native",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "4927@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e4",
+      "role": "master",
+      "sources": [
+        {
+          "event": 4,
+          "source": "s1"
+        }
+      ],
+      "summary": "High Performance Packet filtering in BSD. A holistic review",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "4399@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e5",
+      "role": "master",
+      "sources": [
+        {
+          "event": 5,
+          "source": "s1"
+        }
+      ],
+      "summary": "A packet's journey through pf",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "4306@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e6",
+      "role": "master",
+      "sources": [
+        {
+          "event": 6,
+          "source": "s1"
+        }
+      ],
+      "summary": "Making NetBSD as a fast(er) booting microvm",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "5166@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e7",
+      "role": "master",
+      "sources": [
+        {
+          "event": 7,
+          "source": "s1"
+        }
+      ],
+      "summary": "Writing about FreeBSD",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "5247@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e8",
+      "role": "master",
+      "sources": [
+        {
+          "event": 8,
+          "source": "s1"
+        }
+      ],
+      "summary": "FreeBSD audit source and other syslog-ng news",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "4553@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e9",
+      "role": "master",
+      "sources": [
+        {
+          "event": 1,
+          "source": "s2"
+        }
+      ],
+      "summary": "Welcome to the Legal and Policy Issues DevRoom",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "6602@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e10",
+      "role": "master",
+      "sources": [
+        {
+          "event": 2,
+          "source": "s2"
+        }
+      ],
+      "summary": "Europe's Way to Mandatory B2B-E-Invoices",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "4205@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e11",
+      "role": "master",
+      "sources": [
+        {
+          "event": 3,
+          "source": "s2"
+        }
+      ],
+      "summary": "Is There Really an SBOM Mandate?",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "6155@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e12",
+      "role": "master",
+      "sources": [
+        {
+          "event": 4,
+          "source": "s2"
+        }
+      ],
+      "summary": "How Does Heinz Have 80% of a Commodity Market?* \u2013 Leveraging Trademarks in Free Software",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "6544@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e13",
+      "role": "master",
+      "sources": [
+        {
+          "event": 5,
+          "source": "s2"
+        }
+      ],
+      "summary": "LGPL enforced in Germany: how we helped a purchaser use the courts to compel compliance",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "6169@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e14",
+      "role": "master",
+      "sources": [
+        {
+          "event": 6,
+          "source": "s2"
+        }
+      ],
+      "summary": "Managing copyrights in free software projects - discussion panel",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "5376@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e15",
+      "role": "master",
+      "sources": [
+        {
+          "event": 7,
+          "source": "s2"
+        }
+      ],
+      "summary": "To Mine Or Not To Mine - Training of (Generative) AI Models under the TDM Exception in EU Copyright Laws",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "4794@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e16",
+      "role": "master",
+      "sources": [
+        {
+          "event": 8,
+          "source": "s2"
+        }
+      ],
+      "summary": "Panel: When is an AI system free/open?",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "6639@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e17",
+      "role": "master",
+      "sources": [
+        {
+          "event": 9,
+          "source": "s2"
+        }
+      ],
+      "summary": "Auditing Web Trackers with the EDPB's Open-Source Website Compliance Tool",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "5120@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e18",
+      "role": "master",
+      "sources": [
+        {
+          "event": 10,
+          "source": "s2"
+        }
+      ],
+      "summary": "A Free Software App Store for iOS: the App Fair Project's perspective on the DMA",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "5488@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e19",
+      "role": "master",
+      "sources": [
+        {
+          "event": 11,
+          "source": "s2"
+        }
+      ],
+      "summary": "Breaking tech monopolies in Europe: A fireside chat with the European Commission",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "5432@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e20",
+      "role": "master",
+      "sources": [
+        {
+          "event": 12,
+          "source": "s2"
+        }
+      ],
+      "summary": "Let's talk about anti-trust!",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "6637@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e21",
+      "role": "master",
+      "sources": [
+        {
+          "event": 13,
+          "source": "s2"
+        }
+      ],
+      "summary": "The EU CRA and Copyleft",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "5291@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e22",
+      "role": "master",
+      "sources": [
+        {
+          "event": 14,
+          "source": "s2"
+        }
+      ],
+      "summary": "Legislative overlay: anticipating and navigating through regulatory vectors",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "5325@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e23",
+      "role": "master",
+      "sources": [
+        {
+          "event": 15,
+          "source": "s2"
+        }
+      ],
+      "summary": "CRA Q&A on Open Source Stewards under the Cyber Resilience Act",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "6638@fosdem-2025@fosdem.org"
+    },
+    {
+      "disposition": "included",
+      "id": "e24",
+      "role": "master",
+      "sources": [
+        {
+          "event": 16,
+          "source": "s2"
+        }
+      ],
+      "summary": "Organizer's Panel",
+      "time_basis": "floating",
+      "timezone": "Europe/Brussels",
+      "uid": "6607@fosdem-2025@fosdem.org"
+    }
+  ],
+  "floating_timezone": "Europe/Brussels",
+  "issues": [],
+  "limits": {
+    "candidates": 200000,
+    "events": 5000,
+    "files": 32,
+    "input_bytes": 8388608,
+    "line_bytes": 65536,
+    "occurrences": 20000,
+    "pairs": 20000,
+    "report_bytes": 8388608,
+    "resolutions": 200000,
+    "seconds": 30.0
+  },
+  "occupied_seconds": 27900,
+  "occurrences": [
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T14:30:00Z",
+      "clipped_start": "2025-02-01T14:00:00Z",
+      "end": "2025-02-01T14:30:00Z",
+      "event": "e1",
+      "id": "o1",
+      "local_end": "2025-02-01T09:30:00-05:00",
+      "local_start": "2025-02-01T09:00:00-05:00",
+      "master": "e1",
+      "override": null,
+      "recurrence_id": "2025-02-01T15:00:00",
+      "start": "2025-02-01T14:00:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T14:50:00Z",
+      "clipped_start": "2025-02-01T14:35:00Z",
+      "end": "2025-02-01T14:50:00Z",
+      "event": "e2",
+      "id": "o2",
+      "local_end": "2025-02-01T09:50:00-05:00",
+      "local_start": "2025-02-01T09:35:00-05:00",
+      "master": "e2",
+      "override": null,
+      "recurrence_id": "2025-02-01T15:35:00",
+      "start": "2025-02-01T14:35:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T15:20:00Z",
+      "clipped_start": "2025-02-01T14:55:00Z",
+      "end": "2025-02-01T15:20:00Z",
+      "event": "e3",
+      "id": "o3",
+      "local_end": "2025-02-01T10:20:00-05:00",
+      "local_start": "2025-02-01T09:55:00-05:00",
+      "master": "e3",
+      "override": null,
+      "recurrence_id": "2025-02-01T15:55:00",
+      "start": "2025-02-01T14:55:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T15:50:00Z",
+      "clipped_start": "2025-02-01T15:25:00Z",
+      "end": "2025-02-01T15:50:00Z",
+      "event": "e4",
+      "id": "o4",
+      "local_end": "2025-02-01T10:50:00-05:00",
+      "local_start": "2025-02-01T10:25:00-05:00",
+      "master": "e4",
+      "override": null,
+      "recurrence_id": "2025-02-01T16:25:00",
+      "start": "2025-02-01T15:25:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T16:25:00Z",
+      "clipped_start": "2025-02-01T15:55:00Z",
+      "end": "2025-02-01T16:25:00Z",
+      "event": "e5",
+      "id": "o5",
+      "local_end": "2025-02-01T11:25:00-05:00",
+      "local_start": "2025-02-01T10:55:00-05:00",
+      "master": "e5",
+      "override": null,
+      "recurrence_id": "2025-02-01T16:55:00",
+      "start": "2025-02-01T15:55:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T17:00:00Z",
+      "clipped_start": "2025-02-01T16:30:00Z",
+      "end": "2025-02-01T17:00:00Z",
+      "event": "e6",
+      "id": "o6",
+      "local_end": "2025-02-01T12:00:00-05:00",
+      "local_start": "2025-02-01T11:30:00-05:00",
+      "master": "e6",
+      "override": null,
+      "recurrence_id": "2025-02-01T17:30:00",
+      "start": "2025-02-01T16:30:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T17:30:00Z",
+      "clipped_start": "2025-02-01T17:05:00Z",
+      "end": "2025-02-01T17:30:00Z",
+      "event": "e7",
+      "id": "o7",
+      "local_end": "2025-02-01T12:30:00-05:00",
+      "local_start": "2025-02-01T12:05:00-05:00",
+      "master": "e7",
+      "override": null,
+      "recurrence_id": "2025-02-01T18:05:00",
+      "start": "2025-02-01T17:05:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T18:00:00Z",
+      "clipped_start": "2025-02-01T17:35:00Z",
+      "end": "2025-02-01T18:00:00Z",
+      "event": "e8",
+      "id": "o8",
+      "local_end": "2025-02-01T13:00:00-05:00",
+      "local_start": "2025-02-01T12:35:00-05:00",
+      "master": "e8",
+      "override": null,
+      "recurrence_id": "2025-02-01T18:35:00",
+      "start": "2025-02-01T17:35:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T09:35:00Z",
+      "clipped_start": "2025-02-01T09:30:00Z",
+      "end": "2025-02-01T09:35:00Z",
+      "event": "e9",
+      "id": "o9",
+      "local_end": "2025-02-01T04:35:00-05:00",
+      "local_start": "2025-02-01T04:30:00-05:00",
+      "master": "e9",
+      "override": null,
+      "recurrence_id": "2025-02-01T10:30:00",
+      "start": "2025-02-01T09:30:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T10:00:00Z",
+      "clipped_start": "2025-02-01T09:35:00Z",
+      "end": "2025-02-01T10:00:00Z",
+      "event": "e10",
+      "id": "o10",
+      "local_end": "2025-02-01T05:00:00-05:00",
+      "local_start": "2025-02-01T04:35:00-05:00",
+      "master": "e10",
+      "override": null,
+      "recurrence_id": "2025-02-01T10:35:00",
+      "start": "2025-02-01T09:35:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T10:25:00Z",
+      "clipped_start": "2025-02-01T10:00:00Z",
+      "end": "2025-02-01T10:25:00Z",
+      "event": "e11",
+      "id": "o11",
+      "local_end": "2025-02-01T05:25:00-05:00",
+      "local_start": "2025-02-01T05:00:00-05:00",
+      "master": "e11",
+      "override": null,
+      "recurrence_id": "2025-02-01T11:00:00",
+      "start": "2025-02-01T10:00:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T10:55:00Z",
+      "clipped_start": "2025-02-01T10:30:00Z",
+      "end": "2025-02-01T10:55:00Z",
+      "event": "e12",
+      "id": "o12",
+      "local_end": "2025-02-01T05:55:00-05:00",
+      "local_start": "2025-02-01T05:30:00-05:00",
+      "master": "e12",
+      "override": null,
+      "recurrence_id": "2025-02-01T11:30:00",
+      "start": "2025-02-01T10:30:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T11:25:00Z",
+      "clipped_start": "2025-02-01T11:00:00Z",
+      "end": "2025-02-01T11:25:00Z",
+      "event": "e13",
+      "id": "o13",
+      "local_end": "2025-02-01T06:25:00-05:00",
+      "local_start": "2025-02-01T06:00:00-05:00",
+      "master": "e13",
+      "override": null,
+      "recurrence_id": "2025-02-01T12:00:00",
+      "start": "2025-02-01T11:00:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T11:55:00Z",
+      "clipped_start": "2025-02-01T11:30:00Z",
+      "end": "2025-02-01T11:55:00Z",
+      "event": "e14",
+      "id": "o14",
+      "local_end": "2025-02-01T06:55:00-05:00",
+      "local_start": "2025-02-01T06:30:00-05:00",
+      "master": "e14",
+      "override": null,
+      "recurrence_id": "2025-02-01T12:30:00",
+      "start": "2025-02-01T11:30:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T12:25:00Z",
+      "clipped_start": "2025-02-01T12:00:00Z",
+      "end": "2025-02-01T12:25:00Z",
+      "event": "e15",
+      "id": "o15",
+      "local_end": "2025-02-01T07:25:00-05:00",
+      "local_start": "2025-02-01T07:00:00-05:00",
+      "master": "e15",
+      "override": null,
+      "recurrence_id": "2025-02-01T13:00:00",
+      "start": "2025-02-01T12:00:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T13:20:00Z",
+      "clipped_start": "2025-02-01T12:30:00Z",
+      "end": "2025-02-01T13:20:00Z",
+      "event": "e16",
+      "id": "o16",
+      "local_end": "2025-02-01T08:20:00-05:00",
+      "local_start": "2025-02-01T07:30:00-05:00",
+      "master": "e16",
+      "override": null,
+      "recurrence_id": "2025-02-01T13:30:00",
+      "start": "2025-02-01T12:30:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T13:55:00Z",
+      "clipped_start": "2025-02-01T13:30:00Z",
+      "end": "2025-02-01T13:55:00Z",
+      "event": "e17",
+      "id": "o17",
+      "local_end": "2025-02-01T08:55:00-05:00",
+      "local_start": "2025-02-01T08:30:00-05:00",
+      "master": "e17",
+      "override": null,
+      "recurrence_id": "2025-02-01T14:30:00",
+      "start": "2025-02-01T13:30:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T14:25:00Z",
+      "clipped_start": "2025-02-01T14:00:00Z",
+      "end": "2025-02-01T14:25:00Z",
+      "event": "e18",
+      "id": "o18",
+      "local_end": "2025-02-01T09:25:00-05:00",
+      "local_start": "2025-02-01T09:00:00-05:00",
+      "master": "e18",
+      "override": null,
+      "recurrence_id": "2025-02-01T15:00:00",
+      "start": "2025-02-01T14:00:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T14:55:00Z",
+      "clipped_start": "2025-02-01T14:30:00Z",
+      "end": "2025-02-01T14:55:00Z",
+      "event": "e19",
+      "id": "o19",
+      "local_end": "2025-02-01T09:55:00-05:00",
+      "local_start": "2025-02-01T09:30:00-05:00",
+      "master": "e19",
+      "override": null,
+      "recurrence_id": "2025-02-01T15:30:00",
+      "start": "2025-02-01T14:30:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T15:25:00Z",
+      "clipped_start": "2025-02-01T15:00:00Z",
+      "end": "2025-02-01T15:25:00Z",
+      "event": "e20",
+      "id": "o20",
+      "local_end": "2025-02-01T10:25:00-05:00",
+      "local_start": "2025-02-01T10:00:00-05:00",
+      "master": "e20",
+      "override": null,
+      "recurrence_id": "2025-02-01T16:00:00",
+      "start": "2025-02-01T15:00:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T15:55:00Z",
+      "clipped_start": "2025-02-01T15:30:00Z",
+      "end": "2025-02-01T15:55:00Z",
+      "event": "e21",
+      "id": "o21",
+      "local_end": "2025-02-01T10:55:00-05:00",
+      "local_start": "2025-02-01T10:30:00-05:00",
+      "master": "e21",
+      "override": null,
+      "recurrence_id": "2025-02-01T16:30:00",
+      "start": "2025-02-01T15:30:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T16:25:00Z",
+      "clipped_start": "2025-02-01T16:00:00Z",
+      "end": "2025-02-01T16:25:00Z",
+      "event": "e22",
+      "id": "o22",
+      "local_end": "2025-02-01T11:25:00-05:00",
+      "local_start": "2025-02-01T11:00:00-05:00",
+      "master": "e22",
+      "override": null,
+      "recurrence_id": "2025-02-01T17:00:00",
+      "start": "2025-02-01T16:00:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T16:55:00Z",
+      "clipped_start": "2025-02-01T16:30:00Z",
+      "end": "2025-02-01T16:55:00Z",
+      "event": "e23",
+      "id": "o23",
+      "local_end": "2025-02-01T11:55:00-05:00",
+      "local_start": "2025-02-01T11:30:00-05:00",
+      "master": "e23",
+      "override": null,
+      "recurrence_id": "2025-02-01T17:30:00",
+      "start": "2025-02-01T16:30:00Z"
+    },
+    {
+      "all_day": false,
+      "clipped_end": "2025-02-01T18:00:00Z",
+      "clipped_start": "2025-02-01T17:00:00Z",
+      "end": "2025-02-01T18:00:00Z",
+      "event": "e24",
+      "id": "o24",
+      "local_end": "2025-02-01T13:00:00-05:00",
+      "local_start": "2025-02-01T12:00:00-05:00",
+      "master": "e24",
+      "override": null,
+      "recurrence_id": "2025-02-01T18:00:00",
+      "start": "2025-02-01T17:00:00Z"
+    }
+  ],
+  "overlaps": [
+    {
+      "end": "2025-02-01T14:25:00Z",
+      "id": "p1",
+      "left": "o18",
+      "right": "o1",
+      "seconds": 1500,
+      "start": "2025-02-01T14:00:00Z"
+    },
+    {
+      "end": "2025-02-01T14:50:00Z",
+      "id": "p2",
+      "left": "o19",
+      "right": "o2",
+      "seconds": 900,
+      "start": "2025-02-01T14:35:00Z"
+    },
+    {
+      "end": "2025-02-01T15:20:00Z",
+      "id": "p3",
+      "left": "o3",
+      "right": "o20",
+      "seconds": 1200,
+      "start": "2025-02-01T15:00:00Z"
+    },
+    {
+      "end": "2025-02-01T15:50:00Z",
+      "id": "p4",
+      "left": "o4",
+      "right": "o21",
+      "seconds": 1200,
+      "start": "2025-02-01T15:30:00Z"
+    },
+    {
+      "end": "2025-02-01T16:25:00Z",
+      "id": "p5",
+      "left": "o5",
+      "right": "o22",
+      "seconds": 1500,
+      "start": "2025-02-01T16:00:00Z"
+    },
+    {
+      "end": "2025-02-01T16:55:00Z",
+      "id": "p6",
+      "left": "o23",
+      "right": "o6",
+      "seconds": 1500,
+      "start": "2025-02-01T16:30:00Z"
+    },
+    {
+      "end": "2025-02-01T17:30:00Z",
+      "id": "p7",
+      "left": "o24",
+      "right": "o7",
+      "seconds": 1500,
+      "start": "2025-02-01T17:05:00Z"
+    },
+    {
+      "end": "2025-02-01T18:00:00Z",
+      "id": "p8",
+      "left": "o24",
+      "right": "o8",
+      "seconds": 1500,
+      "start": "2025-02-01T17:35:00Z"
+    }
+  ],
+  "schema_version": 2,
+  "sources": [
+    {
+      "bytes": 4161,
+      "id": "s1",
+      "name": "bsd.ics",
+      "sha256": "82f30b1f446cf282348bd468a1da309c9e44c9d0be625d9ada317579ce33c04b"
+    },
+    {
+      "bytes": 10579,
+      "id": "s2",
+      "name": "legal-and-policy.ics",
+      "sha256": "5b5e79f2fc2e4cd62c7c94ae35afb54d03a1842ebd56ac515f6301bbcad24266"
+    }
+  ],
+  "tool_version": "0.2.0",
+  "window": {
+    "end": "2025-02-03",
+    "end_utc": "2025-02-03T05:00:00Z",
+    "start": "2025-02-01",
+    "start_utc": "2025-02-01T05:00:00Z",
+    "timezone": "America/New_York"
+  }
+}

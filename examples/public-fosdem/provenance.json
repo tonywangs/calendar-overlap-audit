@@ -1,0 +1,37 @@
+{
+  "dataset": "FOSDEM 2025 BSD and Legal and Policy track exports",
+  "publisher": "FOSDEM and credited speakers",
+  "scope": "Complete unchanged exports of two tracks, not the whole conference; public scheduled programming, not personal commitments or attendance.",
+  "files": [
+    {
+      "file": "bsd.ics",
+      "url": "https://archive.fosdem.org/2025/schedule/track/bsd.ics",
+      "source_page": "https://archive.fosdem.org/2025/schedule/track/bsd/",
+      "retrieved_utc": "2026-10-19T09:22:05.229211+00:00",
+      "sha256": "82f30b1f446cf282348bd468a1da309c9e44c9d0be625d9ada317579ce33c04b",
+      "bytes": 4161,
+      "source_page_sha256": "25261e54be3d08b9fea36bbbca212e0c6ce07f18592615916b92d0d1be48d554"
+    },
+    {
+      "file": "legal-and-policy.ics",
+      "url": "https://archive.fosdem.org/2025/schedule/track/legal-and-policy.ics",
+      "source_page": "https://archive.fosdem.org/2025/schedule/track/legal-and-policy/",
+      "retrieved_utc": "2026-10-19T09:22:05.681384+00:00",
+      "sha256": "5b5e79f2fc2e4cd62c7c94ae35afb54d03a1842ebd56ac515f6301bbcad24266",
+      "bytes": 10579,
+      "source_page_sha256": "f21b8f2a74b79a0196217d2c50b92d472843c5fe693500f36826234c6ae146c7"
+    }
+  ],
+  "reuse": {
+    "footer_notice": "This work is licensed under the Creative Commons Attribution 2.0 Belgium Licence.",
+    "footer_url": "https://creativecommons.org/licenses/by/2.0/be/deed.en",
+    "metadata_notice": "DC.Rights in the same pages points to http://creativecommons.org/licenses/by-sa/2.0/be/",
+    "handling": "Retain attribution and both notices; redistribute these data and derived example reports under CC BY-SA 2.0 Belgium to also satisfy the stricter metadata notice. No original ICS bytes changed.",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/be/"
+  },
+  "time_basis": {
+    "evidence_url": "https://archive.fosdem.org/2025/schedule/",
+    "evidence": "All times CET (UTC+1).",
+    "interpretation": "Floating DTSTART/DTEND interpreted explicitly as Europe/Brussels. X-WR-TIMEZONE declares Europe/Brussels; nonstandard standalone VEVENT TZID uses Europe-Brussels."
+  }
+}
